@@ -98,8 +98,8 @@ function gdt_remove_wp_ver_css_js( $src ) {
 function gdt_theme_support() {
     // Add support for template parts
     add_theme_support( 'block-template-parts' );
-  // Enable support for Post Thumbnails (Featured Images) on specified post types.
-  add_theme_support( 'post-thumbnails', array( 'post' ));
+  // Enable support for Post Thumbnails
+  add_theme_support( 'post-thumbnails' );
   // Enable Title tags
   add_theme_support( 'title-tag' );
   // HTML5 support

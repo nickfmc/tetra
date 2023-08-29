@@ -3645,19 +3645,18 @@ body {
    BLOCKQUOTE
    ========================================================================== */
 blockquote {
-  background-color: #EAEAEA;
-  border-left: 4px solid #000;
   margin: 1.5rem 0 1.5rem 0;
   padding: 1rem 2.5rem;
 }
 blockquote p {
-  font-size: 2rem;
+  font-size: 1.4rem;
+  font-weight: 400;
   margin-bottom: 0;
 }
 blockquote cite {
   font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  font-style: normal;
   text-indent: -1rem;
   margin: 0.5rem 0 0 0;
   padding: 0 0 0 1rem !important;
@@ -3721,14 +3720,24 @@ h6, .h6-style {
    HORIZONTAL RULE
    ========================================================================== */
 hr, hr.wp-block-separator {
+  position: relative;
+  padding-top: 56px;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+hr::after, hr.wp-block-separator::after {
+  -webkit-clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
+          clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
+  content: "";
+  width: 63px;
+  position: absolute;
+  top: 50%;
+  margin-top: -5px;
   display: block;
-  margin: 1rem auto;
-  padding: 0;
-  clear: both;
-  width: 100%;
-  border-top: 0;
-  border-color: #333;
-  margin: 50px auto;
+  left: 0;
+  height: 9px;
+  background-image: -webkit-gradient(linear, left top, right top, from(#88aebd), to(#9b9477));
+  background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
 }
 
 /* ==========================================================================
@@ -4058,7 +4067,8 @@ p {
 }
 
 .has-large-font-size {
-  line-height: 1.25;
+  line-height: 1.4;
+  font-weight: 300;
 }
 
 .has-small-font-size {
@@ -4371,7 +4381,7 @@ p {
 .nav-title {
   height: 100px;
   margin-bottom: 0;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .c-mobile-menu-header a {
@@ -4699,11 +4709,17 @@ body.hc-nav-open {
 .hc-offcanvas-nav .nav-container,
 .hc-offcanvas-nav .nav-wrapper,
 .hc-offcanvas-nav ul {
-  background: #fff;
+  background: transparent;
+}
+
+.hc-offcanvas-nav .nav-container {
+  background: rgb(156, 188, 200);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgb(156, 188, 200)), color-stop(94%, rgb(139, 134, 109)));
+  background: linear-gradient(180deg, rgb(156, 188, 200) 0%, rgb(139, 134, 109) 94%);
 }
 
 .hc-offcanvas-nav .nav-content > h2, .hc-offcanvas-nav .nav-content > h3, .hc-offcanvas-nav .nav-content > h4, .hc-offcanvas-nav .nav-content > h5, .hc-offcanvas-nav .nav-content > h6 {
-  font-size: 24px;
+  font-size: 27px;
   font-weight: normal;
   padding: 20px 17px;
   color: #cccccc;
@@ -4712,21 +4728,21 @@ body.hc-nav-open {
 .hc-offcanvas-nav .nav-content > h2:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h3:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h4:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h5:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h6:not(.nav-title):not(.level-title) {
   font-size: 21px;
   padding: 15px 17px;
-  background: #fff;
+  background: transparent;
 }
 
 .hc-offcanvas-nav .nav-item-link,
 .hc-offcanvas-nav li.nav-close a,
 .hc-offcanvas-nav .nav-back a {
-  padding: 18px 17px;
-  font-size: 18px;
-  color: #253237;
+  padding: 10px 17px;
+  color: #fff;
+  font-weight: 300;
+  font-size: 35px;
   z-index: 1;
-  background: #fff;
-  border-bottom: 1px solid #efefef;
+  background: transparent;
   -webkit-transition: background 0.1s ease;
   transition: background 0.1s ease;
-  text-align: left;
+  text-align: right;
 }
 
 .hc-offcanvas-nav .nav-item-link:focus, .hc-offcanvas-nav .nav-item-link:focus-within,
@@ -4748,7 +4764,7 @@ body.hc-nav-open {
 }
 
 .hc-offcanvas-nav:not(.touch-device) li:not(.nav-item-custom) a:not([disabled]):hover {
-  background: #fff;
+  background: transparent;
 }
 
 .hc-offcanvas-nav .nav-custom-content {
@@ -5117,18 +5133,12 @@ body.hc-nav-open {
   padding-bottom: 50px !important;
 }
 
-.bottom-nav li.c-hcnav-button a {
+.bottom-nav li a {
   color: #FFF !important;
-  background-color: #000 !important;
-  display: inline-block !important;
   font-weight: 300;
+  font-size: 18px !important;
   line-height: 1;
-  border-radius: 60px !important;
-  padding: 15px 55px !important;
-}
-
-.bottom-nav li.c-hcnav-button a:hover {
-  background-color: #000 !important;
+  padding: 5px !important;
 }
 
 .hc-offcanvas-nav .sub-menu {
@@ -5142,8 +5152,8 @@ body.hc-nav-open {
 
 .hc-offcanvas-nav .sub-menu li a {
   border-bottom: 0 !important;
-  color: #253237 !important;
-  text-align: left;
+  color: #fff !important;
+  text-align: right;
   padding: 8px 30px !important;
   font-size: 16px !important;
 }
@@ -5636,6 +5646,28 @@ body.hc-nav-open {
   position: absolute;
   bottom: 70px;
   right: -24%;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  opacity: 0.3;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  z-index: 0;
+}
+
+.u-angled-line-left {
+  overflow: hidden;
+  position: relative;
+}
+.u-angled-line-left > * {
+  position: relative;
+  z-index: 1;
+}
+.u-angled-line-left::after {
+  content: "";
+  position: absolute;
+  bottom: 70px;
+  left: -24%;
   width: 100%;
   height: 1px;
   background-color: #fff;

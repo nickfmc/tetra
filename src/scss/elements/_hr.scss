@@ -3,12 +3,20 @@
    ========================================================================== */
 
    hr, hr.wp-block-separator {
-    display: block;  // border: none;
-    margin: 1rem auto;
-    padding: 0;
-    clear: both;
-    width: 100%;
-    border-top: 0;
-    border-color: #333;
-    margin: 50px auto;
+    position: relative;
+    padding-top: 56px;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    &::after{
+    clip-path: polygon(0px 0px, 63px 0px, 55px 9px,  0px 9px);
+      content: "";
+      width: 63px;
+      position: absolute;
+      top: 50%;
+      margin-top: -5px;
+      display: block;
+      left: 0;
+      height: 9px;
+      background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
+    }
   }

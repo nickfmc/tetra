@@ -4,7 +4,12 @@
   <?php  gdt_nav_menu( 'main-menu', 'modal-menu' ); // Adjust using Menus in WordPress Admin ?>
 
   <ul role="menu" aria-level="1" class="bottom-nav">
-    <li class="c-hcnav-button"><a href="#">Footer button</a></li>
+   <li>
+    <a href="tel:">555-5555</a>
+   </li>
+   <li>
+    <a href="">EMAIL</a>
+   </li>
   </ul>
  
 </nav>

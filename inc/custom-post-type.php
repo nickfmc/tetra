@@ -5,12 +5,12 @@
  */
 
 // register ###REPLACE_ME### custom post type
-add_action( 'init', 'gdt_CPTNAME_reg' );
+add_action( 'init', 'gdt_Staff_reg' );
 
 // create a custom post type and name it
-function gdt_CPTNAME_reg() {
-  $singular = 'Sample';
-  $plural = 'Samples';
+function gdt_Staff_reg() {
+  $singular = 'Staff Member';
+  $plural = 'Staff Members';
   $labels = array(
     'name'                 => "$plural",
     'singular_name'        => "$singular",
@@ -44,7 +44,7 @@ function gdt_CPTNAME_reg() {
     'hierarchical'         => false,
     'supports'             => array( 'title', 'editor', 'author', 'thumbnail', 'revisions' )
   );
-  register_post_type( 'postname_type', $args );
+  register_post_type( 'staff_type', $args );
 }
 
 

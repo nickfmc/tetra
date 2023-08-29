@@ -40,15 +40,35 @@ jQuery( document ).ready(function( $ ) {
 
    $('#mobile-nav').hcOffcanvasNav({
     disableAt: 1024,
-    width: 280,
+    width: 580,
     customToggle: $('.toggle'),
      pushContent: '.menu-slide',
     levelTitles: true,
     position: 'right',
     levelOpen: 'expand',
-    navTitle: $('<div class="c-mobile-menu-header"><a href="/"><img src="'+ templateUrl + '/img/tetra_logo.svg"></a></div>'),
+    navTitle: $('<div class="c-mobile-menu-header"><a href="/"><img src="'+ templateUrl + '/img/tetra_logo_white.svg"></a></div>'),
     levelTitleAsBack: true
   });
+
+  //Leadership POPUPS
+  $('.c-staff-member-grid').each(function() { // the containers for all your galleries
+    $(this).magnificPopup({
+        delegate: '.popup-modal', // the selector for gallery item
+        type: 'inline',
+        modal: true,
+        fixedContentPos: true,
+        overflowY: 'scroll',
+        closeBtnInside:true,
+        gallery: {
+          enabled:true
+        }
+    });
+    $(document).on('click', '.popup-modal-dismiss', function (e) {
+      e.preventDefault();
+      $.magnificPopup.close();
+    });
+});
+//END Leadership POPUPS
 
   // modal menu init ----------------------------------
   // var modal_menu = jQuery("#c-modal-nav-button").animatedModal({

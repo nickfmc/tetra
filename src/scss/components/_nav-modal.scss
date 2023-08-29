@@ -4,16 +4,16 @@
    
    $color-close: #ddd;
    $color-dividing-line: #efefef; 
-   $color-item-bg: #fff;
+   $color-item-bg: transparent;
    $color-open-btn: #5c7d6f;
    $color-close-btn: #5c7d6f;
-   $color-item-bg-hover: #fff; 
-   $color-menu-bg: #fff;
+   $color-item-bg-hover: transparent; 
+   $color-menu-bg: transparent;
    $header-height: 100px;
-   $header-bg-color: #fff;
-   $color-menu-item:  #253237;
-   $color-menu-sub-item:  #253237;
-   $nav-item-alignment: left;
+   $header-bg-color: transparent;
+   $color-menu-item:  #fff;
+   $color-menu-sub-item:  #fff;
+   $nav-item-alignment: right;
 
 
    .c-modal-nav {
@@ -341,10 +341,15 @@ a {
  .hc-offcanvas-nav .nav-container,
  .hc-offcanvas-nav .nav-wrapper,
  .hc-offcanvas-nav ul {
-   background: $color-menu-bg;
+   background: transparent;
+ }
+
+ .hc-offcanvas-nav .nav-container {
+  background: rgb(156,188,200);
+   background: linear-gradient(180deg, rgba(156,188,200,1) 0%, rgba(139,134,109,1) 94%); 
  }
  .hc-offcanvas-nav .nav-content > h2, .hc-offcanvas-nav .nav-content > h3, .hc-offcanvas-nav .nav-content > h4, .hc-offcanvas-nav .nav-content > h5, .hc-offcanvas-nav .nav-content > h6 {
-   font-size: 24px;
+   font-size: 27px;
    font-weight: normal;
    padding: 20px 17px;
    color: #cccccc;
@@ -352,17 +357,19 @@ a {
  .hc-offcanvas-nav .nav-content > h2:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h3:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h4:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h5:not(.nav-title):not(.level-title), .hc-offcanvas-nav .nav-content > h6:not(.nav-title):not(.level-title) {
    font-size: 21px;
    padding: 15px 17px;
-   background: #fff;
+   background: transparent;
  }
  .hc-offcanvas-nav .nav-item-link,
  .hc-offcanvas-nav li.nav-close a,
  .hc-offcanvas-nav .nav-back a {
-   padding: 18px 17px;
-   font-size: 18px;
+   padding: 10px 17px;
    color: $color-menu-item;
+   font-weight: 300;
+   font-size: 35px;
    z-index: 1;
-   background: $color-item-bg;
-   border-bottom: 1px solid $color-dividing-line;
+
+   background: transparent;
+  //  border-bottom: 1px solid $color-dividing-line;
    -webkit-transition: background 0.1s ease;
    transition: background 0.1s ease;
    text-align: $nav-item-alignment;
@@ -690,19 +697,14 @@ a {
    padding-right: 20px;
    padding-bottom: 50px !important;
  }
- .bottom-nav li.c-hcnav-button a {
+ .bottom-nav li a {
    color: #FFF !important;
-   background-color: #000 !important;
-   display: inline-block !important;
    font-weight: 300;
+   font-size: 18px !important;
    line-height: 1;
-   border-radius: 60px !important;
-   padding: 15px 55px !important;
+   padding: 5px !important;
  }
- .bottom-nav li.c-hcnav-button a:hover {
-   background-color: #000 !important;
- }
- 
+
  .hc-offcanvas-nav .sub-menu {
    border-bottom: 1px solid $color-dividing-line;
    padding-top: 10px;

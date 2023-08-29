@@ -1,0 +1,17 @@
+{
+    "name": "acf/staff",
+    "title": "Staff grid",
+    "description": "Display Staff Members in a grid",
+    "icon": "admin-users",
+    "viewScript": [ "staff" ],
+    "keywords": ["staff member", "staff", "grid", "member", "team", "team member"],
+    "category": "myblocks", 
+    "acf": {
+        "mode": "edit", 
+        "renderTemplate": "staff.php"
+    },
+    "example": {
+        "attributes": {}
+    },
+    "align": "full"
+}
