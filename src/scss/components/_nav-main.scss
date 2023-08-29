@@ -38,11 +38,12 @@
     white-space: nowrap;
   }
   .c-main-menu > li > a {
-    color: #555555;
+    font-weight: 300;
+    color: $color-tetra-blue-alt;
     display: block;
     font-size: 1rem;
     margin: 0;
-    padding: 41px 1rem;
+    padding: 54px 1rem;
     &:first-of-type > a {
       padding-left: 0;
     }
@@ -51,15 +52,14 @@
     }
   }
   .c-main-menu > li > a:hover {
-    color: #222222;
+    color: $color-tetra-blue;
   }
   .c-main-menu > .current-menu-item > a,
   .c-main-menu > .current-page-ancestor > a,
   .c-main-menu > .current_page_item > a,
   .c-main-menu > .current_page_parent > a,
   .c-main-menu > .current_page_ancestor > a {
-    color: #222222
-  }
+    color: $color-tetra-blue;  }
 }
 // END menu top level
 

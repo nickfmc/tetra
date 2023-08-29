@@ -169,7 +169,7 @@ $paddingHorizontal: 25px;
 .editor-content ol > li::before {
   content: counter(item);
   counter-increment: item;
-  color: $color-sage;
+  color: #000;
   font-weight: 400;
   position: relative;
 	top: 0;
@@ -241,4 +241,11 @@ body .u-break-early {
   .wp-block-image {
     margin-bottom: 10px;
     margin-top: 10px;
+  }
+
+  .has-white-color {
+    color: #fff !important;
+    p {
+      color: #fff !important;
+    }
   }

@@ -16,6 +16,7 @@
   "homepage": "",
   "devDependencies": {
     "animate.css": "^4.1.1",
+    "hc-offcanvas-nav": "^6.1.5",
     "headroom.js": "^0.12.0",
     "magnific-popup": "^1.1.0",
     "objectFitPolyfill": "^2.3.0",

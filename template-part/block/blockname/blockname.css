@@ -1,3 +1,15 @@
 /* ==========================================================================
    VARIABLES
    ========================================================================== */
+@font-face {
+  font-family: "tetra";
+  src: url("../fonts/tetra-light-webfont.woff2") format("woff2"), url("../fonts/tetra-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "tetra";
+  src: url("../fonts/tetra-medium-webfont.woff2") format("woff2"), url("../fonts/tetra-medium-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}

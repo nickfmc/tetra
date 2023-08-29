@@ -11,8 +11,8 @@ $bp-xlarge: 1320px;
 
 // Match these to your theme.json layout settings.
 // Also check the setting of any block plugins you use to match these.
-$wrapper-width-wide: 1180px; // Gutenberg Wide wrapper
-$wrapper-width-base: 920px;  // Gutenberg Standard wrapper
+$wrapper-width-wide: 1260px; // Gutenberg Wide wrapper
+$wrapper-width-base: 940px;  // Gutenberg Standard wrapper
 // Match these to your theme.json layout settings.
 
 
@@ -33,6 +33,14 @@ $color-gray-700:        #323232;
 $color-black:           #000;
 $color-white:           #FFF;
 
+// tetra colors
+$color-tetra-blue: #335c6d;
+$color-tetra-blue-alt: #325c6e;
+
+$color-tetra-blue-light: #89adbe;
+$color-tetra-green: #a8b6a5;
+$color-tetra-offwhite: #f6f8f6;
+
 // assign colours to variables
 $alert-color:       $color-red-400;
 $text-color:        $color-black;
@@ -50,8 +58,24 @@ $logo-size: 300px;
 
 // ++ TYPOGRAPHY +++++++++++++++++++++++++++++++++
 // Fonts
-$font-primary: 'Arial', sans-serif;
-$font-secondary: 'Times New Roman', serif;
+$font-primary: 'tetra', sans-serif;
+$font-secondary: 'tetra', sans-serif;
+
+@font-face {
+   font-family: 'tetra';
+   src: url('../fonts/tetra-light-webfont.woff2') format('woff2'),
+        url('../fonts/tetra-light-webfont.woff') format('woff');
+   font-weight: 300;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'tetra';
+   src: url('../fonts/tetra-medium-webfont.woff2') format('woff2'),
+        url('../fonts/tetra-medium-webfont.woff') format('woff');
+   font-weight: 400;
+   font-style: normal;
+}
 
 // Spacing
 $line-height-normal: 1.50;

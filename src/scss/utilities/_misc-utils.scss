@@ -1,14 +1,59 @@
 /* ==========================================================================
    MISC UTILITIES
    ========================================================================== */
+   .u-corner-crop {
+    clip-path: polygon(0px 0px, 100% 0px, 100% 75%, 75% 100%, 0px 100%);
+   }
 
+   .fw300, .fw-300, .fw-300 p, .fw300 p {
+    font-weight: 300;
+   }
+   
+
+   .u-lined-heading {
+    position: relative;
+    padding-top: 56px;
+    &::after{
+    clip-path: polygon(0px 0px, 63px 0px, 55px 9px,  0px 9px);
+      content: "";
+      width: 63px;
+      position: absolute;
+      top: 0px;
+      display: block;
+      left: 0;
+      height: 9px;
+      background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
+    }
+   }
+
+   .u-object-fit {
+ 
+    figure {
+      height: 100%;
+      position: relative;
+      img {
+        position: absolute;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+    }
+   }
+
+   .editor-content > .u-nopad.alignfull {
+    padding-right: 0 !important;
+    padding-left: 0 !important; 
+   }
 .u-absolute {
   position: absolute;
 }
 .u-relative {
   position: relative;
 }
-
+ 
 .u-large-text, .is-style-large-text {
   font-size: 1.625rem;
 }
@@ -24,6 +69,54 @@
 .u-text-center {
   text-align: center;
 }
+
+.u-with-x {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    opacity: 0.3;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 70px;
+    right: -21%;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    opacity: 0.3;
+    transform: rotate(-45deg);
+  }
+}
+
+.u-angled-line {
+  overflow: hidden;
+  position: relative;
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+  &::after {
+  content: "";
+  position: absolute;
+  bottom: 70px;
+  right: -24%;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  opacity: 0.3;
+  transform: rotate(45deg);
+  z-index: 0;
+  }
+}
+
 
 
 // ++ media or embed aspect ratio +++++++++++++++++++++++++++++++++

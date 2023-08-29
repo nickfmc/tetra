@@ -3,7 +3,19 @@
    ========================================================================== */
 
 .c-page-footer {
-  background-color: #cacaca;
-  padding-left: 25px;
-  padding-right: 25px;
+
+}
+.c-lower-footer {
+  background: $color-tetra-blue;
+  font-size: 14px;
+  color: #fff;
+  border-top: 1px solid rgba(137, 173, 190, 0.5);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-weight: 300;
+  p {
+    font-size: 14px;
+  font-weight: 300;
+
+  }
 }

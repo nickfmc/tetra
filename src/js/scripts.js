@@ -46,7 +46,7 @@ jQuery( document ).ready(function( $ ) {
     levelTitles: true,
     position: 'right',
     levelOpen: 'expand',
-    navTitle: $('<div class="c-mobile-menu-header"><a href="/"><img src="'+ templateUrl + '/img/logo.svg"></a></div>'),
+    navTitle: $('<div class="c-mobile-menu-header"><a href="/"><img src="'+ templateUrl + '/img/tetra_logo.svg"></a></div>'),
     levelTitleAsBack: true
   });
 

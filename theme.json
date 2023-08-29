@@ -3,18 +3,26 @@
 	"settings": {
 		"appearanceTools": true,
 		"spacing": {
-			"blockGap": false
+			"blockGap": false,
+			"units": [
+				"px",
+				"em",
+				"rem",
+				"vh",
+				"vw",
+				"%"
+			  ]
 		},
         "color": {
 			"custom": false,
 			"palette": [
 				{
                     "name": "Black",
-					"slug": "black",
+					"slug": "tetra-black",
 					"color": "#000000"
 				},
 				{
-					"slug": "white",
+					"slug": "tetra-white",
 					"color": "#FFFFFF",
 					"name": "White"
 				},
@@ -29,14 +37,24 @@
 					"name": "Medium grey"
 				},
 				{
-					"slug": "cyan",
-					"color": "#00838f",
-					"name": "Cyan"
+					"slug": "tetra-blue",
+					"color": "#335c6d",
+					"name": "#335c6d Tetra Blue" 
 				},
 				{
-					"slug": "light-cyan",
-					"color": "#4fb3bf",
-					"name": "Light cyan" 
+					"slug": "tetra-blue-light",
+					"color": "#89adbe",
+					"name": "#89adbe Tetra Lighter Blue" 
+				},
+				{
+					"slug": "tetra-green",
+					"color": "#a8b6a5",
+					"name": "#a8b6a5 Tetra Green" 
+				},
+				{
+					"slug": "tetra-offwhite",
+					"color": "#f6f8f6",
+					"name": "#f6f8f6 Tetra Offwhite Blue" 
 				}
 			]
 		
@@ -64,5 +82,12 @@
 			}
 		]
 	}
-	}  
+	},
+	"templateParts": [
+		{
+			"name": "footer",
+			"title": "Footer",
+			"area": "footer"
+		}
+	]    
 }
