@@ -2,7 +2,7 @@
    VARIABLES
    ========================================================================== */
    
-   $color-close: #ddd;
+   $color-close: #fff;
    $color-dividing-line: #efefef; 
    $color-item-bg: transparent;
    $color-open-btn: #5c7d6f;
@@ -39,15 +39,19 @@
 
            a {
              color: $color-open-btn;
+             svg {
+              width: 55px;
+              height: auto;
+             }
            }
  }
  @media (width >= 325px) {
    .c-modal-nav-button-wrap {
      font-size: 40px;
-     top: 10px;
+     top: 20px;
    }
  }
- @media (width >= 992px) {
+ @media (width >= 1024px) {
    .c-modal-nav-button-wrap {
      display: none;
    }
@@ -362,10 +366,10 @@ a {
  .hc-offcanvas-nav .nav-item-link,
  .hc-offcanvas-nav li.nav-close a,
  .hc-offcanvas-nav .nav-back a {
-   padding: 10px 17px;
+   padding: 10px 25px;
    color: $color-menu-item;
    font-weight: 300;
-   font-size: 35px;
+   font-size: 40px;
    z-index: 1;
 
    background: transparent;
@@ -398,7 +402,7 @@ a {
    border-bottom: 1px solid #5E859F;
  }
  .hc-offcanvas-nav .nav-highlight {
-   background: whitesmoke;
+   background: rgba(255,255,255,0.1);
  }
  .hc-offcanvas-nav .nav-wrapper > .nav-content > ul:first-of-type > li:first-child:not(.nav-back):not(.nav-close) > .nav-item-wrapper > .nav-item-link {
    border-top: none;
@@ -437,7 +441,7 @@ a {
    width: 45px;
    position: absolute;
    top: 0;
-   right: 0;
+   right: 15px;
    bottom: 0;
    text-align: center;
    cursor: pointer;
@@ -452,7 +456,7 @@ a {
    content: "";
    position: absolute;
    width: 2px;
-   height: 30px;
+   height: 40px;
    background-color:  $color-close;
    margin-top: -15px;
  }
@@ -493,7 +497,7 @@ a {
  }
  .hc-offcanvas-nav .nav-content > .nav-close a:hover {
    border: none;
-   background: radial-gradient(farthest-corner at top right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  //  background: radial-gradient(farthest-corner at top right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
  }
  .hc-offcanvas-nav .nav-content > .nav-close.has-label + ul {
    margin-top: -1px;
@@ -690,19 +694,27 @@ a {
  }
  
  .bottom-nav {
-   position: absolute;
-   bottom: 0;
+   position: relative;
+   bottom: 0; 
    text-align: center;
    width: 100%;
-   padding-right: 20px;
+   padding-right: 25px !important;
    padding-bottom: 50px !important;
+   margin-top: 150px !important;
  }
  .bottom-nav li a {
    color: #FFF !important;
    font-weight: 300;
-   font-size: 18px !important;
+   font-size: 20px !important;
    line-height: 1;
-   padding: 5px !important;
+   padding: 5px !important; 
+   svg {
+    width: 40px;
+    height: auto;
+   }
+ }
+ .bottom-nav li:last-of-type a{
+  font-size: 30px !important;
  }
 
  .hc-offcanvas-nav .sub-menu {

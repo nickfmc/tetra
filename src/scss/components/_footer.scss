@@ -3,7 +3,10 @@
    ========================================================================== */
 
 .c-page-footer {
-
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
 }
 .c-lower-footer {
   background: $color-tetra-blue;
@@ -16,6 +19,8 @@
   p {
     font-size: 14px;
   font-weight: 300;
+ 
 
   }
+  
 }

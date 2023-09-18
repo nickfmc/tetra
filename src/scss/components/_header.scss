@@ -4,7 +4,7 @@
 
 .c-page-header {
   background: #fff; 
-  height: 125px;
+  height: 100px;
   padding-left: 25px; 
   padding-right: 25px;
   // enable styles below for usage with headroom.js
@@ -12,4 +12,8 @@
   // top: 0;
   // width: 100%;
   // z-index: z(overlay);
+  @media(width >= 1024px) {
+    height: 125px;
+  
+  } 
 }

@@ -119,26 +119,29 @@ $paddingHorizontal: 25px;
 // ++ ul list block (with custom class added) +++++++++++++++++++++++++++++++++
 .editor-content ul {
   list-style-type: none;
-  margin: 1rem 0 1rem 30px;
+  margin: 1rem 0 1rem 20px;
   padding: 0;
   overflow: hidden;
   @media(width >= $bp-large) {
-  margin-left: 60px;
+  margin-left: 20px;
   } 
 }
 .editor-content ul li {
   margin: 0;
-  padding: 0 0 16px 1.25rem;
+  padding: 0 0 16px 15px;
   position: relative;
-  font-size: clamped(18px, 20px);
+  // font-size: clamped(18px, 20px);
+  color: $color-tetra-blue;
+  font-weight: 300;
 }
 .editor-content ul li::before {
   display: block;
-  background-color: #333;
+  background-color: $color-tetra-blue-alt;
+  border-radius: 50%;
   content: "";
 	position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   top: 0.58em;
   left: 0;
 }
@@ -248,5 +251,71 @@ body .u-break-early {
     color: #fff !important;
     p {
       color: #fff !important;
+    }
+  }
+
+  // Popups
+  .white-popup-block {
+    background: #f3f5f3;
+    padding: 50px;
+    text-align: left;
+    max-width: 1080px;
+    margin: 40px auto;
+    position: relative;
+    p {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+
+  .mfp-bg {
+    background: #fff;
+    opacity: 1;
+  }
+
+  .popup-modal-dismiss {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    text-transform: uppercase;
+    color: $color-tetra-blue;
+    font-size: 14px;
+    span {
+      color: $color-tetra-blue-light;
+      font-weight: 300;
+      margin-left: 10px;
+    }
+  }
+.mfp-arrow-right::before  {
+    border-left-color: $color-tetra-blue;
+  }
+
+  .mfp-arrow-left::before {
+    border-right-color: $color-tetra-blue;
+
+  }
+
+  .c-staff-member-grid {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    > div {
+     
+      
+      @media(width >= $bp-medium) {
+        width: calc(50% - 10px);
+      } 
+      @media(width >= $bp-large) {
+        width: calc(33% - 12px);
+      
+      } 
+      img {
+        margin-bottom: 20px;
+      }
+      h5 {
+        color: $color-tetra-blue-light;
+        font-size: 18px;
+        margin-bottom: 3px;
+      }
     }
   }

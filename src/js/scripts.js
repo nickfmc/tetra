@@ -39,14 +39,14 @@ jQuery( document ).ready(function( $ ) {
    
 
    $('#mobile-nav').hcOffcanvasNav({
-    disableAt: 1024,
+    disableAt: 1024, 
     width: 580,
     customToggle: $('.toggle'),
      pushContent: '.menu-slide',
     levelTitles: true,
     position: 'right',
     levelOpen: 'expand',
-    navTitle: $('<div class="c-mobile-menu-header"><a href="/"><img src="'+ templateUrl + '/img/tetra_logo_white.svg"></a></div>'),
+    navTitle: $('<div class="c-mobile-menu-header"><a href="/"><img src="'+ templateUrl + '/img/tetra_logo_mobile.svg"></a></div>'),
     levelTitleAsBack: true
   });
 
@@ -65,7 +65,7 @@ jQuery( document ).ready(function( $ ) {
     });
     $(document).on('click', '.popup-modal-dismiss', function (e) {
       e.preventDefault();
-      $.magnificPopup.close();
+      $.magnificPopup.close(); 
     });
 });
 //END Leadership POPUPS

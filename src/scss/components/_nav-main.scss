@@ -8,7 +8,7 @@
 }
 
 // ++ show main navigation wrapper when the time is right ++++++++++++++++++++++++++++++++++++
-@media (width >= $bp-large) {
+@media (width >= 1024px) {
   .c-main-navigation {
     /* DISPLAY FULL SIZE MENU */
     display: block;
@@ -22,7 +22,7 @@
 
 
 // ++ menu styles (top level) +++++++++++++++++++++++++++++++++
-@media (width >= $bp-large) {
+@media (width >= 1024px) {
   .c-main-menu {
     display: inline-flex;
     align-items: flex-start;
@@ -66,7 +66,7 @@
 
 
 // ++ menu style (drop down!) +++++++++++++++++++++++++++++++++
-@media (width >= $bp-large) {
+@media (width >= 1024px) {
   .c-main-menu li:hover ul, 
   .c-main-menu li.focus ul {
     top: 100%;

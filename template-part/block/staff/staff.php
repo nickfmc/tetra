@@ -11,7 +11,7 @@
 
 // Create id attribute allowing for custom "anchor" value.
 $id = 'c-staffblock-' . $block['id'];
-if( !empty($block['anchor']) ) {
+if( !empty($block['anchor']) ) { 
     $id = $block['anchor'];
 }
 
@@ -33,18 +33,19 @@ if( $is_preview ) {
   $args = array(
     'post_type' => 'staff_type',
     'posts_per_page' => -1,
-    'orderby' => 'title',
+    'orderby' => 'menu_order',
     'order' => 'ASC'
   );
   $query = new WP_Query( $args );
   if ( $query->have_posts() ) {
-    echo '<h3>MediMergent Leadership</h3>';
+    echo '<h3 class="u-light-blue mb-2">Our Team</h3>';
+    echo '<p>Meet the team that makes it all happen.</p>';
     echo '<div style="display:none;" class="c-modal-holder">';
     while ( $query->have_posts() ) {
       $query->the_post();
       global $post;
       echo '<div id="pop-' . $post->post_name . '" class="c-modal-holder-item mfp-hide white-popup-block" data-member="' . $post->post_name . '">';
-      echo '<a class="popup-modal-dismiss" href="#"><span>X</span>Close</a>';
+      echo '<a class="popup-modal-dismiss" href="#">Close <span>X</span></a>';
       the_content();
       echo '</div>';
     }
@@ -67,11 +68,9 @@ if( $is_preview ) {
       if ( get_field( 'designation', get_the_ID() ) ) {
         echo '<div class="c-staff-title">' . get_field( 'designation', get_the_ID() ) . '</div>';
       }
-      if ( get_field( 'excerpt_text', get_the_ID() ) ) {
-        echo '<p class="c-staff-excerpt">' . get_field( 'excerpt_text', get_the_ID() ) . '</p>';
-      }
+     
       echo '<span class="c-staff-member-trigger c-btn-text">';
-      echo '<a class="popup-modal" href="#pop-' . $post->post_name . '">Read More</a>';
+      echo '<a class="popup-modal" href="#pop-' . $post->post_name . '">View Bio</a>';
       echo '</span>';
       echo '</div>';
     }

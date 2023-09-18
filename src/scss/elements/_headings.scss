@@ -21,6 +21,7 @@ h1, .h1-style {
 h2, .h2-style {
   font-size: clamped(22px, 30px);
   line-height: 1.4;
+  margin-bottom: 30px;
 }
 h3, .h3-style {
   font-size: clamped(20px, 22px);
@@ -30,8 +31,14 @@ h4, .h4-style {
   font-size: 2rem;
 }
 h5, .h5-style {
-  font-size: 1.5rem;
+  font-size: clamped(18px, 18px);
+  font-weight: 400;
 }
 h6, .h6-style {
   font-size: 1.2rem;
+}
+
+
+p + h3 {
+  margin-top: 40px;
 }

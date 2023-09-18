@@ -5,7 +5,7 @@ require('script-loader!../node_modules/objectFitPolyfill/dist/objectFitPolyfill.
 require('script-loader!../node_modules/hc-offcanvas-nav/dist/hc-offcanvas-nav.js');  
 
 // require('script-loader!../node_modules/headroom.js/dist/headroom.js');
-// require('script-loader!../node_modules/magnific-popup/dist/jquery.magnific-popup.js'); 
+require('script-loader!../node_modules/magnific-popup/dist/jquery.magnific-popup.js');
 // require('script-loader!../node_modules/slick-carousel/slick/slick');
  
  

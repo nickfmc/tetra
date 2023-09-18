@@ -3188,13 +3188,18 @@ blockquote {
   padding: 1rem 2.5rem;
 }
 blockquote p {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 400;
   margin-bottom: 0;
 }
+@media (width >= 768px) {
+  blockquote p {
+    font-size: 1.4rem;
+  }
+}
 blockquote cite {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   text-indent: -1rem;
   margin: 0.5rem 0 0 0;
@@ -3237,6 +3242,7 @@ h1, .h1-style {
 h2, .h2-style {
   font-size: clamp(1.38rem, 0.8vw + 1.18rem, 1.88rem);
   line-height: 1.4;
+  margin-bottom: 30px;
 }
 
 h3, .h3-style {
@@ -3248,11 +3254,16 @@ h4, .h4-style {
 }
 
 h5, .h5-style {
-  font-size: 1.5rem;
+  font-size: clamp(1.13rem, 0vw + 1.13rem, 1.13rem);
+  font-weight: 400;
 }
 
 h6, .h6-style {
   font-size: 1.2rem;
+}
+
+p + h3 {
+  margin-top: 40px;
 }
 
 /* ==========================================================================
@@ -3307,7 +3318,7 @@ input::placeholder, textarea::placeholder {
    A TAG (links) STYLES
    ========================================================================== */
 a {
-  color: #529564;
+  color: #335c6d;
   text-decoration: none;
   cursor: pointer;
   -webkit-transition: all 250ms ease;
@@ -3334,6 +3345,10 @@ p {
   margin: 0 0 1rem 0;
   padding: 0;
   color: #335c6d;
+  font-weight: 300;
+}
+p a {
+  text-decoration: underline;
 }
 
 /* ==========================================================================
@@ -6331,6 +6346,10 @@ p {
           transform: rotate(-45deg);
 }
 
+.u-light-blue {
+  color: #89adbe;
+}
+
 .u-angled-line {
   overflow: hidden;
   position: relative;
@@ -6350,6 +6369,20 @@ p {
   opacity: 0.3;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+  z-index: 0;
+}
+
+.nav-content::after {
+  content: "";
+  position: absolute;
+  bottom: 70px;
+  right: -100px;
+  width: 200%;
+  height: 1px;
+  background-color: #fff;
+  opacity: 0.3;
+  -webkit-transform: rotate(-23deg);
+          transform: rotate(-23deg);
   z-index: 0;
 }
 
