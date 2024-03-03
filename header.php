@@ -13,8 +13,20 @@
   <?php // other html head stuff (before WP/theme scripts are loaded) ------- ?>
 
   <?php wp_head(); // wordpress head functions -- DONOTREMOVE ?>
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/43972113.js"></script>
+<!-- End of HubSpot Embed Code -->
 
   <?php // START Google Analytics here ?>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00JQPGH6M8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00JQPGH6M8');
+</script>
   <?php // END Analytics ?>
 </head>
 

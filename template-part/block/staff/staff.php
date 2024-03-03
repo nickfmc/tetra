@@ -55,23 +55,26 @@ if( $is_preview ) {
       $query->the_post();
       global $post;
       echo '<div class="c-staff-member" data-member="' . $post->post_name . '">';
+      echo '<a class="popup-modal u-cover-link" href="#pop-' . $post->post_name . '"></a>';
       echo '<div class="c-staff-img">';
+      echo '<div class="c-staff-img-overlay"><span>View Bio</span></div>'; 
       if ( has_post_thumbnail() ) {
         the_post_thumbnail( 'full');
       } else {
         echo '<img src="' . bloginfo( 'template_url' ) . '/img/placeholder.png" alt="placeholder img" />';
       }
       echo '</div>';
+      
       echo '<div class="c-staff-name">';
       echo '<h5>' . get_the_title() . '</h5>';
       echo '</div>';
-      if ( get_field( 'designation', get_the_ID() ) ) {
-        echo '<div class="c-staff-title">' . get_field( 'designation', get_the_ID() ) . '</div>';
+      if ( get_field( 'position', get_the_ID() ) ) {
+        echo '<div class="c-staff-title">' . get_field( 'position', get_the_ID() ) . '</div>';
       }
      
-      echo '<span class="c-staff-member-trigger c-btn-text">';
-      echo '<a class="popup-modal" href="#pop-' . $post->post_name . '">View Bio</a>';
-      echo '</span>';
+      // echo '<span class="c-staff-member-trigger c-btn-text">';
+      // echo '<a class="popup-modal" href="#pop-' . $post->post_name . '">View Bio <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="currentColor" d="m183.505 496l-97.268-97.27l143.175-143.174L86.237 112.38l97.268-97.27l143.227 143.228l11.316 11.209l85.9 85.9l.051.05l-11.311 11.419l-85.9 85.9l-.055-.054Zm-52.013-97.27l52.013 52.014L326.629 307.62l.055.054l52.116-52.118l-52.127-52.128l-11.308-11.2l-131.86-131.862l-52.013 52.014l143.175 143.176Z"/></svg></a>';
+      // echo '</span>';
       echo '</div>';
     }
     echo '</div>';

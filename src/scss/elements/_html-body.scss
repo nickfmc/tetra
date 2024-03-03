@@ -4,7 +4,7 @@
    ========================================================================== */
 
 html {
-  $map: (500px: 16px, 768px: 16px, 992px: 17px, 1200px: 18px);
+  $map: (500px: 16px, 768px: 16px, 992px: 16px, 1200px: 16px);
   @include poly-fluid-sizing('font-size', $map);
 }
 

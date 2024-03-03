@@ -1,0 +1,16 @@
+{
+    "name": "acf/personal-meta",
+    "title": "Personal Meta",
+    "description": "Custom Profile Meta",
+    "icon": "admin-users",
+    "keywords": ["profile", "meta", "personal", "custom"],
+    "category": "myblocks",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "personalmeta.php"
+    },
+    "example": {
+        "attributes": {}
+    },
+    "align": "full"
+}

@@ -66,7 +66,7 @@ add_filter( 'block_categories_all', 'custom_block_category', 10, 2 );
 
 function register_acf_blocks() { 
   register_block_type(  get_stylesheet_directory() . '/template-part/block/staff/block.json' ); 
-  // register_block_type(  get_stylesheet_directory() . '/template-part/block/button/block.json' );
+  register_block_type(  get_stylesheet_directory() . '/template-part/block/personalmeta/block.json' ); 
 }
 
 add_action( 'init', 'register_acf_blocks', 5 );
