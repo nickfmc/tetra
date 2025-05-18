@@ -1,31 +1,11 @@
 {
-    "key": "group_64fe2f3c1876c",
-    "title": "Staff Member",
+    "key": "group_65305a038b547",
+    "title": "Staff Meta",
     "fields": [
         {
-            "key": "field_64fe2f3c223ce",
-            "label": "Position",
-            "name": "position",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_64fe2fa9223d0",
-            "label": "LinkedIn",
-            "name": "linkedin",
+            "key": "field_65305a0576577",
+            "label": "LinkedIn Address",
+            "name": "linkedin_address",
             "aria-label": "",
             "type": "url",
             "instructions": "",
@@ -40,7 +20,26 @@
             "placeholder": ""
         },
         {
-            "key": "field_65542b725e1c6",
+            "key": "field_65305a49275fa",
+            "label": "Email Address",
+            "name": "email_address",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6554495500f8b",
             "label": "Phone Number",
             "name": "phone_number",
             "aria-label": "",
@@ -58,14 +57,31 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_655643ee219d0",
+            "label": "Vcard",
+            "name": "vcard",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "block",
                 "operator": "==",
-                "value": "staff_type"
+                "value": "acf\/personal-meta"
             }
         ]
     ],
@@ -78,5 +94,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1700585969
+    "modified": 1700154699
 }
