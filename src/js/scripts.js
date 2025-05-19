@@ -36,39 +36,57 @@ let mapInitialized = false;
 
 // Initialize the Google Map
 function initPropertiesMap() {
+  console.log("initPropertiesMap function called");
+  
   // Prevent double initialization
-  if (mapInitialized) return;
+  if (mapInitialized) {
+    console.log("Map already initialized, skipping");
+    return;
+  }
   
   // Check if the map container exists
   const mapElement = document.getElementById('propertiesMap');
   const singleMapElement = document.getElementById('singlePropertyMap');
   
-  if (!mapElement && !singleMapElement) return;
+  if (!mapElement && !singleMapElement) {
+    console.log("No map elements found on page");
+    return;
+  }
+  
+  // Check if Google Maps API is loaded
+  if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+    console.error("Google Maps API not loaded");
+    showMapError(mapElement || singleMapElement, "Google Maps API not available. Please check if script blockers are enabled.");
+    return;
+  }
   
   // Set initialization flag
   mapInitialized = true;
+  console.log("Map initialization starting");
+  
+  // Remove loading indicator if it exists
+  const loadingIndicator = document.getElementById('map-loading-indicator');
+  if (loadingIndicator) {
+    loadingIndicator.style.display = 'none';
+  }
   
   try {
     // Initialize the properties map if it exists
     if (mapElement) {
+      console.log("Initializing properties list map");
       initPropertiesListMap(mapElement);
     }
     
     // Initialize the single property map if it exists
     if (singleMapElement) {
+      console.log("Initializing single property map");
       initSinglePropertyMap(singleMapElement);
     }
+    
+    console.log("Map initialization complete");
   } catch (error) {
     console.error('Error initializing Google Maps:', error);
-    
-    // Display error message in map container
-    const containers = [mapElement, singleMapElement].filter(Boolean);
-    containers.forEach(container => {
-      container.innerHTML = '<div style="padding: 20px; background: #f8d7da; color: #721c24; text-align: center;">' +
-                            '<p><strong>Error loading Google Maps</strong></p>' +
-                            '<p>There was a problem initializing the map. Please check your console for details.</p>' +
-                            '</div>';
-    });
+    showMapError(mapElement || singleMapElement, error.message);
   }
 }
 
@@ -333,11 +351,30 @@ function highlightPropertyCard(propertyId) {
   propertyCards.forEach(card => {
     card.classList.remove('active');
     if (parseInt(card.dataset.propertyId) === propertyId) {
-      card.classList.add('active');
+      card.classList.add('active'); 
       // Scroll to the card
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   });
+}
+
+// Helper function to show map errors
+function showMapError(container, message) {
+  if (!container) return;
+  
+  console.error(message);
+  
+  container.innerHTML = '<div style="padding: 20px; background: #f8d7da; color: #721c24; text-align: center;">' +
+    '<p><strong>Google Maps Error</strong></p>' +
+    '<p>' + message + '</p>' +
+    '<p>Try refreshing the page or check the browser console for more details.</p>' +
+    '</div>';
+    
+  // Remove loading indicator if it exists
+  const loadingIndicator = document.getElementById('map-loading-indicator');
+  if (loadingIndicator) {
+    loadingIndicator.style.display = 'none';
+  }
 }
 
 // *********************** START CUSTOM JQUERY DOC READY SCRIPTS *******************************
@@ -347,9 +384,10 @@ jQuery( document ).ready(function( $ ) {
    var templateUrl = object_name.templateUrl;
    
    // Initialize Properties Map if on the properties page
-   if (document.getElementById('propertiesMap')) {
-     // Google Maps API is now loaded via wp_enqueue_script in property-settings.php
-     // This initialization will be called automatically via the callback parameter
+   if (document.getElementById('propertiesMap') || document.getElementById('singlePropertyMap')) {
+     console.log("Map container found on page");
+     // Initialize the map - will check for Google Maps API internally
+     initPropertiesMap();
    }
 
    $('#mobile-nav').hcOffcanvasNav({

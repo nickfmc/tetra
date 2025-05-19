@@ -29,6 +29,17 @@ If you're experiencing issues with the Google Maps integration on your propertie
      - Add your local/staging domain to allowed referrers in Google Cloud Console
      - Create a separate API key for development with no restrictions
 
+5. **Staging/Testing Environment Issues**
+   - **WP Engine and Other Staging Domains**: If using staging environments like `tetrastg.wpenginepowered.com`, you must add these domains to your API key's allowed referrers list.
+   - **Error Message "Google Maps API is not loaded"**: This typically means the API key is restricted to specific domains and your current domain isn't in the allowed list.
+   - **Solution**:
+     - Go to Google Cloud Console → Credentials → API Keys
+     - Edit your Google Maps API key
+     - Under "Application restrictions" add all domains where maps should work:
+       - Your production domain (e.g., `tetra.com`)
+       - Your staging domain (e.g., `tetrastg.wpenginepowered.com`)
+       - Your development domain (e.g., `localhost` or your local environment)
+
 ### Map Shows "For Development Purposes Only" Watermark
 
 1. **Billing Not Enabled**

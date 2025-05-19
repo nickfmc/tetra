@@ -29,6 +29,8 @@ $api_key = get_option('tetra_google_maps_api_key');
     </p>
     <p><strong>Browser Info:</strong> <span id="browser-info">Checking...</span></p>
     <p><strong>Maps API Status:</strong> <span id="maps-api-status">Checking...</span></p>
+    <p><strong>Scripts Loaded:</strong></p>
+    <ul id="script-debug-list" style="font-family: monospace; font-size: 12px;"></ul>
     
     <script>
         // Display browser info
@@ -45,6 +47,16 @@ $api_key = get_option('tetra_google_maps_api_key');
                 mapsStatus.style.color = 'red';
             }
         }, 3000);
+
+        // List all loaded scripts
+        var scriptList = document.getElementById('script-debug-list');
+        var scripts = document.getElementsByTagName('script');
+        for (var i = 0; i < scripts.length; i++) {
+            var src = scripts[i].src || 'Inline script';
+            var li = document.createElement('li');
+            li.textContent = src;
+            scriptList.appendChild(li);
+        }
     </script>
 </div>
 <?php endif; ?>
@@ -57,6 +69,20 @@ $api_key = get_option('tetra_google_maps_api_key');
         <p><strong>Google Maps API Key Missing</strong></p>
         <p>Please add your Google Maps API key in the <a href="<?php echo admin_url('edit.php?post_type=property&page=property-settings'); ?>">Properties Settings</a> page.</p>
     </div>
+    <?php else: ?>
+    <div id="map-loading-indicator" class="properties-info" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; background: rgba(255,255,255,0.8); padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <p><strong>Loading Google Maps...</strong></p>
+        <p style="font-size: 0.9em; margin-top: 5px;">If the map doesn't appear, please check that your API key allows access to this domain.</p>
+    </div>
+    <script>
+        // Remove loading indicator once map is initialized or after timeout
+        setTimeout(function() {
+            var loadingIndicator = document.getElementById('map-loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+        }, 5000);
+    </script>
     <?php endif; ?>
 </div>
 

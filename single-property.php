@@ -5,7 +5,8 @@
  * This template will display a single property with all its details
  */
 
-get_header(); ?>
+get_header(); 
+?>
 
 <div class="c-single-property-container">
     <div class="container">

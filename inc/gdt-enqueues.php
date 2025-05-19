@@ -46,4 +46,5 @@ function gdt_scripts_and_styles() {
   }
 }
 
-?>
+// Ensure we always have scripts.js functionality available
+add_action('wp_enqueue_scripts', 'gdt_scripts_and_styles', 10);

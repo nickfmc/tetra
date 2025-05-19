@@ -174,32 +174,30 @@ function tetra_enqueue_google_maps() {
     // Only enqueue on properties page template or single property
     if (is_page_template('pg-properties-map.php') || is_singular('property')) {
         $api_key = tetra_get_google_maps_api_key();
+        
         if (!empty($api_key)) {
             // Add version parameter to prevent caching issues
             $version = wp_rand(10000, 99999);
             
-            // Enqueue Google Maps API with proper parameters
+            // Enqueue Google Maps API
             wp_enqueue_script(
                 'google-maps',
-                'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&callback=initPropertiesMap&v=' . $version,
+                'https://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places&v=' . $version,
                 array('jquery'),
                 null,
-                true
+                true  // Load in footer
             );
             
-            // Add inline script to handle API loading errors
+            // Error handling for auth failures
             wp_add_inline_script('google-maps', '
-                // Error handling for Google Maps
                 function gm_authFailure() {
-                    const mapElements = document.querySelectorAll(".c-properties-map, .c-single-property-map-container");
-                    mapElements.forEach(function(element) {
-                        element.innerHTML = "<div class=\'map-error\'><p>Google Maps API error. Please check your API key settings or reload the page.</p></div>";
-                        element.style.background = "#f8d7da";
-                        element.style.padding = "20px";
-                        element.style.color = "#721c24";
-                        element.style.textAlign = "center";
-                    });
                     console.error("Google Maps authentication error");
+                    var mapElements = document.querySelectorAll(".c-properties-map, .c-single-property-map-container");
+                    mapElements.forEach(function(element) {
+                        element.innerHTML = "<div style=\'padding: 20px; background: #f8d7da; color: #721c24; text-align: center;\'>" +
+                            "<p><strong>Google Maps API Error</strong></p>" +
+                            "<p>There was a problem with the Google Maps API key. Please contact the administrator.</p></div>";
+                    });
                 }
             ', 'before');
         } else {
