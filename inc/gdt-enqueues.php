@@ -34,7 +34,9 @@ function gdt_scripts_and_styles() {
     wp_enqueue_script( 'gutendev-header-bundle' );
     wp_enqueue_style( 'gutendev-styles' );
     wp_enqueue_style( 'gutendev-print' );
-
+    
+    // Font Awesome for property icons
+    wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4' );
 
     // enqueue FOOTER styles and scripts
     wp_enqueue_script( 'jquery' );

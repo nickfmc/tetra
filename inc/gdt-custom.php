@@ -33,4 +33,30 @@ function current_year_shortcode() {
 }
 add_shortcode('current_year', 'current_year_shortcode');
 
+/**
+ * Pass the Google Maps API key to ACF
+ */
+function tetra_acf_google_map_api($api) {
+    $api_key = get_option('tetra_google_maps_api_key');
+    
+    if (!empty($api_key)) {
+        $api['key'] = $api_key;
+    }
+    
+    return $api;
+}
+add_filter('acf/fields/google_map/api', 'tetra_acf_google_map_api');
+
+/**
+ * Alternative method to set the Google Maps API key for ACF
+ */
+function tetra_acf_init() {
+    $api_key = get_option('tetra_google_maps_api_key');
+    
+    if (!empty($api_key)) {
+        acf_update_setting('google_api_key', $api_key);
+    }
+}
+add_action('acf/init', 'tetra_acf_init');
+
 ?>
