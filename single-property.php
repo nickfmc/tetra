@@ -10,8 +10,7 @@ get_header();
 
 <div class="c-single-property-container">
     <div class="container">
-        <?php while ( have_posts() ) : the_post(); 
-            // Get ACF fields
+        <?php while ( have_posts() ) : the_post();            // Get ACF fields
             $price = get_field('property_price');
             $bedrooms = get_field('property_bedrooms');
             $bathrooms = get_field('property_bathrooms');
@@ -20,6 +19,17 @@ get_header();
             $location = get_field('property_location');
             $features = get_field('property_features');
             
+            // Get property type taxonomy
+            $property_types = get_the_terms(get_the_ID(), 'project_type_tax');
+            $property_type_class = '';
+            $property_type_name = '';
+            
+            if ($property_types && !is_wp_error($property_types)) {
+                $property_type = $property_types[0]; // Get first term
+                $property_type_name = $property_type->name;
+                $property_type_class = sanitize_html_class(strtolower($property_type->slug));
+            }
+            
             // Format the price
             $formatted_price = '$' . number_format($price);
         ?>
@@ -27,6 +37,11 @@ get_header();
                 <div class="c-single-property-header">
                     <div class="c-single-property-title-section">
                         <h1 class="c-single-property-title"><?php the_title(); ?></h1>
+                        <?php if ($property_type_name) : ?>
+                            <div class="c-property-taxonomy-ribbon <?php echo $property_type_class; ?>" style="position: relative; display: inline-block; margin-bottom: 10px;">
+                                <?php echo $property_type_name; ?>
+                            </div>
+                        <?php endif; ?>
                         <p class="c-single-property-address"><?php echo $address; ?></p>
                     </div>
                     <div class="c-single-property-price-section">

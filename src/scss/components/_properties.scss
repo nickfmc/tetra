@@ -1,5 +1,52 @@
 /* Property Map and Listings Styles */
 
+/* Two-Column Layout Container */
+.c-properties-layout-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 991px) {
+    .c-properties-layout-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Left Column - Properties List */
+.c-properties-list-column {
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.c-properties-list-column::-webkit-scrollbar {
+    width: 8px;
+}
+
+.c-properties-list-column::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.c-properties-list-column::-webkit-scrollbar-thumb {
+    background: #4a90e2;
+    border-radius: 4px;
+}
+
+.c-properties-list-column::-webkit-scrollbar-thumb:hover {
+    background: #3a7bc8;
+}
+
+/* Right Column - Map */
+.c-properties-map-column {
+    position: sticky;
+    top: 20px;
+    height: 600px;
+}
+
 /* Map Container */
 .c-properties-map-container {
     width: 100%;
@@ -8,7 +55,7 @@
 }
 
 .c-properties-map {
-    height: 500px;
+    height: 600px;
     width: 100%;
     border-radius: 4px;
     background-color: #f5f5f5;
@@ -16,7 +63,7 @@
     position: relative;
 }
 
-/* Property Grid */
+/* Property Grid - Updated for List Layout */
 .c-properties-listing-title {
     margin-bottom: 30px;
     font-size: 2rem;
@@ -24,47 +71,41 @@
 }
 
 .c-properties-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-@media (max-width: 991px) {
-    .c-properties-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 767px) {
-    .c-properties-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Property Cards */
+/* Property Cards - Updated for List Layout */
 .c-property-card {
     background: #fff;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
 .c-property-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .c-property-card-link {
     text-decoration: none;
     color: inherit;
-    display: block;
+    display: flex;
+    width: 100%;
 }
 
 .c-property-card-image {
     position: relative;
-    height: 200px;
+    width: 200px;
+    height: 150px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .c-property-card-image img {
@@ -80,6 +121,10 @@
 
 .c-property-card-content {
     padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .c-property-card-title {
@@ -119,51 +164,91 @@
     color: #4a90e2;
 }
 
-/* Map Info Window */
-.property-map-infowindow {
-    min-width: 200px;
-}
-
-.property-map-infowindow-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.property-map-infowindow-price {
-    font-size: 14px;
-    font-weight: 700;
-    color: #4a90e2;
-    margin-bottom: 5px;
-}
-
-.property-map-infowindow-address {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.property-map-infowindow-link {
-    display: inline-block;
-    padding: 5px 15px;
-    background: #4a90e2;
+/* Taxonomy Ribbon */
+.c-property-taxonomy-ribbon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #4a90e2, #3a7bc8);
     color: white;
+    padding: 5px 12px;
     border-radius: 3px;
-    text-decoration: none;
-    font-size: 12px;
-    transition: background 0.3s;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
-.property-map-infowindow-link:hover {
-    background: #3a7bc8;
+.c-property-taxonomy-ribbon:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 8px solid #2c5aa0;
+    border-bottom: 4px solid transparent;
 }
 
-.property-map-infowindow-image {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 3px;
-    margin-bottom: 10px;
+/* Alternative color schemes for different taxonomy terms */
+.c-property-taxonomy-ribbon.residential {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.c-property-taxonomy-ribbon.residential:before {
+    border-left-color: #1e7e34;
+}
+
+.c-property-taxonomy-ribbon.commercial {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+}
+
+.c-property-taxonomy-ribbon.commercial:before {
+    border-left-color: #d39e00;
+}
+
+.c-property-taxonomy-ribbon.industrial {
+    background: linear-gradient(135deg, #6f42c1, #5a32a3);
+}
+
+.c-property-taxonomy-ribbon.industrial:before {
+    border-left-color: #4e2a84;
+}
+
+.c-property-taxonomy-ribbon.land {
+    background: linear-gradient(135deg, #fd7e14, #e8590c);
+}
+
+.c-property-taxonomy-ribbon.land:before {
+    border-left-color: #d5480b;
+}
+
+/* Mobile adjustments for cards */
+@media (max-width: 767px) {
+    .c-property-card {
+        flex-direction: column;
+    }
+    
+    .c-property-card-image {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .c-properties-map {
+        height: 400px;
+    }
+    
+    .c-properties-list-column {
+        max-height: none;
+        overflow-y: visible;
+    }
+    
+    .c-properties-map-column {
+        position: relative;
+        height: auto;
+    }
 }
 
 /* Single Property Page */

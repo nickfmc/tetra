@@ -61,36 +61,14 @@ $api_key = get_option('tetra_google_maps_api_key');
 </div>
 <?php endif; ?>
 
-<div class="c-properties-map-container">
-    <div id="propertiesMap" class="c-properties-map"></div>
-    
-    <?php if (empty($api_key)): ?>
-    <div class="properties-warning" style="margin-top: 15px; padding: 15px; background: #fcf8e3; border-left: 4px solid #f0ad4e; color: #8a6d3b;">
-        <p><strong>Google Maps API Key Missing</strong></p>
-        <p>Please add your Google Maps API key in the <a href="<?php echo admin_url('edit.php?post_type=property&page=property-settings'); ?>">Properties Settings</a> page.</p>
-    </div>
-    <?php else: ?>
-    <div id="map-loading-indicator" class="properties-info" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; background: rgba(255,255,255,0.8); padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-        <p><strong>Loading Google Maps...</strong></p>
-        <p style="font-size: 0.9em; margin-top: 5px;">If the map doesn't appear, please check that your API key allows access to this domain.</p>
-    </div>
-    <script>
-        // Remove loading indicator once map is initialized or after timeout
-        setTimeout(function() {
-            var loadingIndicator = document.getElementById('map-loading-indicator');
-            if (loadingIndicator) {
-                loadingIndicator.style.display = 'none';
-            }
-        }, 5000);
-    </script>
-    <?php endif; ?>
-</div>
-
 <div class="c-properties-listing-container">
     <div class="container">
-        <h2 class="c-properties-listing-title">Featured Properties</h2>
+        <h1 class="c-properties-listing-title">Featured Properties</h1>
         
-        <div class="c-properties-listing">
+        <div class="c-properties-layout-container">
+            <!-- Left Column - Properties List -->
+            <div class="c-properties-list-column">
+                <div class="c-properties-listing">
             <?php
             // The Query
             $args = array(
@@ -116,9 +94,25 @@ $api_key = get_option('tetra_google_maps_api_key');
                     
                     // Format the price
                     $formatted_price = '$' . number_format($price);
+                      // Get property type taxonomy
+                    $property_types = get_the_terms(get_the_ID(), 'project_type_tax');
+                    $property_type_class = '';
+                    $property_type_name = '';
+                    
+                    if ($property_types && !is_wp_error($property_types)) {
+                        $property_type = $property_types[0]; // Get first term
+                        $property_type_name = $property_type->name;
+                        $property_type_class = sanitize_html_class(strtolower($property_type->slug));
+                    }
                     
                     ?>
                     <div class="c-property-card" data-property-id="<?php echo get_the_ID(); ?>">
+                        <?php if ($property_type_name) : ?>
+                            <div class="c-property-taxonomy-ribbon <?php echo $property_type_class; ?>">
+                                <?php echo $property_type_name; ?>
+                            </div>
+                        <?php endif; ?>
+                        
                         <a href="<?php the_permalink(); ?>" class="c-property-card-link">
                             <div class="c-property-card-image">
                                 <?php if (has_post_thumbnail()) : ?>
@@ -147,8 +141,7 @@ $api_key = get_option('tetra_google_maps_api_key');
                             </div>
                         </a>
                     </div>
-                    <?php
-                }
+                    <?php                }
                 echo '</div>';
             } else {
                 if ($debug_mode) {
@@ -162,6 +155,36 @@ $api_key = get_option('tetra_google_maps_api_key');
             }
             wp_reset_postdata();
             ?>
+                </div>
+            </div>
+            
+            <!-- Right Column - Map -->
+            <div class="c-properties-map-column">
+                <div class="c-properties-map-container">
+                    <div id="propertiesMap" class="c-properties-map"></div>
+                    
+                    <?php if (empty($api_key)): ?>
+                    <div class="properties-warning" style="margin-top: 15px; padding: 15px; background: #fcf8e3; border-left: 4px solid #f0ad4e; color: #8a6d3b;">
+                        <p><strong>Google Maps API Key Missing</strong></p>
+                        <p>Please add your Google Maps API key in the <a href="<?php echo admin_url('edit.php?post_type=property&page=property-settings'); ?>">Properties Settings</a> page.</p>
+                    </div>
+                    <?php else: ?>
+                    <div id="map-loading-indicator" class="properties-info" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; background: rgba(255,255,255,0.8); padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <p><strong>Loading Google Maps...</strong></p>
+                        <p style="font-size: 0.9em; margin-top: 5px;">If the map doesn't appear, please check that your API key allows access to this domain.</p>
+                    </div>
+                    <script>
+                        // Remove loading indicator once map is initialized or after timeout
+                        setTimeout(function() {
+                            var loadingIndicator = document.getElementById('map-loading-indicator');
+                            if (loadingIndicator) {
+                                loadingIndicator.style.display = 'none';
+                            }
+                        }, 5000);
+                    </script>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
