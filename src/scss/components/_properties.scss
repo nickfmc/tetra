@@ -98,6 +98,33 @@
     color: inherit;
     display: flex;
     width: 100%;
+    flex: 1;
+    min-width: 0; /* Allows flex items to shrink below their content size */
+}
+
+.c-property-card-title-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    
+    &:hover {
+        .c-property-card-title {
+            color: #0066cc;
+        }
+    }
+}
+
+.c-property-card-img-link {
+    flex: 0 0 auto; /* Prevents the image link from shrinking */
+    width: 200px;
+    > div {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        img {
+            object-fit: cover;
+        }
+    }
 }
 
 .c-property-card-image {
@@ -125,6 +152,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-width: 0; /* Allows content to shrink and prevents overflow */
+    overflow: hidden; /* Prevents content from breaking the layout */
 }
 
 .c-property-card-title {
@@ -132,6 +161,10 @@
     font-size: 1.2rem;
     font-weight: 600;
     color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    transition: color 0.2s ease;
 }
 
 .c-property-card-price {
@@ -145,6 +178,9 @@
     font-size: 0.9rem;
     color: #666;
     margin: 0 0 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 .c-property-card-details {
@@ -460,4 +496,93 @@
     .c-single-property-price-section {
         margin-top: 15px;
     }
+}
+
+/* Agent Images in Property Cards */
+.c-property-agents {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.c-property-agents .c-property-detail {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.c-property-agents-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.c-agent-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.c-agent-link:hover {
+    background: #4a90e2;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.c-agent-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.c-agent-avatar-placeholder {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.c-agent-name {
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+/* Update the property card details to better accommodate agents */
+.c-property-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.c-property-card-details .c-property-detail {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.c-property-card-details .c-property-detail i {
+    color: #4a90e2;
+    width: 14px;
+    text-align: center;
 }

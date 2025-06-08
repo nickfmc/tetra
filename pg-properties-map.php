@@ -84,17 +84,12 @@ $api_key = get_option('tetra_google_maps_api_key');
                 echo '<div class="c-properties-grid">';
                 while ( $query->have_posts() ) {
                     $query->the_post();
-                    
-                    // Get ACF fields
-                    $price = get_field('property_price');
-                    $bedrooms = get_field('property_bedrooms');
-                    $bathrooms = get_field('property_bathrooms');
-                    $sqft = get_field('property_sqft');
+                      // Get ACF fields
                     $address = get_field('property_address');
+                    $size = get_field('property_size');
+                    $agents = get_field('property_agents');
                     
-                    // Format the price
-                    $formatted_price = '$' . number_format($price);
-                      // Get property type taxonomy
+                    // Get property type taxonomy
                     $property_types = get_the_terms(get_the_ID(), 'project_type_tax');
                     $property_type_class = '';
                     $property_type_name = '';
@@ -112,34 +107,50 @@ $api_key = get_option('tetra_google_maps_api_key');
                                 <?php echo $property_type_name; ?>
                             </div>
                         <?php endif; ?>
-                        
-                        <a href="<?php the_permalink(); ?>" class="c-property-card-link">
+                          <a href="<?php the_permalink(); ?>" class="c-property-card-link c-property-card-img-link">
                             <div class="c-property-card-image">
-                                <?php if (has_post_thumbnail()) : ?>
+                                <?php if (has_post_thumbnail()) : ?> 
                                     <?php the_post_thumbnail('medium_large'); ?>
                                 <?php else : ?>
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/property-placeholder.jpg" alt="Property Image">
                                 <?php endif; ?>
                             </div>
-                            <div class="c-property-card-content">
-                                <h3 class="c-property-card-title"><?php the_title(); ?></h3>
-                                <p class="c-property-card-price"><?php echo $formatted_price; ?></p>
-                                <p class="c-property-card-address"><?php echo $address; ?></p>
-                                <div class="c-property-card-details">
-                                    <?php if ($bedrooms) : ?>
-                                        <span class="c-property-detail"><i class="fas fa-bed"></i> <?php echo $bedrooms; ?> bd</span>
-                                    <?php endif; ?>
-                                    
-                                    <?php if ($bathrooms) : ?>
-                                        <span class="c-property-detail"><i class="fas fa-bath"></i> <?php echo $bathrooms; ?> ba</span>
-                                    <?php endif; ?>
-                                    
-                                    <?php if ($sqft) : ?>
-                                        <span class="c-property-detail"><i class="fas fa-vector-square"></i> <?php echo number_format($sqft); ?> sqft</span>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
                         </a>
+                        
+                        <div class="c-property-card-content">
+                            <a href="<?php the_permalink(); ?>" class="c-property-card-title-link">
+                                <h3 class="c-property-card-title"><?php the_title(); ?></h3>
+                            </a>
+                            <p class="c-property-card-address"><?php echo $address; ?></p>
+                            
+                            <div class="c-property-card-details">
+                                <?php if ($size) : ?>
+                                    <span class="c-property-detail"><i class="fas fa-vector-square"></i> <?php echo $size; ?></span>
+                                <?php endif; ?>
+                                
+                                <?php if ($agents && !empty($agents)) : ?>
+                                    <div class="c-property-agents">
+                                        <span class="c-property-detail">
+                                            <i class="fas fa-user"></i> Agents:
+                                        </span>
+                                        <div class="c-property-agents-list">
+                                            <?php foreach ($agents as $agent) : ?>
+                                                <a href="<?php echo get_permalink($agent->ID); ?>" class="c-agent-link" title="<?php echo esc_attr(get_the_title($agent->ID)); ?>">
+                                                    <?php if (has_post_thumbnail($agent->ID)) : ?>
+                                                        <?php echo get_the_post_thumbnail($agent->ID, 'thumbnail', array('class' => 'c-agent-avatar')); ?>
+                                                    <?php else : ?>
+                                                        <div class="c-agent-avatar-placeholder">
+                                                            <i class="fas fa-user"></i>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <span class="c-agent-name"><?php echo get_the_title($agent->ID); ?></span>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                     <?php                }
                 echo '</div>';
@@ -241,17 +252,25 @@ var propertyMapData = [
     if ( $query->have_posts() ) {
         while ( $query->have_posts() ) {
             $query->the_post();
-            
-            // Get location data
+              // Get location data
             $location = get_field('property_location');
             if ($location && !empty($location['lat']) && !empty($location['lng'])) {
-                $price = get_field('property_price');
-                $formatted_price = '$' . number_format($price);
+                $size = get_field('property_size');
+                $agents = get_field('property_agents');
                 
                 // Escape the title for JavaScript
                 $title = esc_js(get_the_title());
                 $address = esc_js(get_field('property_address'));
                 $permalink = esc_js(get_permalink());
+                  // Format agents for display
+                $agent_names = '';
+                if ($agents && !empty($agents)) {
+                    $names = array();
+                    foreach ($agents as $agent) {
+                        $names[] = get_the_title($agent->ID);
+                    }
+                    $agent_names = esc_js(implode(', ', $names));
+                }
                 
                 // Get the thumbnail URL
                 $thumbnail = '';
@@ -265,7 +284,8 @@ var propertyMapData = [
                 echo "id: " . get_the_ID() . ",";
                 echo "title: '" . $title . "',";
                 echo "address: '" . $address . "',";
-                echo "price: '" . $formatted_price . "',";
+                echo "size: '" . esc_js($size) . "',";
+                echo "agents: '" . $agent_names . "',";
                 echo "lat: " . $location['lat'] . ",";
                 echo "lng: " . $location['lng'] . ",";
                 echo "permalink: '" . $permalink . "',";

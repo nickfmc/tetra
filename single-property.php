@@ -9,15 +9,11 @@ get_header();
 ?>
 
 <div class="c-single-property-container">
-    <div class="container">
-        <?php while ( have_posts() ) : the_post();            // Get ACF fields
-            $price = get_field('property_price');
-            $bedrooms = get_field('property_bedrooms');
-            $bathrooms = get_field('property_bathrooms');
-            $sqft = get_field('property_sqft');
+    <div class="container">        <?php while ( have_posts() ) : the_post();            // Get ACF fields
             $address = get_field('property_address');
+            $size = get_field('property_size');
+            $agents = get_field('property_agents');
             $location = get_field('property_location');
-            $features = get_field('property_features');
             
             // Get property type taxonomy
             $property_types = get_the_terms(get_the_ID(), 'project_type_tax');
@@ -29,12 +25,8 @@ get_header();
                 $property_type_name = $property_type->name;
                 $property_type_class = sanitize_html_class(strtolower($property_type->slug));
             }
-            
-            // Format the price
-            $formatted_price = '$' . number_format($price);
         ?>
-            <div class="c-single-property">
-                <div class="c-single-property-header">
+            <div class="c-single-property">                <div class="c-single-property-header">
                     <div class="c-single-property-title-section">
                         <h1 class="c-single-property-title"><?php the_title(); ?></h1>
                         <?php if ($property_type_name) : ?>
@@ -43,9 +35,6 @@ get_header();
                             </div>
                         <?php endif; ?>
                         <p class="c-single-property-address"><?php echo $address; ?></p>
-                    </div>
-                    <div class="c-single-property-price-section">
-                        <p class="c-single-property-price"><?php echo $formatted_price; ?></p>
                     </div>
                 </div>
                 
@@ -62,67 +51,64 @@ get_header();
                     ?>
                 </div>
                 
-                <div class="c-single-property-content">
-                    <div class="c-single-property-details">
+                <div class="c-single-property-content">                    <div class="c-single-property-details">
                         <h2 class="c-single-property-section-title">Property Details</h2>
                         <div class="c-single-property-details-grid">
-                            <?php if ($bedrooms) : ?>
-                                <div class="c-single-property-detail-item">
-                                    <div class="c-single-property-detail-icon">
-                                        <i class="fas fa-bed"></i>
-                                    </div>
-                                    <div class="c-single-property-detail-content">
-                                        <h3 class="c-single-property-detail-title">Bedrooms</h3>
-                                        <p class="c-single-property-detail-value"><?php echo $bedrooms; ?></p>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                            
-                            <?php if ($bathrooms) : ?>
-                                <div class="c-single-property-detail-item">
-                                    <div class="c-single-property-detail-icon">
-                                        <i class="fas fa-bath"></i>
-                                    </div>
-                                    <div class="c-single-property-detail-content">
-                                        <h3 class="c-single-property-detail-title">Bathrooms</h3>
-                                        <p class="c-single-property-detail-value"><?php echo $bathrooms; ?></p>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                            
-                            <?php if ($sqft) : ?>
+                            <?php if ($size) : ?>
                                 <div class="c-single-property-detail-item">
                                     <div class="c-single-property-detail-icon">
                                         <i class="fas fa-vector-square"></i>
                                     </div>
                                     <div class="c-single-property-detail-content">
-                                        <h3 class="c-single-property-detail-title">Square Footage</h3>
-                                        <p class="c-single-property-detail-value"><?php echo number_format($sqft); ?> sq ft</p>
+                                        <h3 class="c-single-property-detail-title">Property Size</h3>
+                                        <p class="c-single-property-detail-value"><?php echo $size; ?></p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                              <?php if ($agents && !empty($agents)) : ?>
+                                <div class="c-single-property-detail-item">
+                                    <div class="c-single-property-detail-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="c-single-property-detail-content">
+                                        <h3 class="c-single-property-detail-title">Project Agents</h3>
+                                        <div class="c-property-agents-list">
+                                            <?php foreach ($agents as $agent) : ?>
+                                                <a href="<?php echo get_permalink($agent->ID); ?>" class="c-agent-link" title="<?php echo esc_attr(get_the_title($agent->ID)); ?>">
+                                                    <?php if (has_post_thumbnail($agent->ID)) : ?>
+                                                        <?php echo get_the_post_thumbnail($agent->ID, 'thumbnail', array('class' => 'c-agent-avatar')); ?>
+                                                    <?php else : ?>
+                                                        <div class="c-agent-avatar-placeholder">
+                                                            <i class="fas fa-user"></i>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <span class="c-agent-name"><?php echo get_the_title($agent->ID); ?></span>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <?php if ($location) : ?>
+                                <div class="c-single-property-detail-item">
+                                    <div class="c-single-property-detail-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="c-single-property-detail-content">
+                                        <h3 class="c-single-property-detail-title">Location</h3>
+                                        <p class="c-single-property-detail-value"><?php echo $address; ?></p>
                                     </div>
                                 </div>
                             <?php endif; ?>
                         </div>
                     </div>
-                    
-                    <div class="c-single-property-description">
+                      <div class="c-single-property-description">
                         <h2 class="c-single-property-section-title">Description</h2>
                         <div class="c-single-property-description-content">
                             <?php the_content(); ?>
                         </div>
                     </div>
-                    
-                    <?php if ($features && count($features) > 0) : ?>
-                        <div class="c-single-property-features">
-                            <h2 class="c-single-property-section-title">Features</h2>
-                            <ul class="c-single-property-features-list">
-                                <?php foreach ($features as $feature) : ?>
-                                    <li class="c-single-property-feature-item">
-                                        <i class="fas fa-check"></i> <?php echo $feature['feature']; ?>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
                     
                     <?php if ($location) : ?>
                         <div class="c-single-property-map">
@@ -156,20 +142,30 @@ get_header();
                     $related_query = new WP_Query($args);
                     
                     if ($related_query->have_posts()) : ?>
-                        <div class="c-properties-grid c-related-properties-grid">
-                        <?php while ($related_query->have_posts()) : $related_query->the_post(); 
+                        <div class="c-properties-grid c-related-properties-grid">                        <?php while ($related_query->have_posts()) : $related_query->the_post(); 
                             // Get ACF fields for related property
-                            $rel_price = get_field('property_price');
-                            $rel_bedrooms = get_field('property_bedrooms');
-                            $rel_bathrooms = get_field('property_bathrooms');
-                            $rel_sqft = get_field('property_sqft');
                             $rel_address = get_field('property_address');
+                            $rel_size = get_field('property_size');
+                            $rel_agents = get_field('property_agents');
                             
-                            // Format the price
-                            $rel_formatted_price = '$' . number_format($rel_price);
+                            // Get property type taxonomy for related property
+                            $rel_property_types = get_the_terms(get_the_ID(), 'project_type_tax');
+                            $rel_property_type_class = '';
+                            $rel_property_type_name = '';
+                            
+                            if ($rel_property_types && !is_wp_error($rel_property_types)) {
+                                $rel_property_type = $rel_property_types[0]; // Get first term
+                                $rel_property_type_name = $rel_property_type->name;
+                                $rel_property_type_class = sanitize_html_class(strtolower($rel_property_type->slug));
+                            }
                         ?>
                             <div class="c-property-card">
-                                <a href="<?php the_permalink(); ?>" class="c-property-card-link">
+                                <?php if ($rel_property_type_name) : ?>
+                                    <div class="c-property-taxonomy-ribbon <?php echo $rel_property_type_class; ?>">
+                                        <?php echo $rel_property_type_name; ?>
+                                    </div>
+                                <?php endif; ?>
+                                  <a href="<?php the_permalink(); ?>" class="c-property-card-link c-property-card-img-link">
                                     <div class="c-property-card-image">
                                         <?php if (has_post_thumbnail()) : ?>
                                             <?php the_post_thumbnail('medium_large'); ?>
@@ -177,25 +173,42 @@ get_header();
                                             <img src="<?php echo get_template_directory_uri(); ?>/img/property-placeholder.jpg" alt="Property Image">
                                         <?php endif; ?>
                                     </div>
-                                    <div class="c-property-card-content">
-                                        <h3 class="c-property-card-title"><?php the_title(); ?></h3>
-                                        <p class="c-property-card-price"><?php echo $rel_formatted_price; ?></p>
-                                        <p class="c-property-card-address"><?php echo $rel_address; ?></p>
-                                        <div class="c-property-card-details">
-                                            <?php if ($rel_bedrooms) : ?>
-                                                <span class="c-property-detail"><i class="fas fa-bed"></i> <?php echo $rel_bedrooms; ?> bd</span>
-                                            <?php endif; ?>
-                                            
-                                            <?php if ($rel_bathrooms) : ?>
-                                                <span class="c-property-detail"><i class="fas fa-bath"></i> <?php echo $rel_bathrooms; ?> ba</span>
-                                            <?php endif; ?>
-                                            
-                                            <?php if ($rel_sqft) : ?>
-                                                <span class="c-property-detail"><i class="fas fa-vector-square"></i> <?php echo number_format($rel_sqft); ?> sqft</span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
                                 </a>
+                                
+                                <div class="c-property-card-content">
+                                    <a href="<?php the_permalink(); ?>" class="c-property-card-title-link">
+                                        <h3 class="c-property-card-title"><?php the_title(); ?></h3>
+                                    </a>
+                                    <p class="c-property-card-address"><?php echo $rel_address; ?></p>
+                                    
+                                    <div class="c-property-card-details">
+                                        <?php if ($rel_size) : ?>
+                                            <span class="c-property-detail"><i class="fas fa-vector-square"></i> <?php echo $rel_size; ?></span>
+                                        <?php endif; ?>
+                                        
+                                        <?php if ($rel_agents && !empty($rel_agents)) : ?>
+                                            <div class="c-property-agents">
+                                                <span class="c-property-detail">
+                                                    <i class="fas fa-user"></i> Agents:
+                                                </span>
+                                                <div class="c-property-agents-list">
+                                                    <?php foreach ($rel_agents as $agent) : ?>
+                                                        <a href="<?php echo get_permalink($agent->ID); ?>" class="c-agent-link" title="<?php echo esc_attr(get_the_title($agent->ID)); ?>">
+                                                            <?php if (has_post_thumbnail($agent->ID)) : ?>
+                                                                <?php echo get_the_post_thumbnail($agent->ID, 'thumbnail', array('class' => 'c-agent-avatar')); ?>
+                                                            <?php else : ?>
+                                                                <div class="c-agent-avatar-placeholder">
+                                                                    <i class="fas fa-user"></i>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                            <span class="c-agent-name"><?php echo get_the_title($agent->ID); ?></span>
+                                                        </a>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
                         <?php endwhile; ?>
                         </div>
