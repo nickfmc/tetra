@@ -171,9 +171,9 @@ function initPropertiesListMap(mapElement) {
       // Create simplified info window content with just image and overlaid title
       const infoWindowContent = `
         <div class="property-map-infowindow">
-          <div class="property-map-infowindow-image-container" style="position: relative; width: 100%; height: 200px; border-radius: 8px; overflow: hidden;">
+          <div class="property-map-infowindow-image-container" style="position: relative; width: 100%; height: 250px; border-radius: 8px; overflow: hidden;">
             <img src="${property.large_image || property.thumbnail}" alt="${property.title}" style="width: 100%; height: 100%; object-fit: cover;">
-            <div class="property-map-infowindow-title-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; padding: 20px 15px 15px; font-size: 1.1rem; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
+            <div class="property-map-infowindow-title-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; padding: 20px 15px 15px; font-size: 14px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
               ${property.title}
             </div>
           </div>
@@ -258,6 +258,16 @@ function initPropertiesListMap(mapElement) {
       });
     }
     
+    // Add click handler for "View on Map" button
+    const viewOnMapButton = card.querySelector('.c-view-on-map-button');
+    if (viewOnMapButton) {
+      viewOnMapButton.addEventListener('click', function() {
+        const propertyId = parseInt(this.dataset.propertyId);
+        console.log('View on Map button clicked for property:', propertyId);
+        centerMapOnProperty(propertyId);
+      });
+    }
+    
     // Keep hover effects for highlighting
     card.addEventListener('mouseenter', function() {
       const propertyId = parseInt(this.dataset.propertyId);
@@ -268,6 +278,15 @@ function initPropertiesListMap(mapElement) {
       resetMarkers();
     });
   });
+  
+  // Add event handler for "Show All Properties" button
+  const showAllButton = document.querySelector('.c-show-all-properties-button');
+  if (showAllButton) {
+    showAllButton.addEventListener('click', function() {
+      console.log('Show All Properties button clicked');
+      showAllPropertiesInView();
+    });
+  }
 }
 
 // Function to center map on specific property and open its info window
@@ -280,38 +299,80 @@ function centerMapOnProperty(propertyId) {
     const infoWindow = infoWindows[markerIndex];
     const propertyCard = document.querySelector(`[data-property-id="${propertyId}"]`);
     
-    // Add visual feedback to the clicked card
-    if (propertyCard) {
-      propertyCard.classList.add('map-centering');
-      setTimeout(() => {
-        propertyCard.classList.remove('map-centering');
-      }, 2000);
-    }
-    
-    // Close any active info window
+    // Close active info window
     if (activeInfoWindow) {
       activeInfoWindow.close();
     }
     
-    // Center the map on the marker
+    // Center map on property
     propertiesMap.setCenter(marker.getPosition());
-    propertiesMap.setZoom(16); // Zoom in a bit more for better view
+    propertiesMap.setZoom(16);
     
-    // Open the info window
-    infoWindow.open(propertiesMap, marker);
-    activeInfoWindow = infoWindow;
-    
-    // Highlight the property card
-    highlightPropertyCard(propertyId);
-    
-    // Add a small bounce animation to the marker
+    // Add bounce animation
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(() => {
       marker.setAnimation(null);
-    }, 1500);
+    }, 1400);
+    
+    // Open info window
+    infoWindow.open(propertiesMap, marker);
+    activeInfoWindow = infoWindow;
+    
+    // Highlight property card
+    highlightPropertyCard(propertyId);
+    
+    // Scroll to property card if not visible
+    if (propertyCard) {
+      const cardRect = propertyCard.getBoundingClientRect();
+      const isVisible = cardRect.top >= 0 && cardRect.bottom <= window.innerHeight;
+      
+      if (!isVisible) {
+        propertyCard.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }
+    }
   } else {
-    console.warn(`Property with ID ${propertyId} not found on map`);
+    console.warn(`Property with ID ${propertyId} not found`);
   }
+}
+
+// Function to show all properties in view by fitting map bounds
+function showAllPropertiesInView() {
+  if (!propertiesMap || markers.length === 0) {
+    console.warn('No map or markers available');
+    return;
+  }
+  
+  // Close any active info window
+  if (activeInfoWindow) {
+    activeInfoWindow.close();
+    activeInfoWindow = null;
+  }
+  
+  // Clear property card highlights
+  clearPropertyCardHighlights();
+  
+  // Create bounds object
+  const bounds = new google.maps.LatLngBounds();
+  
+  // Extend bounds for each marker
+  markers.forEach(marker => {
+    bounds.extend(marker.getPosition());
+  });
+  
+  // Fit map to bounds
+  propertiesMap.fitBounds(bounds);
+  
+  // If only one property, zoom out a bit more
+  if (markers.length === 1) {
+    google.maps.event.addListenerOnce(propertiesMap, 'bounds_changed', function() {
+      propertiesMap.setZoom(15);
+    });
+  }
+  
+  console.log(`Showing all ${markers.length} properties in view`);
 }
 
 // Initialize the map for a single property page

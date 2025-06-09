@@ -127,10 +127,11 @@ $api_key = get_option('tetra_google_maps_api_key');
                                     <span class="c-property-detail"><i class="fas fa-vector-square"></i> <?php echo $size; ?></span>
                                 <?php endif; ?>
                                 
+                                
                                 <?php if ($agents && !empty($agents)) : ?>
                                     <div class="c-property-agents">
                                         <span class="c-property-detail">
-                                            <i class="fas fa-user"></i> Agents:
+                                            <i class="fas fa-user"></i> Agent(s):
                                         </span>
                                         <div class="c-property-agents-list">
                                             <?php foreach ($agents as $agent) : ?>
@@ -148,6 +149,13 @@ $api_key = get_option('tetra_google_maps_api_key');
                                         </div>
                                     </div>
                                 <?php endif; ?>
+
+                                <!-- View on Map Button -->
+                                <button class="c-view-on-map-button" data-property-id="<?php echo get_the_ID(); ?>" type="button">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    View on Map
+                                </button>
+                                
                             </div>
                         </div>
                     </div>
@@ -167,10 +175,15 @@ $api_key = get_option('tetra_google_maps_api_key');
             ?>
                 </div>
             </div>
-            
-            <!-- Right Column - Map -->
+              <!-- Right Column - Map -->
             <div class="c-properties-map-column">
                 <div class="c-properties-map-container">
+                    <div class="c-properties-map-controls">
+                        <button class="c-show-all-properties-button" type="button" title="Show All Properties in View">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            Show All Properties
+                        </button>
+                    </div>
                     <div id="propertiesMap" class="c-properties-map"></div>
                     
                     <?php if (empty($api_key)): ?>

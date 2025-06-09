@@ -6,7 +6,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     padding-top: 80px;
-    margin-bottom: 50px;
+    margin-bottom: 90px;
 }
 
 @media (max-width: 991px) {
@@ -18,7 +18,7 @@
 
 /* Left Column - Properties List */
 .c-properties-list-column {
-    max-height: 600px;
+    max-height: 1000px;
     overflow-y: auto;
     padding-right: 10px;
 }
@@ -33,7 +33,7 @@
 }
 
 .c-properties-list-column::-webkit-scrollbar-thumb {
-    background: #4a90e2;
+    background: #345c6d;
     border-radius: 4px;
 }
 
@@ -45,18 +45,21 @@
 .c-properties-map-column {
     position: sticky;
     top: 20px;
-    height: 600px;
+    min-height: 600px;
+    height: 100%;
 }
 
 /* Map Container */
 .c-properties-map-container {
     width: 100%;
+    height: 100%;
     margin-bottom: 50px;
     position: relative;
 }
 
 .c-properties-map {
-    height: 600px;
+    height: 100%;
+    min-height: 600px;
     width: 100%;
     border-radius: 4px;
     background-color: #f5f5f5;
@@ -111,6 +114,7 @@
 }
 
 .c-property-card-title-link {
+    margin-bottom: 0;
     text-decoration: none;
     color: inherit;
     display: block;
@@ -181,7 +185,7 @@
 .c-property-card-price {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #4a90e2;
+    color: #345c6d;
     margin: 0 0 5px;
 }
 
@@ -196,7 +200,7 @@
 
 .c-property-card-details {
     display: flex;
-    gap: 15px;
+    gap: 4px;
     font-size: 0.9rem;
     color: #666;
 }
@@ -208,7 +212,7 @@
 }
 
 .c-property-detail i {
-    color: #4a90e2;
+    color: #345c6d;
 }
 
 /* Taxonomy Ribbon */
@@ -216,7 +220,7 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    background: linear-gradient(135deg, #4a90e2, #3a7bc8);
+    background: linear-gradient(135deg, #345c6d, #89aebe);
     color: white;
     padding: 5px 12px;
     border-radius: 3px;
@@ -228,15 +232,16 @@
     z-index: 2;
 }
 
-.c-property-taxonomy-ribbon:before {
+.c-property-taxonomy-ribbon:after {
     content: '';
     position: absolute;
-    top: 100%;
+    top: 93%;
     left: 0;
     width: 0;
     height: 0;
-    border-left: 8px solid #2c5aa0;
-    border-bottom: 4px solid transparent;
+border-left: 12px solid #345c6d;
+  border-bottom: 8px solid transparent;
+  z-index: -1;
 }
 
 /* Alternative color schemes for different taxonomy terms */
@@ -333,7 +338,7 @@
 .c-single-property-price {
     font-size: 2rem;
     font-weight: 700;
-    color: #4a90e2;
+    color: #345c6d;
     margin: 0;
 }
 
@@ -355,7 +360,7 @@
     font-size: 1.5rem;
     margin: 0 0 20px;
     color: #333;
-    border-bottom: 2px solid #4a90e2;
+    border-bottom: 2px solid #345c6d;
     padding-bottom: 10px;
     display: inline-block;
 }
@@ -386,7 +391,7 @@
     width: 50px;
     height: 50px;
     background: #f5f8ff;
-    color: #4a90e2;
+    color: #345c6d;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -442,7 +447,7 @@
 }
 
 .c-single-property-feature-item i {
-    color: #4a90e2;
+    color: #345c6d;
 }
 
 .c-single-property-map {
@@ -469,7 +474,7 @@
 .c-single-property-contact-button {
     display: inline-block;
     padding: 12px 30px;
-    background: #4a90e2;
+    background: #345c6d;
     color: white;
     border-radius: 4px;
     text-decoration: none;
@@ -478,7 +483,7 @@
 }
 
 .c-single-property-contact-button:hover {
-    background: #3a7bc8;
+    background: #24424e;
 }
 
 .c-single-property-related {
@@ -540,10 +545,11 @@
     transition: all 0.3s ease;
     font-size: 0.8rem;
     white-space: nowrap;
+    border: 1px solid #ccc;
 }
 
 .c-agent-link:hover {
-    background: #4a90e2;
+    background: #345c6d;
     color: white;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
@@ -593,7 +599,7 @@
 }
 
 .c-property-card-details .c-property-detail i {
-    color: #4a90e2;
+    color: #345c6d;
     width: 14px;
     text-align: center;
 }
@@ -601,7 +607,7 @@
 /* Google Maps Info Window Styles */
 .property-map-infowindow {
     padding: 0;
-    max-width: 350px;
+    max-width: 450px;
     
     .property-map-infowindow-image {
         width: 100%;
@@ -631,7 +637,7 @@
         font-size: 0.9rem;
         
         i {
-            color: #4a90e2;
+            color: #345c6d;
             margin-right: 5px;
         }
     }
@@ -658,14 +664,14 @@
 
 /* Highlight property card when corresponding map marker is active */
 .c-property-card.active {
-    border: 2px solid #4a90e2;
+    border: 2px solid #345c6d;
     box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
     transform: translateY(-2px);
     background: #f8fbff;
 }
 
 .c-property-card.active .c-property-card-title {
-    color: #4a90e2;
+    color: #345c6d;
 }
 
 .c-property-card.active .c-property-card-image {
@@ -681,4 +687,84 @@
     bottom: 0;
     background: rgba(74, 144, 226, 0.1);
     border-radius: 4px;
+}
+
+/* View on Map Button */
+.c-view-on-map-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    background: #345c6d;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+.c-view-on-map-button:hover {
+    background: #89aebe;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(74, 144, 226, 0.3);
+}
+
+.c-view-on-map-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(74, 144, 226, 0.4);
+}
+
+.c-view-on-map-button i {
+    font-size: 0.75rem;
+}
+
+/* Map Controls Container */
+.c-properties-map-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+/* Show All Properties Button */
+.c-show-all-properties-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: #ffffff;
+    color: #333;
+    border: 2px solid #345c6d;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.c-show-all-properties-button:hover {
+    background: #345c6d;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+.c-show-all-properties-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.4);
+}
+
+.c-show-all-properties-button i {
+    font-size: 0.8rem;
 }
