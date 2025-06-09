@@ -174,11 +174,59 @@ $api_key = get_option('tetra_google_maps_api_key');
             wp_reset_postdata();
             ?>
                 </div>
-            </div>
-              <!-- Right Column - Map -->
+            </div>            <!-- Right Column - Map -->
             <div class="c-properties-map-column">
                 <div class="c-properties-map-container">
                     <div class="c-properties-map-controls">
+                        <div class="c-map-filters">
+                            <select class="c-filter-select" id="agentFilter">
+                                <option value="">All Agents</option>
+                                <?php
+                                // Get all unique agents for filter
+                                $all_agents = [];
+                                $temp_query = new WP_Query($args);
+                                if ($temp_query->have_posts()) {
+                                    while ($temp_query->have_posts()) {
+                                        $temp_query->the_post();
+                                        $agents = get_field('property_agents');
+                                        if ($agents && !empty($agents)) {
+                                            foreach ($agents as $agent) {
+                                                $agent_id = $agent->ID;
+                                                $agent_name = get_the_title($agent_id);
+                                                if (!isset($all_agents[$agent_id])) {
+                                                    $all_agents[$agent_id] = $agent_name;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                wp_reset_postdata();
+                                
+                                // Output agent options
+                                foreach ($all_agents as $agent_id => $agent_name) {
+                                    echo '<option value="' . $agent_id . '">' . esc_html($agent_name) . '</option>';
+                                }
+                                ?>
+                            </select>
+                            
+                            <select class="c-filter-select" id="projectTypeFilter">
+                                <option value="">All Project Types</option>
+                                <?php
+                                // Get all project types for filter
+                                $project_types = get_terms(array(
+                                    'taxonomy' => 'project_type_tax',
+                                    'hide_empty' => true,
+                                ));
+                                
+                                if ($project_types && !is_wp_error($project_types)) {
+                                    foreach ($project_types as $type) {
+                                        echo '<option value="' . $type->term_id . '">' . esc_html($type->name) . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        
                         <button class="c-show-all-properties-button" type="button" title="Show All Properties in View">
                             <i class="fas fa-expand-arrows-alt"></i>
                             Show All Properties
@@ -265,21 +313,33 @@ var propertyMapData = [
         while ( $query->have_posts() ) {
             $query->the_post();
               // Get location data
-            $location = get_field('property_location');
-            if ($location && !empty($location['lat']) && !empty($location['lng'])) {
+            $location = get_field('property_location');            if ($location && !empty($location['lat']) && !empty($location['lng'])) {
                 $size = get_field('property_size');
                 $agents = get_field('property_agents');
+                
+                // Get property type taxonomy
+                $property_types = get_the_terms(get_the_ID(), 'project_type_tax');
+                $property_type_name = '';
+                $property_type_id = '';
+                
+                if ($property_types && !is_wp_error($property_types)) {
+                    $property_type = $property_types[0]; // Get first term
+                    $property_type_name = $property_type->name;
+                    $property_type_id = $property_type->term_id;
+                }
                 
                 // Escape the title for JavaScript
                 $title = esc_js(get_the_title());
                 $address = esc_js(get_field('property_address'));
                 $permalink = esc_js(get_permalink());
-                  // Format agents for display
+                  // Format agents for display and collect agent IDs
                 $agent_names = '';
+                $agent_ids = array();
                 if ($agents && !empty($agents)) {
                     $names = array();
                     foreach ($agents as $agent) {
                         $names[] = get_the_title($agent->ID);
+                        $agent_ids[] = $agent->ID;
                     }
                     $agent_names = esc_js(implode(', ', $names));
                 }
@@ -300,6 +360,9 @@ var propertyMapData = [
                 echo "address: '" . $address . "',";
                 echo "size: '" . esc_js($size) . "',";
                 echo "agents: '" . $agent_names . "',";
+                echo "agentIds: [" . implode(',', $agent_ids) . "],";
+                echo "projectType: '" . esc_js($property_type_name) . "',";
+                echo "projectTypeId: " . $property_type_id . ",";
                 echo "lat: " . $location['lat'] . ",";
                 echo "lng: " . $location['lng'] . ",";
                 echo "permalink: '" . $permalink . "',";

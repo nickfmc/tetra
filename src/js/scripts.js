@@ -287,63 +287,40 @@ function initPropertiesListMap(mapElement) {
       showAllPropertiesInView();
     });
   }
-}
-
-// Function to center map on specific property and open its info window
-function centerMapOnProperty(propertyId) {
-  // Find the marker and info window for this property
-  const markerIndex = markers.findIndex(marker => marker.propertyId === propertyId);
   
-  if (markerIndex !== -1) {
-    const marker = markers[markerIndex];
-    const infoWindow = infoWindows[markerIndex];
-    const propertyCard = document.querySelector(`[data-property-id="${propertyId}"]`);
-    
-    // Close active info window
-    if (activeInfoWindow) {
-      activeInfoWindow.close();
-    }
-    
-    // Center map on property
-    propertiesMap.setCenter(marker.getPosition());
-    propertiesMap.setZoom(16);
-    
-    // Add bounce animation
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-    setTimeout(() => {
-      marker.setAnimation(null);
-    }, 1400);
-    
-    // Open info window
-    infoWindow.open(propertiesMap, marker);
-    activeInfoWindow = infoWindow;
-    
-    // Highlight property card
-    highlightPropertyCard(propertyId);
-    
-    // Scroll to property card if not visible
-    if (propertyCard) {
-      const cardRect = propertyCard.getBoundingClientRect();
-      const isVisible = cardRect.top >= 0 && cardRect.bottom <= window.innerHeight;
-      
-      if (!isVisible) {
-        propertyCard.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
-        });
-      }
-    }
-  } else {
-    console.warn(`Property with ID ${propertyId} not found`);
+  // Add event handlers for filter dropdowns
+  const agentFilter = document.getElementById('agentFilter');
+  const projectTypeFilter = document.getElementById('projectTypeFilter');
+  
+  if (agentFilter) {
+    agentFilter.addEventListener('change', function() {
+      console.log('Agent filter changed:', this.value);
+      applyFilters();
+    });
+  }
+  
+  if (projectTypeFilter) {
+    projectTypeFilter.addEventListener('change', function() {
+      console.log('Project type filter changed:', this.value);
+      applyFilters();
+    });
   }
 }
 
-// Function to show all properties in view by fitting map bounds
-function showAllPropertiesInView() {
+// Function to apply filters to map markers and property cards
+function applyFilters() {
   if (!propertiesMap || markers.length === 0) {
-    console.warn('No map or markers available');
+    console.warn('No map or markers available for filtering');
     return;
   }
+  
+  const agentFilter = document.getElementById('agentFilter');
+  const projectTypeFilter = document.getElementById('projectTypeFilter');
+  
+  const selectedAgent = agentFilter ? agentFilter.value : '';
+  const selectedProjectType = projectTypeFilter ? projectTypeFilter.value : '';
+  
+  console.log('Applying filters - Agent:', selectedAgent, 'Project Type:', selectedProjectType);
   
   // Close any active info window
   if (activeInfoWindow) {
@@ -354,25 +331,165 @@ function showAllPropertiesInView() {
   // Clear property card highlights
   clearPropertyCardHighlights();
   
-  // Create bounds object
-  const bounds = new google.maps.LatLngBounds();
+  let visibleMarkers = [];
+  let visiblePropertyIds = [];
   
-  // Extend bounds for each marker
-  markers.forEach(marker => {
-    bounds.extend(marker.getPosition());
+  // Filter markers and collect visible property IDs
+  markers.forEach((marker, index) => {
+    const property = propertyMapData[index];
+    let shouldShow = true;
+    
+    // Check agent filter
+    if (selectedAgent && selectedAgent !== '') {
+      const agentId = parseInt(selectedAgent);
+      if (!property.agentIds || !property.agentIds.includes(agentId)) {
+        shouldShow = false;
+      }
+    }
+    
+    // Check project type filter
+    if (selectedProjectType && selectedProjectType !== '') {
+      const projectTypeId = parseInt(selectedProjectType);
+      if (!property.projectTypeId || property.projectTypeId !== projectTypeId) {
+        shouldShow = false;
+      }
+    }
+    
+    // Show/hide marker
+    marker.setVisible(shouldShow);
+    
+    if (shouldShow) {
+      visibleMarkers.push(marker);
+      visiblePropertyIds.push(property.id);
+    }
   });
   
-  // Fit map to bounds
+  // Show/hide property cards
+  const propertyCards = document.querySelectorAll('.c-property-card');
+  propertyCards.forEach(card => {
+    const propertyId = parseInt(card.dataset.propertyId);
+    if (visiblePropertyIds.includes(propertyId)) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Adjust map bounds to show visible markers
+  if (visibleMarkers.length > 0) {
+    const bounds = new google.maps.LatLngBounds();
+    visibleMarkers.forEach(marker => {
+      bounds.extend(marker.getPosition());
+    });
+    
+    propertiesMap.fitBounds(bounds);
+    
+    // If only one property, zoom out a bit more
+    if (visibleMarkers.length === 1) {
+      google.maps.event.addListenerOnce(propertiesMap, 'bounds_changed', function() {
+        propertiesMap.setZoom(15);
+      });
+    }
+  } else {
+    // No properties match the filter, show a message or reset view
+    console.log('No properties match the current filters');
+  }
+  
+  console.log(`Filtered results: ${visibleMarkers.length} properties visible`);
+}
+
+// Function to reset all filters
+function resetFilters() {
+  const agentFilter = document.getElementById('agentFilter');
+  const projectTypeFilter = document.getElementById('projectTypeFilter');
+  
+  if (agentFilter) agentFilter.value = '';
+  if (projectTypeFilter) projectTypeFilter.value = '';
+  
+  // Show all markers and property cards
+  markers.forEach(marker => {
+    marker.setVisible(true);
+  });
+  
+  const propertyCards = document.querySelectorAll('.c-property-card');
+  propertyCards.forEach(card => {
+    card.style.display = 'flex';
+  });
+  
+  // Reset map view to show all properties
+  fitMapToAllProperties();
+  
+  console.log('All filters reset');
+}
+
+// Function to show all properties in view (called by "Show All Properties" button)
+function showAllPropertiesInView() {
+  if (!propertiesMap || markers.length === 0) {
+    console.warn('No map or markers available');
+    return;
+  }
+  
+  console.log('Showing all properties in view');
+  
+  // Close any active info window
+  if (activeInfoWindow) {
+    activeInfoWindow.close();
+    activeInfoWindow = null;
+  }
+  
+  // Clear property card highlights
+  clearPropertyCardHighlights();
+  
+  // Reset filters to show all properties
+  const agentFilter = document.getElementById('agentFilter');
+  const projectTypeFilter = document.getElementById('projectTypeFilter');
+  
+  if (agentFilter) agentFilter.value = '';
+  if (projectTypeFilter) projectTypeFilter.value = '';
+  
+  // Show all markers
+  markers.forEach(marker => {
+    marker.setVisible(true);
+  });
+  
+  // Show all property cards
+  const propertyCards = document.querySelectorAll('.c-property-card');
+  propertyCards.forEach(card => {
+    card.style.display = 'flex';
+  });
+  
+  // Fit map bounds to show all properties
+  fitMapToAllProperties();
+  
+  console.log('All properties are now visible');
+}
+
+// Helper function to fit map bounds to all properties
+function fitMapToAllProperties() {
+  if (!propertiesMap || markers.length === 0) {
+    console.warn('No map or markers available for bounds fitting');
+    return;
+  }
+  
+  const bounds = new google.maps.LatLngBounds();
+  
+  // Add all marker positions to bounds
+  markers.forEach(marker => {
+    if (marker.getVisible()) {
+      bounds.extend(marker.getPosition());
+    }
+  });
+  
+  // Fit the map to the bounds
   propertiesMap.fitBounds(bounds);
   
-  // If only one property, zoom out a bit more
-  if (markers.length === 1) {
+  // If only one property, zoom out a bit more for better context
+  const visibleMarkers = markers.filter(marker => marker.getVisible());
+  if (visibleMarkers.length === 1) {
     google.maps.event.addListenerOnce(propertiesMap, 'bounds_changed', function() {
       propertiesMap.setZoom(15);
     });
   }
-  
-  console.log(`Showing all ${markers.length} properties in view`);
 }
 
 // Initialize the map for a single property page

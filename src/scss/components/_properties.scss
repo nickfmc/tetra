@@ -731,7 +731,43 @@ border-left: 12px solid #345c6d;
     right: 10px;
     z-index: 10;
     display: flex;
+    flex-direction: column;
     gap: 10px;
+    align-items: flex-end;
+}
+
+/* Map Filters Container */
+.c-map-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Filter Select Dropdowns */
+.c-filter-select {
+    padding: 8px 12px;
+    background: #ffffff;
+    color: #333;
+    border: 2px solid #345c6d;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+}
+
+.c-filter-select:hover {
+    background: #f8fbff;
+    border-color: #4a90e2;
+}
+
+.c-filter-select:focus {
+    outline: none;
+    background: #f8fbff;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
 /* Show All Properties Button */
@@ -767,4 +803,33 @@ border-left: 12px solid #345c6d;
 
 .c-show-all-properties-button i {
     font-size: 0.8rem;
+}
+
+/* Mobile responsiveness for map controls */
+@media (max-width: 767px) {
+    .c-properties-map-controls {
+        position: relative;
+        top: auto;
+        right: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 0 10px;
+    }
+    
+    .c-map-filters {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+    
+    .c-filter-select {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .c-show-all-properties-button {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
 }

@@ -6513,7 +6513,55 @@ body.hc-nav-open {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 10px;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+/* Map Filters Container */
+.c-map-filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* Filter Select Dropdowns */
+.c-filter-select {
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #333;
+  border: 2px solid #345c6d;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 140px;
+}
+
+.c-filter-select:hover {
+  background: #f8fbff;
+  border-color: #4a90e2;
+}
+
+.c-filter-select:focus {
+  outline: none;
+  background: #f8fbff;
+  border-color: #4a90e2;
+  -webkit-box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+          box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
 /* Show All Properties Button */
@@ -6561,6 +6609,41 @@ body.hc-nav-open {
   font-size: 0.8rem;
 }
 
+/* Mobile responsiveness for map controls */
+@media (max-width: 767px) {
+  .c-properties-map-controls {
+    position: relative;
+    top: auto;
+    right: auto;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+  .c-map-filters {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 8px;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+  }
+  .c-filter-select {
+    min-width: auto;
+    width: 100%;
+  }
+  .c-show-all-properties-button {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+}
 /* ==========================================================================
    COLOURS
    ========================================================================== */
