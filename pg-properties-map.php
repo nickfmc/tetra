@@ -62,8 +62,8 @@ $api_key = get_option('tetra_google_maps_api_key');
 <?php endif; ?>
 
 <div class="c-properties-listing-container">
-    <div class="container">
-        <h1 class="c-properties-listing-title">Featured Properties</h1>
+    <div class="o-wrapper-wide container">
+        
         
         <div class="c-properties-layout-container">
             <!-- Left Column - Properties List -->
@@ -106,8 +106,7 @@ $api_key = get_option('tetra_google_maps_api_key');
                             <div class="c-property-taxonomy-ribbon <?php echo $property_type_class; ?>">
                                 <?php echo $property_type_name; ?>
                             </div>
-                        <?php endif; ?>
-                          <a href="<?php the_permalink(); ?>" class="c-property-card-link c-property-card-img-link">
+                        <?php endif; ?>                        <div class="c-property-card-link c-property-card-img-link" data-property-id="<?php echo get_the_ID(); ?>" style="cursor: pointer;">
                             <div class="c-property-card-image">
                                 <?php if (has_post_thumbnail()) : ?> 
                                     <?php the_post_thumbnail('medium_large'); ?>
@@ -115,12 +114,12 @@ $api_key = get_option('tetra_google_maps_api_key');
                                     <img src="<?php echo get_template_directory_uri(); ?>/img/property-placeholder.jpg" alt="Property Image">
                                 <?php endif; ?>
                             </div>
-                        </a>
+                        </div>
                         
                         <div class="c-property-card-content">
-                            <a href="<?php the_permalink(); ?>" class="c-property-card-title-link">
+                            <div class="c-property-card-title-link" data-property-id="<?php echo get_the_ID(); ?>" style="cursor: pointer;">
                                 <h3 class="c-property-card-title"><?php the_title(); ?></h3>
-                            </a>
+                            </div>
                             <p class="c-property-card-address"><?php echo $address; ?></p>
                             
                             <div class="c-property-card-details">
@@ -271,13 +270,15 @@ var propertyMapData = [
                     }
                     $agent_names = esc_js(implode(', ', $names));
                 }
-                
-                // Get the thumbnail URL
+                  // Get the thumbnail URL and larger image URL
                 $thumbnail = '';
+                $large_image = '';
                 if (has_post_thumbnail()) {
                     $thumbnail = esc_js(get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'));
+                    $large_image = esc_js(get_the_post_thumbnail_url(get_the_ID(), 'medium_large'));
                 } else {
                     $thumbnail = esc_js(get_template_directory_uri() . '/img/property-placeholder.jpg');
+                    $large_image = esc_js(get_template_directory_uri() . '/img/property-placeholder.jpg');
                 }
                 
                 echo '{';
@@ -289,7 +290,8 @@ var propertyMapData = [
                 echo "lat: " . $location['lat'] . ",";
                 echo "lng: " . $location['lng'] . ",";
                 echo "permalink: '" . $permalink . "',";
-                echo "thumbnail: '" . $thumbnail . "'";
+                echo "thumbnail: '" . $thumbnail . "',";
+                echo "large_image: '" . $large_image . "'";
                 echo '},';
             } elseif ($debug_mode) {
                 // In debug mode, add a comment about the missing location

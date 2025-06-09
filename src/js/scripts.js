@@ -168,21 +168,22 @@ function initPropertiesListMap(mapElement) {
         propertyId: property.id
       });
       
-      // Create info window content
+      // Create simplified info window content with just image and overlaid title
       const infoWindowContent = `
         <div class="property-map-infowindow">
-          <img src="${property.thumbnail}" class="property-map-infowindow-image" alt="${property.title}">
-          <h3 class="property-map-infowindow-title">${property.title}</h3>
-          <p class="property-map-infowindow-price">${property.price}</p>
-          <p class="property-map-infowindow-address">${property.address}</p>
-          <a href="${property.permalink}" class="property-map-infowindow-link">View Property</a>
+          <div class="property-map-infowindow-image-container" style="position: relative; width: 100%; height: 200px; border-radius: 8px; overflow: hidden;">
+            <img src="${property.large_image || property.thumbnail}" alt="${property.title}" style="width: 100%; height: 100%; object-fit: cover;">
+            <div class="property-map-infowindow-title-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; padding: 20px 15px 15px; font-size: 1.1rem; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
+              ${property.title}
+            </div>
+          </div>
         </div>
       `;
       
       // Create info window
       const infoWindow = new google.maps.InfoWindow({
         content: infoWindowContent,
-        maxWidth: 300
+        maxWidth: 350
       });
       
       // Store markers and info windows
@@ -203,6 +204,11 @@ function initPropertiesListMap(mapElement) {
         // Highlight the corresponding property card
         highlightPropertyCard(property.id);
       });
+      
+      // Remove highlighting when info window is closed
+      infoWindow.addListener('closeclick', function() {
+        clearPropertyCardHighlights();
+      });
     });
     
     // Fit map to bounds if we have valid markers
@@ -218,11 +224,41 @@ function initPropertiesListMap(mapElement) {
     } else {
       console.warn('No valid property markers to display');
     }
+    
+    // Clear highlights when clicking elsewhere on the map
+    propertiesMap.addListener('click', function() {
+      if (activeInfoWindow) {
+        activeInfoWindow.close();
+        activeInfoWindow = null;
+      }
+      clearPropertyCardHighlights();
+    });
   }
   
-  // Add click event to property cards to highlight corresponding marker
+  // Add click event to property cards to center map and open info window
   const propertyCards = document.querySelectorAll('.c-property-card');
   propertyCards.forEach(card => {
+    // Add click handlers for image and title
+    const imageLink = card.querySelector('.c-property-card-img-link');
+    const titleLink = card.querySelector('.c-property-card-title-link');
+    
+    if (imageLink) {
+      imageLink.addEventListener('click', function() {
+        const propertyId = parseInt(this.dataset.propertyId);
+        console.log('Image clicked for property:', propertyId);
+        centerMapOnProperty(propertyId);
+      });
+    }
+    
+    if (titleLink) {
+      titleLink.addEventListener('click', function() {
+        const propertyId = parseInt(this.dataset.propertyId);
+        console.log('Title clicked for property:', propertyId);
+        centerMapOnProperty(propertyId);
+      });
+    }
+    
+    // Keep hover effects for highlighting
     card.addEventListener('mouseenter', function() {
       const propertyId = parseInt(this.dataset.propertyId);
       highlightMarker(propertyId);
@@ -232,6 +268,50 @@ function initPropertiesListMap(mapElement) {
       resetMarkers();
     });
   });
+}
+
+// Function to center map on specific property and open its info window
+function centerMapOnProperty(propertyId) {
+  // Find the marker and info window for this property
+  const markerIndex = markers.findIndex(marker => marker.propertyId === propertyId);
+  
+  if (markerIndex !== -1) {
+    const marker = markers[markerIndex];
+    const infoWindow = infoWindows[markerIndex];
+    const propertyCard = document.querySelector(`[data-property-id="${propertyId}"]`);
+    
+    // Add visual feedback to the clicked card
+    if (propertyCard) {
+      propertyCard.classList.add('map-centering');
+      setTimeout(() => {
+        propertyCard.classList.remove('map-centering');
+      }, 2000);
+    }
+    
+    // Close any active info window
+    if (activeInfoWindow) {
+      activeInfoWindow.close();
+    }
+    
+    // Center the map on the marker
+    propertiesMap.setCenter(marker.getPosition());
+    propertiesMap.setZoom(16); // Zoom in a bit more for better view
+    
+    // Open the info window
+    infoWindow.open(propertiesMap, marker);
+    activeInfoWindow = infoWindow;
+    
+    // Highlight the property card
+    highlightPropertyCard(propertyId);
+    
+    // Add a small bounce animation to the marker
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(() => {
+      marker.setAnimation(null);
+    }, 1500);
+  } else {
+    console.warn(`Property with ID ${propertyId} not found on map`);
+  }
 }
 
 // Initialize the map for a single property page
@@ -355,6 +435,14 @@ function highlightPropertyCard(propertyId) {
       // Scroll to the card
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  });
+}
+
+// Clear all property card highlights
+function clearPropertyCardHighlights() {
+  const propertyCards = document.querySelectorAll('.c-property-card');
+  propertyCards.forEach(card => {
+    card.classList.remove('active');
   });
 }
 

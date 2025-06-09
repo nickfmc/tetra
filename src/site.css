@@ -5674,6 +5674,7 @@ body.hc-nav-open {
   -ms-grid-columns: 1fr 30px 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  padding-top: 80px;
   margin-bottom: 50px;
 }
 
@@ -5743,6 +5744,7 @@ body.hc-nav-open {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding-top: 3px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -5789,15 +5791,27 @@ body.hc-nav-open {
       -ms-flex: 1;
           flex: 1;
   min-width: 0; /* Allows flex items to shrink below their content size */
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.c-property-card-link:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
 }
 
 .c-property-card-title-link {
   text-decoration: none;
   color: inherit;
   display: block;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 .c-property-card-title-link:hover .c-property-card-title {
   color: #0066cc;
+  -webkit-transform: translateX(2px);
+          transform: translateX(2px);
 }
 
 .c-property-card-img-link {
@@ -6352,6 +6366,92 @@ body.hc-nav-open {
   color: #4a90e2;
   width: 14px;
   text-align: center;
+}
+
+/* Google Maps Info Window Styles */
+.property-map-infowindow {
+  padding: 0;
+  max-width: 350px;
+}
+.property-map-infowindow .property-map-infowindow-image {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.property-map-infowindow .property-map-infowindow-title {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+}
+.property-map-infowindow .property-map-infowindow-address {
+  margin: 0 0 10px;
+  color: #666;
+  font-size: 0.9rem;
+}
+.property-map-infowindow .property-map-infowindow-size,
+.property-map-infowindow .property-map-infowindow-agents {
+  margin: 0 0 10px;
+  color: #666;
+  font-size: 0.9rem;
+}
+.property-map-infowindow .property-map-infowindow-size i,
+.property-map-infowindow .property-map-infowindow-agents i {
+  color: #4a90e2;
+  margin-right: 5px;
+}
+.property-map-infowindow .property-map-infowindow-agents {
+  margin: 0;
+}
+
+/* Enhanced click feedback for property cards */
+.c-property-card-img-link:active,
+.c-property-card-title-link:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+.c-property-card.map-centering {
+  -webkit-box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+          box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+}
+
+.c-property-card.map-centering .c-property-card-img-link {
+  opacity: 0.9;
+}
+
+/* Highlight property card when corresponding map marker is active */
+.c-property-card.active {
+  border: 2px solid #4a90e2;
+  -webkit-box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+          box-shadow: 0 8px 25px rgba(74, 144, 226, 0.4);
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+  background: #f8fbff;
+}
+
+.c-property-card.active .c-property-card-title {
+  color: #4a90e2;
+}
+
+.c-property-card.active .c-property-card-image {
+  position: relative;
+}
+
+.c-property-card.active .c-property-card-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(74, 144, 226, 0.1);
+  border-radius: 4px;
 }
 
 /* ==========================================================================
