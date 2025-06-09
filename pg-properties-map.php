@@ -64,6 +64,69 @@ $api_key = get_option('tetra_google_maps_api_key');
 <div class="c-properties-listing-container">
     <div class="o-wrapper-wide container">
         
+        <!-- Control Bar Above Map and Listings -->
+        <div class="c-properties-control-bar">
+            <div class="c-control-bar-inner">
+                <div class="c-control-bar-filters">
+                    <select class="c-filter-select" id="agentFilter">
+                        <option value="">All Agents</option>
+                        <?php
+                        // Get all unique agents for filter
+                        $all_agents = [];
+                        $temp_query = new WP_Query(array(
+                            'post_type' => 'property',
+                            'posts_per_page' => -1,
+                            'orderby' => 'date',
+                            'order' => 'DESC',
+                        ));
+                        if ($temp_query->have_posts()) {
+                            while ($temp_query->have_posts()) {
+                                $temp_query->the_post();
+                                $agents = get_field('property_agents');
+                                if ($agents && !empty($agents)) {
+                                    foreach ($agents as $agent) {
+                                        $agent_id = $agent->ID;
+                                        $agent_name = get_the_title($agent_id);
+                                        if (!isset($all_agents[$agent_id])) {
+                                            $all_agents[$agent_id] = $agent_name;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        wp_reset_postdata();
+                        
+                        // Output agent options
+                        foreach ($all_agents as $agent_id => $agent_name) {
+                            echo '<option value="' . $agent_id . '">' . esc_html($agent_name) . '</option>';
+                        }
+                        ?>
+                    </select>
+                    
+                    <select class="c-filter-select" id="projectTypeFilter">
+                        <option value="">All Project Types</option>
+                        <?php
+                        // Get all project types for filter
+                        $project_types = get_terms(array(
+                            'taxonomy' => 'project_type_tax',
+                            'hide_empty' => true,
+                        ));
+                        
+                        if ($project_types && !is_wp_error($project_types)) {
+                            foreach ($project_types as $type) {
+                                echo '<option value="' . $type->term_id . '">' . esc_html($type->name) . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                
+                <button class="c-show-all-properties-button" type="button" title="Show All Properties in View">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                    Show All Properties
+                </button>
+            </div>
+        </div>
         
         <div class="c-properties-layout-container">
             <!-- Left Column - Properties List -->
@@ -177,61 +240,6 @@ $api_key = get_option('tetra_google_maps_api_key');
             </div>            <!-- Right Column - Map -->
             <div class="c-properties-map-column">
                 <div class="c-properties-map-container">
-                    <div class="c-properties-map-controls">
-                        <div class="c-map-filters">
-                            <select class="c-filter-select" id="agentFilter">
-                                <option value="">All Agents</option>
-                                <?php
-                                // Get all unique agents for filter
-                                $all_agents = [];
-                                $temp_query = new WP_Query($args);
-                                if ($temp_query->have_posts()) {
-                                    while ($temp_query->have_posts()) {
-                                        $temp_query->the_post();
-                                        $agents = get_field('property_agents');
-                                        if ($agents && !empty($agents)) {
-                                            foreach ($agents as $agent) {
-                                                $agent_id = $agent->ID;
-                                                $agent_name = get_the_title($agent_id);
-                                                if (!isset($all_agents[$agent_id])) {
-                                                    $all_agents[$agent_id] = $agent_name;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                wp_reset_postdata();
-                                
-                                // Output agent options
-                                foreach ($all_agents as $agent_id => $agent_name) {
-                                    echo '<option value="' . $agent_id . '">' . esc_html($agent_name) . '</option>';
-                                }
-                                ?>
-                            </select>
-                            
-                            <select class="c-filter-select" id="projectTypeFilter">
-                                <option value="">All Project Types</option>
-                                <?php
-                                // Get all project types for filter
-                                $project_types = get_terms(array(
-                                    'taxonomy' => 'project_type_tax',
-                                    'hide_empty' => true,
-                                ));
-                                
-                                if ($project_types && !is_wp_error($project_types)) {
-                                    foreach ($project_types as $type) {
-                                        echo '<option value="' . $type->term_id . '">' . esc_html($type->name) . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        
-                        <button class="c-show-all-properties-button" type="button" title="Show All Properties in View">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                            Show All Properties
-                        </button>
-                    </div>
                     <div id="propertiesMap" class="c-properties-map"></div>
                     
                     <?php if (empty($api_key)): ?>

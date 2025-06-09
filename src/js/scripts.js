@@ -584,6 +584,60 @@ function initSinglePropertyMap(mapElement) {
   infoWindow.open(singlePropertyMap, marker);
 }
 
+// Center map on a specific property and open its info window
+function centerMapOnProperty(propertyId) {
+  if (!propertiesMap || markers.length === 0) {
+    console.warn('No map or markers available for centering');
+    return;
+  }
+  
+  console.log('Centering map on property:', propertyId);
+  
+  // Find the marker for this property
+  let targetMarker = null;
+  let targetInfoWindow = null;
+  
+  markers.forEach((marker, index) => {
+    if (marker.propertyId === propertyId) {
+      targetMarker = marker;
+      targetInfoWindow = infoWindows[index];
+    }
+  });
+  
+  if (targetMarker && targetInfoWindow) {
+    // Close any active info window
+    if (activeInfoWindow) {
+      activeInfoWindow.close();
+    }
+    
+    // Center the map on the property
+    propertiesMap.setCenter(targetMarker.getPosition());
+    propertiesMap.setZoom(16);
+    
+    // Add a brief visual feedback on the property card
+    const propertyCard = document.querySelector(`.c-property-card[data-property-id="${propertyId}"]`);
+    if (propertyCard) {
+      propertyCard.classList.add('map-centering');
+      setTimeout(() => {
+        propertyCard.classList.remove('map-centering');
+      }, 1000);
+    }
+    
+    // Open the info window for this property
+    setTimeout(() => {
+      targetInfoWindow.open(propertiesMap, targetMarker);
+      activeInfoWindow = targetInfoWindow;
+      
+      // Highlight the property card
+      highlightPropertyCard(propertyId);
+    }, 300); // Small delay to allow map centering animation
+    
+    console.log('Map centered on property:', propertyId);
+  } else {
+    console.warn('Could not find marker for property:', propertyId);
+  }
+}
+
 // Highlight a marker when hovering over a property card
 function highlightMarker(propertyId) {
   markers.forEach((marker, index) => {
