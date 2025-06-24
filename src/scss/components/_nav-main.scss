@@ -15,7 +15,7 @@
     padding-left: calc(#{$logo-size} + 1rem);
     position: absolute;
     right: 0;
-    top: 34px;
+    top: 40px;
   }
 }
 
@@ -45,7 +45,7 @@
     font-size: 1.15rem;
     margin: 0;
     padding: 10px 1.25rem;
-    border-radius: 8px;
+    border-radius: 4px;
     transition: $transition-ease;
   }
 
@@ -66,7 +66,7 @@ color: $color-tetra-purple;
     background: transparent;
     color: $color-tetra-blue-alt;
     border: 2px solid $color-tetra-blue-alt;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 10px 32px;
     margin-left: 1.5rem;
     font-weight: 600;
@@ -82,7 +82,7 @@ color: $color-tetra-purple;
   .c-main-menu ul {
     background: #fff;
     border: 2px solid $color-tetra-purple;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0px 3px 5px 0px rgba(204, 204, 204, 0.60);
     position: absolute;
     right: 0;
@@ -135,6 +135,30 @@ color: $color-tetra-purple;
   .c-main-menu ul li:not(:last-child) a {
     border-bottom: 1px solid #e5e2e8;
   }
+  // Add chevron for dropdowns
+  .c-main-menu > li.menu-item-has-children > a {
+    position: relative;
+    padding-right: 2.2em;
+  }
+  .c-main-menu > li.menu-item-has-children > a::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    right: 1.1em;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid $color-tetra-blue-alt;
+    border-bottom: 2px solid $color-tetra-blue-alt;
+    transform: translateY(-50%) rotate(45deg);
+    transition: border-color 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+  .c-main-menu > li.menu-item-has-children:hover > a::after,
+  .c-main-menu > li.menu-item-has-children:focus-within > a::after {
+    border-color: #fff;
+    transform: translateY(-10%) rotate(-135deg);
+  }
 }
 // END menu top level
 
@@ -153,7 +177,7 @@ color: $color-tetra-purple;
     position: absolute;
     right: 0;
     top: 100%;
-    min-width: 180px;
+    min-width: 150px;
     margin: 0;
     padding: 10px;
     opacity: 0;

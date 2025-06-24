@@ -3223,9 +3223,9 @@ blockquote::before {
    HEADINGS
    ========================================================================== */
 h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, .h4-style, h5, .h5-style, h6, .h6-style {
-  color: #325c6e;
+  color: #345C6D;
   font-family: "tetra", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.1;
   margin: 0 0 1rem 0;
 }
@@ -3237,6 +3237,7 @@ h1 a, .h1-style a, h2 a, .h2-style a, h3 a, .h3-style a, h4 a, .h4-style a, h5 a
 h1, .h1-style {
   font-size: clamp(2.19rem, 2.9vw + 1.46rem, 4rem);
   margin-bottom: 0;
+  font-weight: 500;
 }
 h1 strong, .h1-style strong {
   font-weight: 800;

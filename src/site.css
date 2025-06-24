@@ -3207,7 +3207,7 @@ abbr[title] {
  */
 b,
 strong {
-  font-weight: bolder;
+  font-weight: 700;
 }
 
 /**
@@ -3637,7 +3637,7 @@ html {
 body {
   color: #251E2D;
   font-family: "Source Sans Pro", sans-serif;
-  line-height: 1.5;
+  line-height: 1.4;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -3684,9 +3684,9 @@ blockquote::before {
    HEADINGS
    ========================================================================== */
 h1, .h1-style, h2, .h2-style, h3, .h3-style, h4, .h4-style, h5, .h5-style, h6, .h6-style {
-  color: #325c6e;
+  color: #345C6D;
   font-family: "tetra", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.1;
   margin: 0 0 1rem 0;
 }
@@ -3696,17 +3696,19 @@ h1 a, .h1-style a, h2 a, .h2-style a, h3 a, .h3-style a, h4 a, .h4-style a, h5 a
 }
 
 h1, .h1-style {
-  font-size: clamp(2.19rem, 2.9vw + 1.46rem, 4rem);
+  font-size: clamp(2.19rem, 4vw + 1.19rem, 4.69rem);
   margin-bottom: 0;
+  font-weight: 500;
+  letter-spacing: -1.5px;
 }
 h1 strong, .h1-style strong {
   font-weight: 800;
 }
 
 h2, .h2-style {
-  font-size: clamp(1.38rem, 0.8vw + 1.18rem, 1.88rem);
-  line-height: 1.4;
+  font-size: clamp(1.38rem, 3.2vw + 0.57rem, 3.38rem);
   margin-bottom: 30px;
+  letter-spacing: -1.08px;
 }
 
 h3, .h3-style {
@@ -3804,7 +3806,7 @@ a[href^="mailto:"] {
    P TAGS
    ========================================================================== */
 p {
-  line-height: 1.5;
+  line-height: 1.4;
   margin: 0 0 1rem 0;
   padding: 0;
   color: #335c6d;
@@ -3899,6 +3901,16 @@ p a {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.editor-content > .gb-container.alignfull, .editor-content > [class^=gb-element-].alignfull, .editor-content > .alignfull {
+  padding-left: 25px;
+  padding-right: 25px;
+  position: relative;
+}
+
+#main-content [class^=gb-element-] > *:last-child {
+  margin-bottom: 0;
 }
 
 .editor-content > .alignfull {
@@ -4534,7 +4546,7 @@ p a {
     padding-left: calc(300px + 1rem);
     position: absolute;
     right: 0;
-    top: 34px;
+    top: 40px;
   }
 }
 @media (width >= 1024px) {
@@ -4564,7 +4576,7 @@ p a {
     font-size: 1.15rem;
     margin: 0;
     padding: 10px 1.25rem;
-    border-radius: 8px;
+    border-radius: 4px;
     -webkit-transition: all 250ms ease;
     transition: all 250ms ease;
   }
@@ -4585,7 +4597,7 @@ p a {
     background: transparent;
     color: #325c6e;
     border: 2px solid #325c6e;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 10px 32px;
     margin-left: 1.5rem;
     font-weight: 600;
@@ -4602,7 +4614,7 @@ p a {
   .c-main-menu ul {
     background: #fff;
     border: 2px solid #6C486E;
-    border-radius: 8px;
+    border-radius: 4px;
     -webkit-box-shadow: 0px 3px 5px 0px rgba(204, 204, 204, 0.6);
             box-shadow: 0px 3px 5px 0px rgba(204, 204, 204, 0.6);
     position: absolute;
@@ -4651,6 +4663,34 @@ p a {
   .c-main-menu ul li:not(:last-child) a {
     border-bottom: 1px solid #e5e2e8;
   }
+  .c-main-menu > li.menu-item-has-children > a {
+    position: relative;
+    padding-right: 2.2em;
+  }
+  .c-main-menu > li.menu-item-has-children > a::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: 1.1em;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #325c6e;
+    border-bottom: 2px solid #325c6e;
+    -webkit-transform: translateY(-50%) rotate(45deg);
+            transform: translateY(-50%) rotate(45deg);
+    -webkit-transition: border-color 0.2s, -webkit-transform 0.2s;
+    transition: border-color 0.2s, -webkit-transform 0.2s;
+    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color 0.2s, transform 0.2s, -webkit-transform 0.2s;
+    pointer-events: none;
+  }
+  .c-main-menu > li.menu-item-has-children:hover > a::after,
+  .c-main-menu > li.menu-item-has-children:focus-within > a::after {
+    border-color: #fff;
+    -webkit-transform: translateY(-10%) rotate(-135deg);
+            transform: translateY(-10%) rotate(-135deg);
+  }
 }
 @media (width >= 1024px) {
   .c-main-menu li:hover ul,
@@ -4664,7 +4704,7 @@ p a {
     position: absolute;
     right: 0;
     top: 100%;
-    min-width: 180px;
+    min-width: 150px;
     margin: 0;
     padding: 10px;
     opacity: 0;

@@ -40,6 +40,19 @@ $paddingHorizontal: 25px;
   }
 }
 
+.editor-content > .gb-container.alignfull, .editor-content > [class^="gb-element-"].alignfull,.editor-content > .alignfull  {
+  padding-left: 25px;
+  padding-right: 25px;
+  position: relative;
+
+ }
+
+ #main-content [class^="gb-element-"] > *:last-child {
+  margin-bottom: 0;
+}
+
+
+
 .editor-content > .alignfull {
   transform: translateX(calc(0px - #{$paddingHorizontal}));
   width: calc(100% + 2 * #{$paddingHorizontal});
