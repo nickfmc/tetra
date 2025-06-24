@@ -3635,8 +3635,8 @@ html {
 }
 
 body {
-  color: #000;
-  font-family: "tetra", sans-serif;
+  color: #251E2D;
+  font-family: "Source Sans Pro", sans-serif;
   line-height: 1.5;
   -webkit-overflow-scrolling: touch;
 }
@@ -3757,23 +3757,23 @@ hr::after, hr.wp-block-separator::after {
    FORM STYLES
    ========================================================================== */
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input::-ms-input-placeholder, textarea::-ms-input-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input::placeholder, textarea::placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 
@@ -4133,7 +4133,7 @@ p a {
   font-size: 14px;
 }
 .popup-modal-dismiss span {
-  color: #89adbe;
+  color: #89ADBE;
   font-weight: 300;
   margin-left: 10px;
 }
@@ -4170,7 +4170,7 @@ p a {
   margin-bottom: 20px;
 }
 .c-staff-member-grid > div h5 {
-  color: #89adbe;
+  color: #89ADBE;
   font-size: 18px;
   margin-bottom: 3px;
 }
@@ -4389,7 +4389,7 @@ p a {
 }
 .c-blk-btn a:hover, .c-btn-primary a:hover, .wp-block-button.is-style-standard a.wp-block-button__link:hover, .wp-block-button.is-style-standard .wp-block-button__link:hover {
   background-color: #EAEAEA;
-  color: #000;
+  color: #251E2D;
 }
 
 .gb-button-41959841 {
@@ -4399,7 +4399,7 @@ p a {
   display: block;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
-  background-color: #89adbe;
+  background-color: #89ADBE;
   position: absolute;
   right: -7px;
   top: calc(50% - 1px);
@@ -7020,7 +7020,7 @@ body.hc-nav-open {
 }
 
 .u-light-blue {
-  color: #89adbe;
+  color: #89ADBE;
 }
 
 .u-angled-line {

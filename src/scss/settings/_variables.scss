@@ -30,16 +30,33 @@ $color-gray-100:        #EAEAEA;
 $color-gray-400:        #ACACAC;
 $color-gray-700:        #323232;
 
-$color-black:           #000;
+$color-black:           #251E2D;
 $color-white:           #FFF;
 
 // tetra colors
+$color-tetra-green: #657962;
 $color-tetra-blue: #335c6d;
 $color-tetra-blue-alt: #325c6e;
-
 $color-tetra-blue-light: #89adbe;
 $color-tetra-green: #a8b6a5;
 $color-tetra-offwhite: #f6f8f6;
+
+
+
+$color-teal: #345C6D;
+$color-tetra-blue-light: #89ADBE;
+$color-tetra-blue-new: #293E46;
+$color-tetra-green-light: #A8B6A5;
+$color-tetra-cool: #F6F8F6;
+$color-tetra-warm: #DED2CF;
+$color-tetra-purple: #6C486E;
+$color-clay: #E2C7A3;
+$color-stone: #F0EBE5;
+$color-tetra-grey: #ccc;
+
+
+
+
 
 // assign colours to variables
 $alert-color:       $color-red-400;
@@ -58,7 +75,7 @@ $logo-size: 300px;
 
 // ++ TYPOGRAPHY +++++++++++++++++++++++++++++++++
 // Fonts
-$font-primary: 'tetra', sans-serif;
+$font-primary: 'Source Sans Pro', sans-serif;
 $font-secondary: 'tetra', sans-serif;
 
 @font-face {

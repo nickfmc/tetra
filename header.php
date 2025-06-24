@@ -12,6 +12,9 @@
 
   <?php // other html head stuff (before WP/theme scripts are loaded) ------- ?>
 
+  <!-- Google Fonts: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
+
   <?php wp_head(); // wordpress head functions -- DONOTREMOVE ?>
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/43972113.js"></script>

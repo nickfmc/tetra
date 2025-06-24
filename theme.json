@@ -19,7 +19,7 @@
 				{
                     "name": "Black",
 					"slug": "tetra-black",
-					"color": "#000000"
+					"color": "#251E2D"
 				},
 				{
 					"slug": "tetra-white",
@@ -48,13 +48,65 @@
 				},
 				{
 					"slug": "tetra-green",
-					"color": "#a8b6a5",
+					"color": "#657962",
 					"name": "#a8b6a5 Tetra Green" 
 				},
 				{
 					"slug": "tetra-offwhite",
 					"color": "#f6f8f6",
 					"name": "#f6f8f6 Tetra Offwhite Blue" 
+				},
+				{
+					"slug": "teal",
+					"color": "#345C6D",
+					"name": "Teal"
+				},
+				{
+					"slug": "tetra-blue-new",
+					"color": "#293E46",
+					"name": "Tetra Blue New"
+				},
+				{
+					"slug": "tetra-green-light",
+					"color": "#A8B6A5",
+					"name": "Tetra Green Light"
+				},
+				{
+					"slug": "tetra-cool",
+					"color": "#F6F8F6",
+					"name": "Tetra Cool"
+				},
+				{
+					"slug": "tetra-warm",
+					"color": "#DED2CF",
+					"name": "Tetra Warm"
+				},
+				{
+					"slug": "tetra-purple",
+					"color": "#6C486E",
+					"name": "Tetra Purple"
+				},
+				{
+					"slug": "clay",
+					"color": "#E2C7A3",
+					"name": "Clay"
+				},
+				{
+					"slug": "stone",
+					"color": "#F0EBE5",
+					"name": "Stone"
+				},
+				{
+					"slug": "tetra-grey",
+					"color": "#ccc",
+					"name": "Tetra Grey"
+				}
+			],
+			"gradients": [
+				{
+					"name": "Tetra Purple to Teal",
+					"slug": "tetra-purple-to-teal",
+					"gradient": "linear-gradient(90deg, #6C486E 1.8%, #345C6D 99.7%)"
 				}
 			]
 		

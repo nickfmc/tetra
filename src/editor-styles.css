@@ -3174,8 +3174,8 @@ html {
 }
 
 body {
-  color: #000;
-  font-family: "tetra", sans-serif;
+  color: #251E2D;
+  font-family: "Source Sans Pro", sans-serif;
   line-height: 1.5;
   -webkit-overflow-scrolling: touch;
 }
@@ -3279,8 +3279,7 @@ hr, hr.wp-block-separator {
   border-bottom: 0 !important;
 }
 hr::after, hr.wp-block-separator::after {
-  -webkit-clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
-          clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
+  clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
   content: "";
   width: 63px;
   position: absolute;
@@ -3297,23 +3296,23 @@ hr::after, hr.wp-block-separator::after {
    FORM STYLES
    ========================================================================== */
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input::-ms-input-placeholder, textarea::-ms-input-placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 input::placeholder, textarea::placeholder {
-  color: #000;
+  color: #251E2D;
   opacity: 0.8;
 }
 
@@ -3378,7 +3377,7 @@ p a {
 }
 .c-blk-btn a:hover, .c-btn-primary a:hover, .wp-block-button.is-style-standard a.wp-block-button__link:hover, .wp-block-button.is-style-standard .wp-block-button__link:hover {
   background-color: #EAEAEA;
-  color: #000;
+  color: #251E2D;
 }
 
 .gb-button-41959841 {
@@ -3388,7 +3387,7 @@ p a {
   display: block;
   -webkit-transition: all 250ms ease;
   transition: all 250ms ease;
-  background-color: #89adbe;
+  background-color: #89ADBE;
   position: absolute;
   right: -7px;
   top: calc(50% - 1px);
@@ -6250,8 +6249,7 @@ p a {
    MISC UTILITIES
    ========================================================================== */
 .u-corner-crop {
-  -webkit-clip-path: polygon(0px 0px, 100% 0px, 100% 75%, 75% 100%, 0px 100%);
-          clip-path: polygon(0px 0px, 100% 0px, 100% 75%, 75% 100%, 0px 100%);
+  clip-path: polygon(0px 0px, 100% 0px, 100% 75%, 75% 100%, 0px 100%);
 }
 
 .fw300, .fw-300, .fw-300 p, .fw300 p {
@@ -6263,8 +6261,7 @@ p a {
   padding-top: 56px;
 }
 .u-lined-heading::after {
-  -webkit-clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
-          clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
+  clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
   content: "";
   width: 63px;
   position: absolute;
@@ -6382,7 +6379,7 @@ p a {
 }
 
 .u-light-blue {
-  color: #89adbe;
+  color: #89ADBE;
 }
 
 .u-angled-line {
