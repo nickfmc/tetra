@@ -3235,18 +3235,19 @@ h1 a, .h1-style a, h2 a, .h2-style a, h3 a, .h3-style a, h4 a, .h4-style a, h5 a
 }
 
 h1, .h1-style {
-  font-size: clamp(2.19rem, 2.9vw + 1.46rem, 4rem);
+  font-size: clamp(2.19rem, 4vw + 1.19rem, 4.69rem);
   margin-bottom: 0;
   font-weight: 500;
+  letter-spacing: -1.5px;
 }
 h1 strong, .h1-style strong {
   font-weight: 800;
 }
 
 h2, .h2-style {
-  font-size: clamp(1.38rem, 0.8vw + 1.18rem, 1.88rem);
-  line-height: 1.4;
-  margin-bottom: 30px;
+  font-size: clamp(1.38rem, 3.2vw + 0.57rem, 3.38rem);
+  margin-bottom: 20px;
+  letter-spacing: -1.08px;
 }
 
 h3, .h3-style {
@@ -3254,7 +3255,9 @@ h3, .h3-style {
 }
 
 h4, .h4-style {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 0.4vw + 1.4rem, 1.75rem);
+  line-height: 135%;
+  letter-spacing: 0.28px;
 }
 
 h5, .h5-style {
@@ -3345,9 +3348,10 @@ a[href^="mailto:"] {
    ========================================================================== */
 p {
   line-height: 1.5;
+  letter-spacing: 0.48px;
   margin: 0 0 1rem 0;
   padding: 0;
-  color: #335c6d;
+  color: #293E46;
   font-weight: 300;
 }
 p a {
@@ -3403,6 +3407,516 @@ p a {
   background-color: #a8b6a5;
 }
 
+/* ==========================================================================
+	 BLOCK EDITOR GENERATED STYLES
+	 ========================================================================== */
+.editor-content {
+  padding: 0 25px;
+}
+
+.editor-content > * {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.editor-content > * > div[class*=wp-block] {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.editor-content > .alignwide, .editor-content > .is-style-alignwide {
+  width: 1260px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.editor-content > .alignwide > div[class*=wp-block], .editor-content > .is-style-alignwide > div[class*=wp-block] {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.editor-content > .alignwide > div[class*=wp-block].alignwide, .editor-content > .is-style-alignwide > div[class*=wp-block].alignwide {
+  width: 1260px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.editor-content > .gb-container.alignfull, .editor-content > [class^=gb-element-].alignfull, .editor-content > .alignfull {
+  padding-left: 25px;
+  padding-right: 25px;
+  position: relative;
+}
+
+#main-content [class^=gb-element-] > *:last-child {
+  margin-bottom: 0;
+}
+
+.editor-content > .alignfull {
+  -webkit-transform: translateX(calc(0px - 25px));
+          transform: translateX(calc(0px - 25px));
+  width: calc(100% + 2 * 25px);
+  max-width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+.editor-content > .alignfull > div[class*=wp-block] {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.editor-content > .alignfull > div[class*=wp-block].alignwide {
+  width: 1260px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.editor-content > .alignfull.parafull {
+  -webkit-transform: none;
+          transform: none;
+  left: -25px;
+}
+
+.editor-content > .gb-container.alignfull {
+  padding-left: 25px;
+  padding-right: 25px;
+  position: relative;
+}
+
+.aligncenter {
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.editor-content .alignleft {
+  float: left;
+  margin-right: 2em;
+  max-width: 360px;
+}
+
+.editor-content .alignright {
+  float: right;
+  margin-left: 2em;
+  max-width: 360px;
+}
+
+.is-style-secondaryfont {
+  font-family: "tetra", sans-serif;
+}
+
+.wp-block-table {
+  border: 2px solid #ACACAC;
+}
+.wp-block-table th {
+  text-align: center;
+}
+.wp-block-table th, .wp-block-table td {
+  border: 2px solid #ACACAC;
+  padding: 10px;
+  color: #323232;
+  line-height: 1.2;
+}
+.wp-block-table tr:first-of-type {
+  text-align: center;
+}
+.wp-block-table tr:first-of-type td {
+  padding: 30px 10px;
+}
+
+.editor-content ul {
+  list-style-type: none;
+  margin: 1rem 0 1rem 20px;
+  padding: 0;
+  overflow: hidden;
+}
+@media (width >= 1101px) {
+  .editor-content ul {
+    margin-left: 20px;
+  }
+}
+
+.editor-content ul li {
+  margin: 0;
+  padding: 0 0 9px 15px;
+  position: relative;
+  color: #335c6d;
+  font-weight: 300;
+}
+
+.editor-content ul li::before {
+  display: block;
+  background-color: #325c6e;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  top: 0.58em;
+  left: 0;
+}
+
+.editor-content .stk-block-icon-list ul {
+  overflow: visible;
+}
+.editor-content .stk-block-icon-list ul li::before {
+  display: none;
+}
+
+.editor-content ol {
+  counter-reset: item;
+  margin: 1rem 0 1rem 30px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.editor-content ol > li {
+  padding: 0 0 0.5rem 1.4rem;
+  position: relative;
+  text-indent: -1.4rem;
+}
+
+.editor-content ol > li::before {
+  content: counter(item);
+  counter-increment: item;
+  color: #000;
+  font-weight: 400;
+  position: relative;
+  top: 0;
+  width: 1.3rem;
+  margin: 0 0.8rem 0 0;
+}
+
+.wp-block-buttons .wp-block-button:last-of-type {
+  margin-right: 0;
+}
+
+@media (width <= 768px) {
+  body .wp-block-column {
+    -ms-flex-preferred-size: 100% !important;
+        flex-basis: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (width <= 768px) {
+  body .wp-block-column:not(:only-child) {
+    -ms-flex-preferred-size: 100% !important;
+        flex-basis: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (width >= 768px) {
+  .editor-content .wp-block-column:not(:first-child) {
+    margin-left: 2em;
+  }
+}
+
+.is-style-no-gutter .wp-block-column {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (width <= 1101px) {
+  body .u-break-early {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  body .u-break-early .wp-block-column {
+    -ms-flex-preferred-size: 100% !important;
+        flex-basis: 100% !important;
+    max-width: 100%;
+    margin: 0 0 25px 0 !important;
+  }
+}
+
+.has-large-font-size {
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+.has-small-font-size {
+  line-height: 1.8;
+}
+
+.wp-block-image {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.has-white-color {
+  color: #fff !important;
+}
+.has-white-color p {
+  color: #fff !important;
+}
+
+.white-popup-block {
+  background: #f3f5f3;
+  padding: 50px;
+  text-align: left;
+  max-width: 1080px;
+  margin: 40px auto;
+  position: relative;
+}
+.white-popup-block p {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.mfp-bg {
+  background: #fff;
+  opacity: 1;
+}
+
+.popup-modal-dismiss {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  text-transform: uppercase;
+  color: #335c6d;
+  font-size: 14px;
+}
+.popup-modal-dismiss span {
+  color: #89ADBE;
+  font-weight: 300;
+  margin-left: 10px;
+}
+
+.mfp-arrow-right::before {
+  border-left-color: #335c6d;
+}
+
+.mfp-arrow-left::before {
+  border-right-color: #335c6d;
+}
+
+.c-staff-member-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  gap: 20px;
+}
+@media (width >= 768px) {
+  .c-staff-member-grid > div {
+    width: calc(50% - 10px);
+  }
+}
+@media (width >= 1101px) {
+  .c-staff-member-grid > div {
+    width: calc(33% - 12px);
+  }
+}
+.c-staff-member-grid > div img {
+  margin-bottom: 20px;
+}
+.c-staff-member-grid > div h5 {
+  color: #89ADBE;
+  font-size: 18px;
+  margin-bottom: 3px;
+}
+
+.c-staff-title {
+  color: #335c6d;
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.c-staff-member-trigger a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.c-staff-member-trigger a svg {
+  margin-left: 5px;
+  width: 20px;
+}
+
+.c-staff-img {
+  position: relative;
+}
+.c-staff-img img {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.c-staff-img img:hover {
+  -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
+}
+
+.c-staff-member {
+  position: relative;
+}
+
+.c-staff-member:hover .c-staff-img img {
+  -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
+}
+.c-staff-member:hover .c-staff-img-overlay {
+  opacity: 1;
+}
+.c-staff-member:hover .c-staff-img-overlay span {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+.c-staff-img-overlay {
+  position: absolute;
+  overflow: hidden;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background: rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  opacity: 0;
+}
+.c-staff-img-overlay span {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  padding: 12px;
+  background-color: rgba(51, 92, 109, 0.6);
+  width: 100%;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+.c-hero-left {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+}
+
+.personalmeta {
+  background: #e0e6e5;
+  border-radius: 0 0 10px 10px;
+}
+.personalmeta div a {
+  padding: 9px 13px;
+  border-bottom: 1px solid #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  gap: 8px;
+  font-weight: 300;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+  -webkit-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+  background-size: 200% auto;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: clip;
+}
+.personalmeta div a span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  gap: 8px;
+  font-weight: 300;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+  -webkit-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+  z-index: 2;
+}
+.personalmeta div a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: -webkit-gradient(linear, left top, right top, from(#88aebd), to(#9b9477));
+  background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
+  opacity: 0;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  z-index: 1;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+.personalmeta div a:hover {
+  color: #fff;
+}
+.personalmeta div a:hover:before {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+.personalmeta div:last-of-type a {
+  border-radius: 0 0 10px 10px;
+  border-bottom: none;
+}
+.personalmeta div:last-of-type a:hover {
+  border-radius: 0 0 10px 10px;
+}
+.personalmeta div:last-of-type a:before {
+  border-radius: 0 0 10px 10px;
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: left bottom;
+  }
+  100% {
+    background-position: right bottom;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: left bottom;
+  }
+  100% {
+    background-position: right bottom;
+  }
+}
 /* ==========================================================================
    COLOURS
    ========================================================================== */
@@ -6260,18 +6774,18 @@ p a {
 .u-lined-heading {
   position: relative;
   padding-top: 56px;
+  padding-left: 55px;
 }
-.u-lined-heading::after {
-  clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
+.u-lined-heading::before {
   content: "";
-  width: 63px;
-  position: absolute;
-  top: 0px;
+  background-image: url("../img/logo_grid_4.svg");
+  width: 50px;
+  height: 50px;
+  background-size: 100%;
   display: block;
-  left: 0;
-  height: 9px;
-  background-image: -webkit-gradient(linear, left top, right top, from(#88aebd), to(#9b9477));
-  background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
+  position: absolute;
+  left: -6px;
+  bottom: 8px;
 }
 
 .u-object-fit figure {
@@ -6488,12 +7002,6 @@ p a {
   font-family: "tetra", sans-serif;
 }
 
-.wp-block, .ugb-inner-block--center {
-  max-width: 940px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
 .wp-block[data-align*=wide], .is-style-alignwide, .wp-block-separator.is-style-wide, .ugb-inner-block--wide,
 div:not([class]) > .block-editor-block-list__layout > .wp-block[data-align*=wide]:not([data-align^=full]) {
   max-width: 1260px !important;
@@ -6501,7 +7009,7 @@ div:not([class]) > .block-editor-block-list__layout > .wp-block[data-align*=wide
   margin-right: auto !important;
 }
 
-.wp-block[data-align=full], .is-style-alignfull {
+.wp-block[data-align=full], .is-style-alignfull, .gb-is-root-block.alignfull {
   max-width: none !important;
   width: 100% !important;
 }
@@ -6562,12 +7070,4 @@ div:not([class]) > .block-editor-block-list__layout > .wp-block[data-align*=wide
 
 .is-style-narrow-columns .wp-block-column {
   margin-left: 20px;
-}
-
-.wp-block,
-.wp-block[data-type^=toolset]:not([data-align^=full]),
-div:not([class]) > .block-editor-block-list__layout > .wp-block:not([data-align^=full]),
-.tb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block:not([data-align^=full]) {
-  max-width: 940px !important;
-  z-index: 10;
 }

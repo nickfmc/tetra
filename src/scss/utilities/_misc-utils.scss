@@ -3,8 +3,20 @@
    ========================================================================== */
    .u-corner-crop {
     clip-path: polygon(0px 0px, 100% 0px, 100% 75%, 75% 100%, 0px 100%);
+
    }
 
+
+
+    //    .u-corner-crop {
+    //   -webkit-mask-image: url('../img/your-corner-shape.svg');
+    //   mask-image: url('../img/your-corner-shape.svg');
+    //   -webkit-mask-size: 100% 100%;
+    //   mask-size: 100% 100%;
+    //   -webkit-mask-repeat: no-repeat;
+    //   mask-repeat: no-repeat;
+    //   overflow: hidden;
+    // }
    .fw300, .fw-300, .fw-300 p, .fw300 p {
     font-weight: 300;
    }
@@ -13,17 +25,30 @@
    .u-lined-heading {
     position: relative;
     padding-top: 56px;
-    &::after{
-    clip-path: polygon(0px 0px, 63px 0px, 55px 9px,  0px 9px);
+    // &::after{
+    // clip-path: polygon(0px 0px, 63px 0px, 55px 9px,  0px 9px);
+    //   content: "";
+    //   width: 63px;
+    //   position: absolute;
+    //   top: 0px;
+    //   display: block;
+    //   left: 0;
+    //   height: 9px;
+    //   background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
+    // }
+    padding-left: 55px;
+    &::before {
       content: "";
-      width: 63px;
-      position: absolute;
-      top: 0px;
+      background-image: url('../img/logo_grid_4.svg');
+      width: 50px;
+      height: 50px;
+      background-size: 100%;
       display: block;
-      left: 0;
-      height: 9px;
-      background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
+      position: absolute;
+      left: -6px;
+      bottom: 8px;
     }
+
    }
 
    .u-object-fit {

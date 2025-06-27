@@ -23,10 +23,10 @@
 @import "./scss/elements/_links.scss";
 @import "./scss/elements/_paragraph.scss";
 
-
+ 
 // ++ COMPONENTS TO IMPORT +++++++++++++++++++++++++++++++++
 @import "./scss/components/_buttons.scss";
-@import "./scss/components/_block-default.scss";
+@import "./scss/components/_blocks-default.scss";
 
 
 // ++ UTILITIES +++++++++++++++++++++++++++++++++
@@ -42,12 +42,7 @@
 	font-family: $font-secondary;
   }
 
-// /* Width of "regular" blocks */
-.wp-block, .ugb-inner-block--center {
-	max-width: $wrapper-width-base !important;
-	margin-left: auto !important;
-	margin-right: auto !important;
-}
+
 // /* Width of "wide" blocks */
 .wp-block[data-align*="wide"], .is-style-alignwide, .wp-block-separator.is-style-wide, .ugb-inner-block--wide,
 div:not([class]) > .block-editor-block-list__layout > .wp-block[data-align*="wide"]:not([data-align^="full"])
@@ -62,7 +57,7 @@ div:not([class]) > .block-editor-block-list__layout > .wp-block[data-align*="wid
 
 
 // and full width blocks
-.wp-block[data-align="full"], .is-style-alignfull {
+.wp-block[data-align="full"], .is-style-alignfull, .gb-is-root-block.alignfull {
 	max-width: none !important;
 	width: 100% !important;
 }
@@ -129,11 +124,3 @@ body .wp-block-column {
 	}
    }
   
-// // /* Width of "regular" blocks -- WHY DO I NEED THIS MESS TOOLSET!?!?! */
-.wp-block, 
- .wp-block[data-type^="toolset"]:not([data-align^="full"]), 
- div:not([class]) > .block-editor-block-list__layout > .wp-block:not([data-align^="full"]), 
- .tb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block:not([data-align^="full"]) {
-	max-width: $wrapper-width-base !important;
-	z-index: 10;
-}

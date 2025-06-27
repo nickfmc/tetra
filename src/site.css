@@ -3637,7 +3637,7 @@ html {
 body {
   color: #251E2D;
   font-family: "Source Sans Pro", sans-serif;
-  line-height: 1.4;
+  line-height: 1.5;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -3707,7 +3707,7 @@ h1 strong, .h1-style strong {
 
 h2, .h2-style {
   font-size: clamp(1.38rem, 3.2vw + 0.57rem, 3.38rem);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   letter-spacing: -1.08px;
 }
 
@@ -3716,7 +3716,9 @@ h3, .h3-style {
 }
 
 h4, .h4-style {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 0.4vw + 1.4rem, 1.75rem);
+  line-height: 135%;
+  letter-spacing: 0.28px;
 }
 
 h5, .h5-style {
@@ -3806,10 +3808,11 @@ a[href^="mailto:"] {
    P TAGS
    ========================================================================== */
 p {
-  line-height: 1.4;
+  line-height: 1.5;
+  letter-spacing: 0.48px;
   margin: 0 0 1rem 0;
   padding: 0;
-  color: #335c6d;
+  color: #293E46;
   font-weight: 300;
 }
 p a {
@@ -7024,18 +7027,18 @@ body.hc-nav-open {
 .u-lined-heading {
   position: relative;
   padding-top: 56px;
+  padding-left: 55px;
 }
-.u-lined-heading::after {
-  clip-path: polygon(0px 0px, 63px 0px, 55px 9px, 0px 9px);
+.u-lined-heading::before {
   content: "";
-  width: 63px;
-  position: absolute;
-  top: 0px;
+  background-image: url("../img/logo_grid_4.svg");
+  width: 50px;
+  height: 50px;
+  background-size: 100%;
   display: block;
-  left: 0;
-  height: 9px;
-  background-image: -webkit-gradient(linear, left top, right top, from(#88aebd), to(#9b9477));
-  background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
+  position: absolute;
+  left: -6px;
+  bottom: 8px;
 }
 
 .u-object-fit figure {
