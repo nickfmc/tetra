@@ -159,13 +159,38 @@ function initPropertiesListMap(mapElement) {
       const latLng = new google.maps.LatLng(property.lat, property.lng);
       bounds.extend(latLng);
       
+      // Determine icon color based on property type slug
+      let iconColor = '#A8B6A5'; // Default color
+      
+      // Check the project type slug for more reliable matching
+      if (property.projectTypeSlug) {
+        if (property.projectTypeSlug === 'sold') {
+          iconColor = '#657962'; // Green for sold properties
+        } else if (property.projectTypeSlug === 'agency-leased') {
+          iconColor = '#6c486e'; // Purple for agency-leased properties
+        }
+      }
+      
+      // Create custom marker icon with dynamic color
+      const customIcon = {
+        url: 'data:image/svg+xml;base64,' + btoa(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="56" viewBox="0 0 72 56" fill="none">
+            <path d="M1.97137 15.9937H19.7292C21.3986 15.9937 22.7528 17.3356 22.7528 18.9947V54.0657C22.7528 55.72 23.7919 56.2031 25.0723 55.1393L38.8855 43.6962C40.1659 42.6324 41.1902 40.4316 41.1902 38.7725V3.7015C41.1902 2.04726 39.836 0.700439 38.1616 0.700439H20.4235C18.7541 0.700439 16.3608 1.55928 15.0755 2.62307L1.26716 14.0662C-0.0132113 15.1299 0.301957 15.9888 1.97137 15.9888M70.2941 0.700439C71.9635 0.700439 72.2787 1.55928 70.9983 2.62307L57.1801 14.0662C55.8997 15.1299 53.5064 15.9888 51.8321 15.9888H47.1193V3.7015C47.1193 2.04726 48.4736 0.700439 50.143 0.700439H70.2842H70.2941Z" fill="${iconColor}"/>
+          </svg>
+        `),
+        scaledSize: new google.maps.Size(36, 28), // Scale to half size for better map visibility
+        anchor: new google.maps.Point(18, 28), // Anchor point at bottom center
+        origin: new google.maps.Point(0, 0)
+      };
+
       // Create marker
       const marker = new google.maps.Marker({
         position: latLng,
         map: propertiesMap,
         title: property.title,
         animation: google.maps.Animation.DROP,
-        propertyId: property.id
+        propertyId: property.id,
+        icon: customIcon
       });
       
       // Create simplified info window content with just image and overlaid title

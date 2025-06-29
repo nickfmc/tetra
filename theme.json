@@ -107,6 +107,21 @@
 					"name": "Tetra Purple to Teal",
 					"slug": "tetra-purple-to-teal",
 					"gradient": "linear-gradient(90deg, #6C486E 1.8%, #345C6D 99.7%)"
+				},
+				{
+					"name": "Tetra Teal to Clay",
+					"slug": "tetra-teal-to-clay",
+					"gradient": "linear-gradient(90deg, #345C6D 1.8%, #E2C7A3 99.7%)"
+				},
+				{
+					"name": "Tetra Dark Green to Teal",
+					"slug": "tetra-dark-green-to-teal",
+					"gradient": "linear-gradient(90deg, #657962 1.8%, #345C6D 99.7%)"
+				},
+				{
+					"name": "Tetra Purple to Green",
+					"slug": "tetra-purple-to-green",
+					"gradient": "linear-gradient(90deg, #6C486E 1.8%, #A8B6A5 99.7%)"
 				}
 			]
 		

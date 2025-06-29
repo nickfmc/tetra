@@ -1,0 +1,32 @@
+{
+    "name": "acf/testimonial-slider",
+    "title": "Testimonial Slider",
+    "description": "A slider showcasing testimonials with images, quotes, names, and companies",
+    "category": "design",
+    "icon": "testimonial",
+    "keywords": ["testimonial", "slider", "quote", "review"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "testimonial-slider.php"
+    },
+    "align": "full",
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": false,
+        "jsx": false
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "testimonials": [
+                    {
+                        "quote": "We love this product! Our designers were using it for their projects, so we already knew what kind of design they want.",
+                        "name": "Devon Lane",
+                        "company": "Grower.io"
+                    }
+                ]
+            }
+        }
+    }
+}

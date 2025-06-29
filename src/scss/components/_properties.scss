@@ -244,37 +244,22 @@ border-left: 12px solid #345c6d;
 }
 
 /* Alternative color schemes for different taxonomy terms */
-.c-property-taxonomy-ribbon.residential {
-    background: linear-gradient(135deg, #28a745, #218838);
+.c-property-taxonomy-ribbon.agency-leased {
+    background: #6c486e;
 }
 
-.c-property-taxonomy-ribbon.residential:before {
-    border-left-color: #1e7e34;
+.c-property-taxonomy-ribbon.agency-leased:after {
+    border-left-color: #6c486e;
 }
 
-.c-property-taxonomy-ribbon.commercial {
-    background: linear-gradient(135deg, #ffc107, #e0a800);
+.c-property-taxonomy-ribbon.sold {
+    background: #657962;
 }
 
-.c-property-taxonomy-ribbon.commercial:before {
-    border-left-color: #d39e00;
+.c-property-taxonomy-ribbon.sold:after {
+    border-left-color: #657962;
 }
 
-.c-property-taxonomy-ribbon.industrial {
-    background: linear-gradient(135deg, #6f42c1, #5a32a3);
-}
-
-.c-property-taxonomy-ribbon.industrial:before {
-    border-left-color: #4e2a84;
-}
-
-.c-property-taxonomy-ribbon.land {
-    background: linear-gradient(135deg, #fd7e14, #e8590c);
-}
-
-.c-property-taxonomy-ribbon.land:before {
-    border-left-color: #d5480b;
-}
 
 /* Mobile adjustments for cards */
 @media (max-width: 767px) {
@@ -586,7 +571,7 @@ border-left: 12px solid #345c6d;
 .c-property-card-details {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0;
     font-size: 0.9rem;
     color: #666;
 }
@@ -691,6 +676,7 @@ border-left: 12px solid #345c6d;
 /* View on Map Button */
 .c-view-on-map-button {
     display: inline-flex;
+    align-self: flex-start;
     align-items: center;
     gap: 6px;
     padding: 9px 12px;
@@ -705,6 +691,8 @@ border-left: 12px solid #345c6d;
     transition: all 0.2s ease;
     margin-top: 10px;
     white-space: nowrap;
+    margin-top: 10px;
+    border-radius: 3px;
 }
 
 .c-view-on-map-button:hover {

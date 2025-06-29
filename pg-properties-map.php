@@ -6,8 +6,16 @@
  * and list them below the map.
  */
 
-get_header(); 
+get_header(); ?>
 
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+      <section class="editor-content  clearfix">
+        <?php the_content(); ?>
+      </section> 
+      <!-- /editor-content -->
+    <?php endwhile; endif; // END main loop (if/while) ?>
+
+<?php
 // Debug mode for site admins
 $debug_mode = (current_user_can('manage_options') && isset($_GET['debug']));
 $api_key = get_option('tetra_google_maps_api_key');
@@ -68,7 +76,26 @@ $api_key = get_option('tetra_google_maps_api_key');
         <div class="c-properties-control-bar">
             <div class="c-control-bar-inner">
                 <div class="c-control-bar-filters">
-                    <select class="c-filter-select" id="agentFilter">
+                   
+                    
+                    <select class="c-filter-select" id="projectTypeFilter">
+                        <option value="">All Project Types</option>
+                        <?php
+                        // Get all project types for filter
+                        $project_types = get_terms(array(
+                            'taxonomy' => 'project_type_tax',
+                            'hide_empty' => true,
+                        ));
+                        
+                        if ($project_types && !is_wp_error($project_types)) {
+                            foreach ($project_types as $type) {
+                                echo '<option value="' . $type->term_id . '">' . esc_html($type->name) . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+
+                     <select class="c-filter-select" id="agentFilter">
                         <option value="">All Agents</option>
                         <?php
                         // Get all unique agents for filter
@@ -102,28 +129,11 @@ $api_key = get_option('tetra_google_maps_api_key');
                         }
                         ?>
                     </select>
-                    
-                    <select class="c-filter-select" id="projectTypeFilter">
-                        <option value="">All Project Types</option>
-                        <?php
-                        // Get all project types for filter
-                        $project_types = get_terms(array(
-                            'taxonomy' => 'project_type_tax',
-                            'hide_empty' => true,
-                        ));
-                        
-                        if ($project_types && !is_wp_error($project_types)) {
-                            foreach ($project_types as $type) {
-                                echo '<option value="' . $type->term_id . '">' . esc_html($type->name) . '</option>';
-                            }
-                        }
-                        ?>
-                    </select>
                 </div>
                 
                 <button class="c-show-all-properties-button" type="button" title="Show All Properties in View">
                     <i class="fas fa-expand-arrows-alt"></i>
-                    Show All Properties
+                    re-centre map
                 </button>
             </div>
         </div>
@@ -329,11 +339,13 @@ var propertyMapData = [
                 $property_types = get_the_terms(get_the_ID(), 'project_type_tax');
                 $property_type_name = '';
                 $property_type_id = '';
+                $property_type_slug = '';
                 
                 if ($property_types && !is_wp_error($property_types)) {
                     $property_type = $property_types[0]; // Get first term
                     $property_type_name = $property_type->name;
                     $property_type_id = $property_type->term_id;
+                    $property_type_slug = $property_type->slug;
                 }
                 
                 // Escape the title for JavaScript
@@ -371,6 +383,7 @@ var propertyMapData = [
                 echo "agentIds: [" . implode(',', $agent_ids) . "],";
                 echo "projectType: '" . esc_js($property_type_name) . "',";
                 echo "projectTypeId: " . $property_type_id . ",";
+                echo "projectTypeSlug: '" . esc_js($property_type_slug) . "',";
                 echo "lat: " . $location['lat'] . ",";
                 echo "lng: " . $location['lng'] . ",";
                 echo "permalink: '" . $permalink . "',";

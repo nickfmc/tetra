@@ -40,11 +40,30 @@
   }
   &:hover {
     &::after {
-      width: 30px;
+      width: 20px;
       right: -17px;
       background-color: $color-tetra-green;
     }
   }
 }
 
+
+.c-btn-text {
+  position: relative;
+}
+.c-btn-text::after {
+  content: "";
+  width: 15px;
+  height: 3px;
+  background-color: currentColor;
+  position: absolute;
+  right: -20px;
+  top: calc(50% - 1.5px);
+  transition: width 200ms ease, right 200ms ease;
+}
+
+.c-btn-text:hover::after {
+  width: 20px;
+  right: -30px;
+}
 

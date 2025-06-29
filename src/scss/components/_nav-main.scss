@@ -15,7 +15,7 @@
     padding-left: calc(#{$logo-size} + 1rem);
     position: absolute;
     right: 0;
-    top: 40px;
+    top: 27px;
   }
 }
 
@@ -37,8 +37,12 @@
     position: relative;
     margin-left: 10px;
     white-space: nowrap;
+    transition: $transition-ease;
+
   }
   .c-main-menu > li > a {
+    position: relative;
+    z-index: 1;
     font-weight: 400;
     color: $color-tetra-blue-alt;
     display: block;
@@ -46,13 +50,31 @@
     margin: 0;
     padding: 10px 1.25rem;
     border-radius: 4px;
-    transition: $transition-ease;
+    transition: $transition-ease-slow;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $color-tetra-purple;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 400ms ease;
+      border-radius: 2px;
+    }
   }
 
    .c-main-menu > li:hover > a {
-    background: $color-tetra-purple;
     color: #fff;
     box-shadow: 0 2px 8px rgba(108, 72, 110, 0.08);
+    
+    &::before {
+      opacity: 1;
+    }
    }
  
   .c-main-menu > .current-menu-item > a,
@@ -63,7 +85,8 @@
 color: $color-tetra-purple;
   }
   .c-main-menu > li.is-nav-button > a {
-    background: transparent;
+    position: relative;
+    z-index: 1;
     color: $color-tetra-blue-alt;
     border: 2px solid $color-tetra-blue-alt;
     border-radius: 4px;
@@ -71,12 +94,32 @@ color: $color-tetra-purple;
     margin-left: 1.5rem;
     font-weight: 600;
     font-size: 1.15rem;
-    transition: $transition-ease;
+    transition: $transition-ease-slow; /* Switched to slower transition */
     box-shadow: none;
+    background: transparent;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--tetra-dark-green-new, #657962) 1.8%, var(--Tetra---Teal, #345C6D) 99.7%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 400ms ease; /* Slowed down the transition */
+      border-radius: 2px; /* Ensure the background respects the border radius */
+    }
   }
   .c-main-menu > li.is-nav-button > a:hover {
     color: #fff;
-    background: var(--Dark-Green-Blue, linear-gradient(90deg, var(--tetra-dark-green-new, #657962) 1.8%, var(--Tetra---Teal, #345C6D) 99.7%));
+    border-color: $color-tetra-blue-alt; /* Keep the border visible */
+    
+    &::before {
+      opacity: 1;
+    }
   }
   // Dropdown styles
   .c-main-menu ul {
@@ -179,7 +222,7 @@ color: $color-tetra-purple;
     top: 100%;
     min-width: 150px;
     margin: 0;
-    padding: 10px;
+    padding: 10px 20px;
     opacity: 0;
     visibility: hidden;
     transition: all 200ms linear;

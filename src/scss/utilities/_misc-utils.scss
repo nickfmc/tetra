@@ -3,8 +3,11 @@
    ========================================================================== */
    .u-corner-crop {
     clip-path: polygon(0px 0px, 100% 0px, 100% 75%, 75% 100%, 0px 100%);
+    position: relative;
+    z-index: 1;
 
-   }
+  }
+
 
 
 
@@ -24,7 +27,7 @@
 
    .u-lined-heading {
     position: relative;
-    padding-top: 56px;
+    // padding-top: 56px;
     // &::after{
     // clip-path: polygon(0px 0px, 63px 0px, 55px 9px,  0px 9px);
     //   content: "";
@@ -36,17 +39,19 @@
     //   height: 9px;
     //   background-image: linear-gradient(to right, #88aebd 0%, #9b9477 100%);
     // }
-    padding-left: 55px;
+    padding-left: 33px;
     &::before {
       content: "";
       background-image: url('../img/logo_grid_4.svg');
       width: 50px;
-      height: 50px;
-      background-size: 100%;
-      display: block;
-      position: absolute;
-      left: -6px;
-      bottom: 8px;
+     width: 34px;
+  height: 35px;
+  background-size: 100%;
+  display: block;
+  position: absolute;
+  left: -6px;
+  bottom: 13px;
+    
     }
 
    }

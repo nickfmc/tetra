@@ -3402,9 +3402,30 @@ p a {
   width: 20px;
 }
 .gb-button-41959841:hover::after {
-  width: 30px;
+  width: 20px;
   right: -17px;
   background-color: #a8b6a5;
+}
+
+.c-btn-text {
+  position: relative;
+}
+
+.c-btn-text::after {
+  content: "";
+  width: 15px;
+  height: 3px;
+  background-color: currentColor;
+  position: absolute;
+  right: -20px;
+  top: calc(50% - 1.5px);
+  -webkit-transition: width 200ms ease, right 200ms ease;
+  transition: width 200ms ease, right 200ms ease;
+}
+
+.c-btn-text:hover::after {
+  width: 20px;
+  right: -30px;
 }
 
 /* ==========================================================================
@@ -6765,6 +6786,8 @@ p a {
    ========================================================================== */
 .u-corner-crop {
   clip-path: polygon(0px 0px, 100% 0px, 100% 75%, 75% 100%, 0px 100%);
+  position: relative;
+  z-index: 1;
 }
 
 .fw300, .fw-300, .fw-300 p, .fw300 p {
@@ -6773,19 +6796,19 @@ p a {
 
 .u-lined-heading {
   position: relative;
-  padding-top: 56px;
-  padding-left: 55px;
+  padding-left: 33px;
 }
 .u-lined-heading::before {
   content: "";
   background-image: url("../img/logo_grid_4.svg");
   width: 50px;
-  height: 50px;
+  width: 34px;
+  height: 35px;
   background-size: 100%;
   display: block;
   position: absolute;
   left: -6px;
-  bottom: 8px;
+  bottom: 13px;
 }
 
 .u-object-fit figure {
