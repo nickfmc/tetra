@@ -68,9 +68,11 @@ function register_acf_blocks() {
   register_block_type(  get_stylesheet_directory() . '/template-part/block/staff/block.json' ); 
   register_block_type(  get_stylesheet_directory() . '/template-part/block/personalmeta/block.json' ); 
   register_block_type(  get_stylesheet_directory() . '/template-part/block/testimonial-slider/block.json' ); 
+  register_block_type(  get_stylesheet_directory() . '/template-part/block/tenant-representation/block.json' ); 
   
-  // Include testimonial slider ACF fields
+  // Include ACF fields
   include_once get_stylesheet_directory() . '/template-part/block/testimonial-slider/acf-fields.php';
+  include_once get_stylesheet_directory() . '/template-part/block/tenant-representation/acf-fields.php';
 }
 
 add_action( 'init', 'register_acf_blocks', 5 );

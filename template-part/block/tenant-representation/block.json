@@ -1,0 +1,33 @@
+{
+    "apiVersion": 2,
+    "name": "acf/tenant-representation",
+    "title": "Tenant Representation",
+    "description": "A block to display a list of tenants with their logos, size requirements, market requirements, and broker contacts",
+    "category": "myblocks",
+    "icon": "building",
+    "keywords": ["tenant", "representation", "brokers", "contact", "leasing"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "tenant-representation.php"
+    },
+    "align": "wide",
+    "supports": {
+        "align": ["wide", "full"],
+        "mode": false,
+        "jsx": false
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "tenants": [
+                    {
+                        "tenant_name": "Example Tenant Corp",
+                        "size_requirement": "10,000 - 15,000 sq ft",
+                        "market_requirement": "Downtown Vancouver"
+                    }
+                ]
+            }
+        }
+    }
+}

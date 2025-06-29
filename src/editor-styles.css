@@ -3238,6 +3238,8 @@ h1, .h1-style {
   font-size: clamp(2.19rem, 4vw + 1.19rem, 4.69rem);
   margin-bottom: 0;
   font-weight: 500;
+  line-height: 1;
+  margin-bottom: 20px;
   letter-spacing: -1.5px;
 }
 h1 strong, .h1-style strong {
