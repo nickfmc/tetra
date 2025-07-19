@@ -407,4 +407,85 @@ var propertyMapData = [
 </div>
 <?php endif; ?>
 
+
+<script>
+// --- Pre-filter logic for query string ---
+(function() {
+    // Helper to get query params as object
+    function getQueryParams() {
+        var params = {};
+        var search = window.location.search.substring(1);
+        if (!search) return params;
+        search.split('&').forEach(function(pair) {
+            var parts = pair.split('=');
+            var key = decodeURIComponent(parts[0]);
+            var value = parts.length > 1 ? decodeURIComponent(parts[1]) : '';
+            params[key] = value;
+        });
+        return params;
+    }
+
+    function doPrefilter(retries) {
+        var projectTypeFilter = document.getElementById('projectTypeFilter');
+        var agentFilter = document.getElementById('agentFilter');
+        if (!projectTypeFilter || !agentFilter) {
+            if (retries > 0) setTimeout(function() { doPrefilter(retries-1); }, 100);
+            return;
+        }
+
+        // Build a map of project type slug => term_id for lookup
+        var projectTypeSlugToId = {};
+        for (var i = 0; i < projectTypeFilter.options.length; i++) {
+            var opt = projectTypeFilter.options[i];
+            var slug = opt.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            if (opt.value) projectTypeSlugToId[slug] = opt.value;
+        }
+
+        var params = getQueryParams();
+        // 1. Project type filter by slug (?sold or ?project_type=sold)
+        var foundProjectType = false;
+        var projectTypeSlug = null;
+        // If ?project_type=slug
+        if (params['project_type']) {
+            projectTypeSlug = params['project_type'].toLowerCase();
+        } else {
+            // If ?sold (no value, just key)
+            for (var key in params) {
+                if (key !== 'agent' && key !== 'debug') {
+                    projectTypeSlug = key.toLowerCase();
+                    break;
+                }
+            }
+        }
+        if (projectTypeSlug && projectTypeSlugToId[projectTypeSlug]) {
+            projectTypeFilter.value = projectTypeSlugToId[projectTypeSlug];
+            foundProjectType = true;
+        }
+
+        // 2. Agent filter (?agent=ID)
+        if (params['agent']) {
+            agentFilter.value = params['agent'];
+        }
+
+        // 3. Trigger change events to filter the list/map if needed
+        // Use setTimeout to ensure any event listeners are attached
+        setTimeout(function() {
+            if (foundProjectType) {
+                var evt = new Event('change', { bubbles: true });
+                projectTypeFilter.dispatchEvent(evt);
+            }
+            if (params['agent']) {
+                var evt2 = new Event('change', { bubbles: true });
+                agentFilter.dispatchEvent(evt2);
+            }
+        }, 200);
+    }
+
+    // Wait for window load to ensure all scripts are loaded, then try prefilter logic
+    window.addEventListener('load', function() {
+        doPrefilter(10); // Try up to 10 times if needed
+    });
+})();
+</script>
+
 <?php get_footer(); ?>
