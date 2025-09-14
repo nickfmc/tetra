@@ -38,7 +38,7 @@ if( $is_preview ) {
   );
   $query = new WP_Query( $args );
   if ( $query->have_posts() ) {
-    echo '<h3 class="u-light-blue mb-2">Our Team</h3>';
+    echo '<h3 class="u-light-blue mb-2">Our People</h3>';
     echo '<p>Meet the team that makes it all happen.</p>';
     echo '<div style="display:none;" class="c-modal-holder">';
     while ( $query->have_posts() ) {

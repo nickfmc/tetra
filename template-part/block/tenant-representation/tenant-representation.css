@@ -170,11 +170,9 @@
     grid-template-columns: auto 1fr;
     gap: 2rem;
     align-items: center;
-    background: #FFFFFF; /* tetra-white */
     border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(37, 30, 45, 0.05);
-    border: 1px solid #DED2CF; /* tetra-warm */
+
+
 }
 
 @media (max-width: 767px) {
@@ -212,9 +210,15 @@
 
 .tenant-details__info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1.5rem;
     min-width: 0;
+}
+
+@media (max-width: 767px) {
+    .tenant-details__info {
+            flex-direction: column;
+    }
 }
 
 .tenant-info__item {
@@ -236,7 +240,7 @@
 .tenant-info__label {
     font-size: 17px;
     font-weight: 700;
-    color: #657962; /* tetra-green */
+    color: #293E46; /* tetra-green */
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -252,13 +256,19 @@
 
 /* Bottom Section: Broker Contacts */
 .tenant-details__brokers {
-    background: linear-gradient(135deg, #6C486E 0%, #345C6D 100%); /* tetra-purple-to-teal */
+    background: #F6F8F6; /* tetra-purple-to-teal */
     border-radius: 8px;
     padding: 2rem;
     color: white;
-    box-shadow: 0 10px 25px rgba(108, 72, 110, 0.3);
+ border: 1px solid #DED2CF;
     position: relative;
     overflow: hidden;
+    transition: opacity 0.3s ease;
+    opacity: 0.8;
+}
+
+.tenant-details__brokers:hover {
+    opacity: 1;
 }
 
 .tenant-details__brokers::before {
@@ -275,7 +285,7 @@
 .brokers-section__title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #251E2D;
     margin: 0 0 1.5rem 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -300,14 +310,11 @@
 
 .broker-contact__card {
     background: rgba(246, 248, 246, 0.15); /* tetra-cool with opacity */
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(222, 210, 207, 0.2); /* tetra-warm with opacity */
     border-radius: 8px;
-    padding: 1.5rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     position: relative;
 }
 
@@ -329,7 +336,7 @@
 }
 
 .broker-contact__card:hover {
-    background: rgba(246, 248, 246, 0.25); /* tetra-cool with higher opacity */
+    
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(37, 30, 45, 0.2); /* tetra-black shadow */
 }
@@ -339,6 +346,9 @@
     gap: 1rem;
     align-items: center;
     padding-bottom: 1rem;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    background: #e0e6e5; /* light stone */;
     border-bottom: 1px solid rgba(222, 210, 207, 0.3); /* tetra-warm with opacity */
 }
 
@@ -368,14 +378,14 @@
 .broker-name {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #293E46;
     margin: 0 0 0.25rem 0;
     line-height: 1.3;
 }
 
 .broker-position {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: #293E46;
     margin: 0;
     font-style: italic;
     font-weight: 400;
@@ -384,37 +394,17 @@
 .broker-contact__details {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
 }
-
+.broker-contact__details a {
+    width: 100%;
+}
 .broker-contact__item {
     display: flex;
     align-items: center;
 }
 
-.broker-contact__item a {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: #FFFFFF; /* tetra-white */
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    background: rgba(246, 248, 246, 0.1); /* tetra-cool with opacity */
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(222, 210, 207, 0.2); /* tetra-warm with opacity */
-    flex: 1;
-    justify-content: flex-start;
-}
 
-.broker-contact__item a:hover {
-    background: rgba(246, 248, 246, 0.2); /* tetra-cool with higher opacity */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 30, 45, 0.2); /* tetra-black shadow */
-}
+
 
 .broker-email svg,
 .broker-phone svg,
@@ -523,6 +513,10 @@
     outline: 2px solid #FFFFFF; 
     outline-offset: 2px;
     border-radius: 6px;
+}
+
+.broker-contact__item a:hover {
+    color: #fff !important;
 }
 
 /* Loading state */
