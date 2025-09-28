@@ -33,6 +33,13 @@ if( $is_preview ) {
 // Get tenant data
 $tenants = get_field('tenants');
 
+// Sort tenants alphabetically by tenant_name if they exist
+if($tenants && is_array($tenants)) {
+    usort($tenants, function($a, $b) {
+        return strcmp($a['tenant_name'], $b['tenant_name']);
+    });
+}
+
 // Check if tenants exist
 if(!$tenants && $is_preview) {
     echo '<div style="padding: 20px; background: #f0f0f0; text-align: center;">Add tenants in the block settings</div>';
@@ -70,17 +77,6 @@ if(!$tenants && $is_preview) {
                                         </div>
                                     <?php endif; ?>
                                     
-                                    <div class="tenant-details__info">
-                                        <div class="tenant-info__item">
-                                            <h4 class="tenant-info__label">Size Requirement:</h4>
-                                            <p class="tenant-info__value"><?php echo esc_html($tenant['size_requirement']); ?></p>
-                                        </div>
-                                        
-                                        <div class="tenant-info__item">
-                                            <h4 class="tenant-info__label">Market Requirement:</h4>
-                                            <p class="tenant-info__value"><?php echo esc_html($tenant['market_requirement']); ?></p>
-                                        </div>
-                                    </div>
                                 </div>
                                 
                                 <!-- Bottom Section: Broker Contacts -->
