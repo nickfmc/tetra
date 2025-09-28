@@ -25,12 +25,73 @@
 .c-tenant-representation__subtitle {
     text-align: center;
     color: #657962; /* tetra-green */
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-size: 1.125rem;
     font-weight: 400;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* A-Z Index Navigation Styles */
+.c-tenant-az-index {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.az-index-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+}
+
+.az-index-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.az-index-letter.active {
+    background: #293E46; /* tetra-black */
+    color: #FFFFFF;
+    border-color: #293E46;
+}
+
+.az-index-letter.active:hover {
+    background: #1e2d33;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(41, 62, 70, 0.2);
+}
+
+.az-index-letter.inactive {
+    background: #e9ecef;
+    color: #6c757d;
+    cursor: default;
+    opacity: 0.5;
+}
+
+.az-index-letter.inactive:hover {
+    background: #e9ecef;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Letter Anchor Points */
+.tenant-letter-anchor {
+    scroll-margin-top: 100px; /* Offset for fixed headers if any */
 }
 
 .c-tenant-representation__list {
@@ -204,6 +265,21 @@
     transition: transform 0.3s ease;
 }
 
+.tenant-details__logo a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    border-radius: 4px;
+}
+
+.tenant-details__logo a:hover {
+    transform: scale(1.05);
+}
+
+.tenant-details__logo a:focus {
+    outline: 2px solid #293E46;
+    outline-offset: 2px;
+}
+
 .tenant-logo:hover {
     transform: scale(1.05);
 }
@@ -264,7 +340,7 @@
     position: relative;
     overflow: hidden;
     transition: opacity 0.3s ease;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .tenant-details__brokers:hover {
@@ -534,4 +610,39 @@
 /* Smooth scrolling anchor */
 .c-tenant-representation__item[data-tenant] {
     scroll-margin-top: 2rem;
+}
+
+/* Responsive A-Z Index */
+@media (max-width: 768px) {
+    .c-tenant-az-index {
+        margin-bottom: 1.5rem;
+        padding: 0.75rem;
+    }
+    
+    .az-index-container {
+        gap: 0.25rem;
+    }
+    
+    .az-index-letter {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .az-index-container {
+        gap: 0.125rem;
+    }
+    
+    .az-index-letter {
+        width: 24px;
+        height: 24px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
 }

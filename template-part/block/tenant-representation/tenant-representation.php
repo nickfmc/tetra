@@ -38,6 +38,15 @@ if($tenants && is_array($tenants)) {
     usort($tenants, function($a, $b) {
         return strcmp($a['tenant_name'], $b['tenant_name']);
     });
+    
+    // Create an array to track which letters have tenants
+    $available_letters = array();
+    foreach($tenants as $tenant) {
+        $first_letter = strtoupper(substr($tenant['tenant_name'], 0, 1));
+        if(ctype_alpha($first_letter)) {
+            $available_letters[$first_letter] = true;
+        }
+    }
 }
 
 // Check if tenants exist
@@ -53,8 +62,35 @@ if(!$tenants && $is_preview) {
             <h3 class="c-tenant-representation__title">Current Tenant Representation</h3>
             <p class="c-tenant-representation__subtitle"></p>
             
+            <!-- A-Z Index Navigation -->
+            <div class="c-tenant-az-index">
+                <div class="az-index-container">
+                    <?php 
+                    $alphabet = range('A', 'Z');
+                    foreach($alphabet as $letter): 
+                        $has_tenants = isset($available_letters[$letter]);
+                        $class = $has_tenants ? 'az-index-letter active' : 'az-index-letter inactive';
+                        $href = $has_tenants ? '#tenant-letter-' . $letter : '#';
+                    ?>
+                        <a href="<?php echo $href; ?>" class="<?php echo $class; ?>" <?php echo !$has_tenants ? 'aria-disabled="true"' : ''; ?>>
+                            <?php echo $letter; ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
             <div class="c-tenant-representation__list">
-                <?php foreach($tenants as $index => $tenant): ?>
+                <?php 
+                $current_letter = '';
+                foreach($tenants as $index => $tenant): 
+                    $tenant_first_letter = strtoupper(substr($tenant['tenant_name'], 0, 1));
+                    
+                    // Add letter anchor if this is the first tenant of a new letter
+                    if($tenant_first_letter !== $current_letter && ctype_alpha($tenant_first_letter)) {
+                        echo '<div class="tenant-letter-anchor" id="tenant-letter-' . $tenant_first_letter . '"></div>';
+                        $current_letter = $tenant_first_letter;
+                    }
+                ?>
                     <div class="c-tenant-representation__item" data-tenant="<?php echo $index; ?>">
                         <button class="c-tenant-representation__trigger" type="button" aria-expanded="false">
                             <span class="tenant-name"><?php echo esc_html($tenant['tenant_name']); ?></span>
@@ -71,9 +107,17 @@ if(!$tenants && $is_preview) {
                                 <div class="tenant-details__header">
                                     <?php if($tenant['tenant_logo']): ?>
                                         <div class="tenant-details__logo">
-                                            <img src="<?php echo esc_url($tenant['tenant_logo']['url']); ?>" 
-                                                 alt="<?php echo esc_attr($tenant['tenant_name']); ?> Logo"
-                                                 class="tenant-logo">
+                                            <?php if($tenant['link_url']): ?>
+                                                <a href="<?php echo esc_url($tenant['link_url']); ?>" target="_blank" rel="noopener">
+                                                    <img src="<?php echo esc_url($tenant['tenant_logo']['url']); ?>" 
+                                                         alt="<?php echo esc_attr($tenant['tenant_name']); ?> Logo"
+                                                         class="tenant-logo">
+                                                </a>
+                                            <?php else: ?>
+                                                <img src="<?php echo esc_url($tenant['tenant_logo']['url']); ?>" 
+                                                     alt="<?php echo esc_attr($tenant['tenant_name']); ?> Logo"
+                                                     class="tenant-logo">
+                                            <?php endif; ?>
                                         </div>
                                     <?php endif; ?>
                                     
