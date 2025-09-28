@@ -278,3 +278,142 @@
             left: 0;
             z-index: 1; /* Ensure it's above other content within the container */
         }
+
+/* ==========================================================================
+   STAFF TETRA-BUTE CONTRIBUTIONS
+   ========================================================================== */
+
+.c-staff-tetra-butes {
+  margin-top: 40px;
+  padding: 30px 0;
+  border-top: 1px solid #eee;
+}
+
+.c-staff-tetra-butes h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.c-staff-tetra-butes > p {
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.c-staff-tetra-butes-grid {
+  display: grid;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.c-staff-tetra-bute-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: #f1f3f4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+}
+
+.c-staff-tetra-bute-logo {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 6px;
+  padding: 10px;
+  
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.c-staff-tetra-bute-content {
+  flex: 1;
+  
+  h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 400;
+  }
+  
+  p {
+    margin: 0 0 15px 0;
+    color: #666;
+    line-height: 1.5;
+  }
+}
+
+.c-staff-tetra-bute-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.c-tetra-bute-link-small {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #88aebd 0%, #9b9477 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: linear-gradient(135deg, #7a9fb0 0%, #8a8369 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.c-tetra-bute-external-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: transparent;
+  color: #88aebd;
+  text-decoration: none;
+  border: 2px solid #88aebd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: #88aebd;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .c-staff-tetra-bute-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .c-staff-tetra-bute-logo {
+    align-self: center;
+  }
+  
+  .c-staff-tetra-bute-links {
+    justify-content: center;
+  }
+}

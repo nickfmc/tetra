@@ -69,6 +69,7 @@ function register_acf_blocks() {
   register_block_type(  get_stylesheet_directory() . '/template-part/block/personalmeta/block.json' ); 
   register_block_type(  get_stylesheet_directory() . '/template-part/block/testimonial-slider/block.json' ); 
   register_block_type(  get_stylesheet_directory() . '/template-part/block/tenant-representation/block.json' ); 
+  register_block_type(  get_stylesheet_directory() . '/template-part/block/tetra-bute/block.json' ); 
   
   // Include ACF fields
   include_once get_stylesheet_directory() . '/template-part/block/testimonial-slider/acf-fields.php';

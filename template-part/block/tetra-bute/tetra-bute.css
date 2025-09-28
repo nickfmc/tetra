@@ -1,0 +1,296 @@
+/* ==========================================================================
+   TETRA-BUTE BLOCK STYLES
+   ========================================================================== */
+
+.c-tetra-bute-block {
+  padding: 60px 0;
+}
+
+.c-tetra-bute-intro {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.c-tetra-bute-intro h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.c-tetra-bute-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.c-tetra-bute-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.c-tetra-bute-item {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+}
+
+.c-tetra-bute-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.c-tetra-bute-main {
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  transition: all 0.4s ease;
+}
+
+.c-tetra-bute-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.c-tetra-bute-logo img {
+  max-height: 80px;
+  max-width: 200px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.c-tetra-bute-item:hover .c-tetra-bute-logo img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.c-tetra-bute-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+  font-weight: 400;
+}
+
+.c-tetra-bute-content p {
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.c-tetra-bute-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #88aebd 0%, #9b9477 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  display: block;
+  width: fit-content;
+}
+
+.c-tetra-bute-link:hover {
+  background: linear-gradient(135deg, #7a9fb0 0%, #8a8369 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  color: white;
+  text-decoration: none;
+}
+
+/* Staff Overlay Styles */
+.c-tetra-bute-staff-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(136, 174, 189, 0.95) 0%, rgba(155, 148, 119, 0.95) 100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  backdrop-filter: blur(2px);
+}
+
+.c-tetra-bute-item:hover .c-tetra-bute-staff-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.c-tetra-bute-staff-content {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.c-tetra-bute-item:hover .c-tetra-bute-staff-content {
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.c-tetra-bute-staff-content h4 {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.c-tetra-bute-staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.c-tetra-bute-staff-member {
+  text-align: center;
+  animation: slideInScale 0.8s ease forwards;
+  opacity: 0;
+  transform: scale(0.8) translateY(10px);
+}
+
+.c-tetra-bute-item:hover .c-tetra-bute-staff-member:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.c-tetra-bute-item:hover .c-tetra-bute-staff-member:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.c-tetra-bute-item:hover .c-tetra-bute-staff-member:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.c-tetra-bute-item:hover .c-tetra-bute-staff-member:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes slideInScale {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.c-tetra-bute-staff-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  border: 3px solid rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.c-tetra-bute-staff-photo:hover {
+  border-color: rgba(255,255,255,0.8);
+  transform: scale(1.1);
+}
+
+
+
+.c-tetra-bute-staff-photo a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c-tetra-bute-staff-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c-tetra-bute-staff-info h5 {
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.c-tetra-bute-staff-position {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+/* Custom brand color support */
+.c-tetra-bute-item[data-brand-color] .c-tetra-bute-link {
+  background: var(--brand-color, linear-gradient(135deg, #88aebd 0%, #9b9477 100%));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .c-tetra-bute-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 0 20px;
+  }
+  
+  .c-tetra-bute-intro {
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+  
+  .c-tetra-bute-intro h2 {
+    font-size: 2rem;
+  }
+  
+  .c-tetra-bute-main {
+    padding: 25px;
+  }
+  
+  .c-tetra-bute-staff-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+/* Admin/Preview Styles */
+.c-tetra-bute-placeholder {
+  padding: 60px 40px;
+  text-align: center;
+  background: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  color: #6c757d;
+}
+
+.c-tetra-bute-placeholder h3 {
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+.is-admin .c-tetra-bute-item:hover .c-tetra-bute-staff-overlay {
+  opacity: 0.7;
+}

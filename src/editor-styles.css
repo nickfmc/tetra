@@ -4079,8 +4079,7 @@ p a {
 }
 .c-meta-card .personalmeta {
   background: rgba(246, 248, 246, 0.15); /* tetra-cool with opacity */
-  -webkit-backdrop-filter: blur(0);
-          backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
   border: 1px solid rgba(246, 248, 246, 0.2); /* tetra-cool with opacity */
   border-radius: 8px;
   position: relative;
@@ -7318,6 +7317,167 @@ p a {
   z-index: 1; /* Ensure it's above other content within the container */
 }
 
+/* ==========================================================================
+   STAFF TETRA-BUTE CONTRIBUTIONS
+   ========================================================================== */
+.c-staff-tetra-butes {
+  margin-top: 40px;
+  padding: 30px 0;
+  border-top: 1px solid #eee;
+}
+
+.c-staff-tetra-butes h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.c-staff-tetra-butes > p {
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.c-staff-tetra-butes-grid {
+  display: -ms-grid;
+  display: grid;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.c-staff-tetra-bute-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.c-staff-tetra-bute-item:hover {
+  background: #f1f3f4;
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.c-staff-tetra-bute-logo {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: white;
+  border-radius: 6px;
+  padding: 10px;
+}
+.c-staff-tetra-bute-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.c-staff-tetra-bute-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.c-staff-tetra-bute-content h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+  color: #333;
+  font-weight: 400;
+}
+.c-staff-tetra-bute-content p {
+  margin: 0 0 15px 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+.c-staff-tetra-bute-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.c-tetra-bute-link-small {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #88aebd 0%, #9b9477 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.c-tetra-bute-link-small:hover {
+  background: linear-gradient(135deg, #7a9fb0 0%, #8a8369 100%);
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: white;
+  text-decoration: none;
+}
+
+.c-tetra-bute-external-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: transparent;
+  color: #88aebd;
+  text-decoration: none;
+  border: 2px solid #88aebd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.c-tetra-bute-external-link:hover {
+  background: #88aebd;
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .c-staff-tetra-bute-item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+  }
+  .c-staff-tetra-bute-logo {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+  }
+  .c-staff-tetra-bute-links {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
 .is-style-secondaryfont {
   font-family: "tetra", sans-serif;
 }

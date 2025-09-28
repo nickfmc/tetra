@@ -1,0 +1,20 @@
+{
+  "name": "acf/tetra-bute",
+  "title": "Tetra-Bute",
+  "description": "Display Tetra-Bute initiatives with linked staff members",
+  "category": "myblocks",
+  "icon": "heart",
+  "keywords": ["charity", "initiative", "staff", "tetra-bute"],
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true,
+    "customClassName": true
+  },
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "tetra-bute.php"
+  },
+  "example": {
+    "attributes": {}
+  }
+}
