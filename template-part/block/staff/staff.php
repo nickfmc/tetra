@@ -46,7 +46,56 @@ if( $is_preview ) {
       global $post;
       echo '<div id="pop-' . $post->post_name . '" class="c-modal-holder-item mfp-hide white-popup-block" data-member="' . $post->post_name . '">';
       echo '<a class="popup-modal-dismiss" href="#">Close <span>X</span></a>';
+      
       the_content();
+      
+      // Add Tetra-Bute section for this staff member after personalmeta
+      $current_staff_id = get_the_ID();
+      $tetra_bute_args = array(
+        'post_type' => 'tetra_bute',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'meta_query' => array(
+          array(
+            'key' => 'linked_staff',
+            'value' => '"' . $current_staff_id . '"',
+            'compare' => 'LIKE'
+          )
+        )
+      );
+      $tetra_bute_query = new WP_Query($tetra_bute_args);
+      $has_tetra_butes = $tetra_bute_query->have_posts();
+      
+      if ($has_tetra_butes) {
+        // Get the staff member's first name for the heading
+        $staff_title = get_the_title();
+        $staff_first_name = explode(' ', trim($staff_title))[0];
+        $possessive_name = $staff_first_name . "'s";
+        
+        echo '<div class="c-staff-modal-tetra-butes">';
+        echo '<h5>' . $possessive_name . ' Tetra-Bute Contributions</h5>';
+        echo '<div class="c-staff-modal-tetra-bute-logos">';
+        
+        while ($tetra_bute_query->have_posts()) {
+          $tetra_bute_query->the_post();
+          $tetra_bute_logo = get_field('logo', get_the_ID());
+          
+          echo '<div class="c-staff-modal-tetra-bute-item">';
+          if ($tetra_bute_logo) {
+            echo '<div class="c-staff-modal-tetra-bute-logo">';
+            echo '<img src="' . esc_url($tetra_bute_logo['url']) . '" alt="' . esc_attr($tetra_bute_logo['alt']) . '" />';
+            echo '</div>';
+          }
+          echo '<span class="c-staff-modal-tetra-bute-title">' . get_the_title() . '</span>';
+          echo '</div>';
+        }
+        
+        echo '</div>';
+        echo '<a href="/tetra-bute/" class="c-tetra-bute-learn-more">Learn about Tetra-Bute</a>';
+        echo '</div>'; // Close tetra-butes section
+        wp_reset_postdata();
+      }
+      
       echo '</div>';
     }
     echo '</div>';

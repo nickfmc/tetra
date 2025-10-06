@@ -722,6 +722,27 @@ function showMapError(container, message) {
   }
 }
 
+// Staff Modal Tetra-Bute Positioning
+function positionStaffTetraButes() {
+  // Find all staff modal containers that have Tetra-Bute sections
+  const modals = document.querySelectorAll('.c-modal-holder-item');
+  
+  modals.forEach(modal => {
+    const tetraButeSection = modal.querySelector('.c-staff-modal-tetra-butes');
+    const personalMeta = modal.querySelector('.personalmeta');
+    
+    if (tetraButeSection && personalMeta) {
+      // Move the Tetra-Bute section to appear right after the personalmeta div
+      personalMeta.parentNode.insertBefore(tetraButeSection, personalMeta.nextSibling);
+    }
+  });
+}
+
+// Initialize staff modal positioning on page load
+document.addEventListener('DOMContentLoaded', function() {
+  positionStaffTetraButes();
+});
+
 // *********************** START CUSTOM JQUERY DOC READY SCRIPTS *******************************
 jQuery( document ).ready(function( $ ) {
 
@@ -758,6 +779,14 @@ jQuery( document ).ready(function( $ ) {
         closeBtnInside:true,
         gallery: {
           enabled:true
+        },
+        callbacks: {
+          open: function() {
+            // Re-position Tetra-Bute sections when modal opens
+            setTimeout(function() {
+              positionStaffTetraButes();
+            }, 50);
+          }
         }
     });
     $(document).on('click', '.popup-modal-dismiss', function (e) {
