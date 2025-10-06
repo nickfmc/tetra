@@ -103,8 +103,8 @@ if(!$tenants && $is_preview) {
                         
                         <div class="c-tenant-representation__details">
                             <div class="tenant-details__content">
-                                <!-- Top Section: Logo and Info -->
-                                <div class="tenant-details__header">
+                                <!-- Main Layout: Logo and Brokers Side by Side -->
+                                <div class="tenant-details__main-layout">
                                     <?php if($tenant['tenant_logo']): ?>
                                         <div class="tenant-details__logo">
                                             <?php if($tenant['link_url']): ?>
@@ -121,17 +121,15 @@ if(!$tenants && $is_preview) {
                                         </div>
                                     <?php endif; ?>
                                     
-                                </div>
-                                
-                                <!-- Bottom Section: Broker Contacts -->
-                                <?php if($tenant['broker_contact']): 
-                                    $brokers = is_array($tenant['broker_contact']) ? $tenant['broker_contact'] : array($tenant['broker_contact']);
-                                ?>
-                                    <div class="tenant-details__brokers">
-                                        <h4 class="brokers-section__title">
-                                            <?php echo count($brokers) > 1 ? 'Broker Contacts:' : 'Broker Contact:'; ?>
-                                        </h4>
-                                        <div class="brokers-grid">
+                                    <!-- Broker Contacts Inline -->
+                                    <?php if($tenant['broker_contact']): 
+                                        $brokers = is_array($tenant['broker_contact']) ? $tenant['broker_contact'] : array($tenant['broker_contact']);
+                                    ?>
+                                        <div class="tenant-details__brokers">
+                                            <h4 class="brokers-section__title">
+                                                <?php echo count($brokers) > 1 ? 'Broker Contacts:' : 'Broker Contact:'; ?>
+                                            </h4>
+                                            <div class="brokers-grid">
                                             <?php foreach($brokers as $broker): 
                                                 $broker_id = $broker->ID;
                                             ?>
@@ -188,9 +186,10 @@ if(!$tenants && $is_preview) {
                                                     </div>
                                                 </div>
                                             <?php endforeach; ?>
+                                            </div>
                                         </div>
-                                    </div>
-                                <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
