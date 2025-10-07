@@ -741,7 +741,151 @@ function positionStaffTetraButes() {
 // Initialize staff modal positioning on page load
 document.addEventListener('DOMContentLoaded', function() {
   positionStaffTetraButes();
+  initMasonryLayout();
 });
+
+// Tetra-Bute Masonry Layout
+function initMasonryLayout() {
+  const grid = document.querySelector('.c-tetra-bute-grid');
+  if (!grid) return;
+  
+  // Masonry configuration
+  const columnGap = 30;
+  let columnCount = getColumnCount();
+  
+  function getColumnCount() {
+    // Get container width minus padding
+    const containerStyle = window.getComputedStyle(grid);
+    const paddingLeft = parseFloat(containerStyle.paddingLeft) || 0;
+    const paddingRight = parseFloat(containerStyle.paddingRight) || 0;
+    const availableWidth = grid.offsetWidth - paddingLeft - paddingRight;
+    
+    const minColumnWidth = 350;
+    
+    // Force single column on mobile
+    if (window.innerWidth <= 768) {
+      return 1;
+    }
+    
+    // Calculate max columns based on available width (excluding padding)
+    const maxColumns = Math.floor((availableWidth + columnGap) / (minColumnWidth + columnGap));
+    return Math.max(1, maxColumns);
+  }
+  
+  function layoutMasonry() {
+    const items = Array.from(grid.children);
+    if (items.length === 0) return;
+    
+    columnCount = getColumnCount();
+    
+    // Reset grid styles
+    grid.style.position = 'relative';
+    
+    if (columnCount === 1) {
+      // Single column - reset to normal flow with spacing
+      items.forEach((item, index) => {
+        item.style.position = 'static';
+        item.style.transform = 'none';
+        item.style.width = 'auto';
+        item.style.marginBottom = (index === items.length - 1) ? '0' : '30px';
+      });
+      grid.style.height = 'auto';
+      return;
+    }
+    
+    // Calculate column width with safety check (accounting for padding)
+    const containerStyle = window.getComputedStyle(grid);
+    const paddingLeft = parseFloat(containerStyle.paddingLeft) || 0;
+    const paddingRight = parseFloat(containerStyle.paddingRight) || 0;
+    const availableWidth = grid.offsetWidth - paddingLeft - paddingRight;
+    const totalGapWidth = (columnCount - 1) * columnGap;
+    const columnWidth = Math.floor((availableWidth - totalGapWidth) / columnCount);
+    
+    // Ensure columns fit within container
+    if (columnWidth < 300 && columnCount > 1) {
+      // Force single column if calculated width is too small
+      items.forEach((item, index) => {
+        item.style.position = 'static';
+        item.style.transform = 'none';
+        item.style.width = 'auto';
+        item.style.marginBottom = (index === items.length - 1) ? '0' : '30px';
+      });
+      grid.style.height = 'auto';
+      return;
+    }
+    
+    // Initialize column heights
+    const columnHeights = new Array(columnCount).fill(0);
+    
+    // First pass: set widths and positions to static to measure heights
+    items.forEach(item => {
+      item.style.position = 'static';
+      item.style.width = columnWidth + 'px';
+      item.style.transform = 'none';
+      item.style.marginBottom = '0'; // Reset margin for masonry mode
+    });
+    
+    // Force reflow to get accurate measurements
+    grid.offsetHeight;
+    
+    // Second pass: position items absolutely
+    items.forEach((item, index) => {
+      // Get the natural height of the item
+      const itemHeight = item.offsetHeight;
+      
+      // Find shortest column
+      const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+      
+      // Position item
+      const x = shortestColumnIndex * (columnWidth + columnGap);
+      const y = columnHeights[shortestColumnIndex];
+      
+      // Apply absolute positioning
+      item.style.position = 'absolute';
+      item.style.transition = 'transform 0.3s ease';
+      item.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      
+      // Update column height
+      columnHeights[shortestColumnIndex] += itemHeight + columnGap;
+    });
+    
+    // Set container height
+    grid.style.height = Math.max(...columnHeights) + 'px';
+  }
+  
+  // Layout on load
+  setTimeout(layoutMasonry, 100);
+  
+  // Re-layout on window resize
+  let resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(layoutMasonry, 250);
+  });
+  
+  // Re-layout when images load (important for proper height calculation)
+  const images = grid.querySelectorAll('img');
+  let imagesLoaded = 0;
+  const totalImages = images.length;
+  
+  if (totalImages > 0) {
+    images.forEach(img => {
+      if (img.complete) {
+        imagesLoaded++;
+        if (imagesLoaded === totalImages) {
+          setTimeout(layoutMasonry, 50);
+        }
+      } else {
+        img.addEventListener('load', function() {
+          imagesLoaded++;
+          if (imagesLoaded === totalImages) {
+            setTimeout(layoutMasonry, 50);
+          }
+        });
+      }
+    });
+  }
+}
 
 // *********************** START CUSTOM JQUERY DOC READY SCRIPTS *******************************
 jQuery( document ).ready(function( $ ) {

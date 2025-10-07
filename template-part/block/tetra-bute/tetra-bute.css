@@ -27,23 +27,23 @@
 }
 
 .c-tetra-bute-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .c-tetra-bute-item {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 0;
+  box-sizing: border-box;
+}
+
+.c-tetra-bute-item {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  min-height: 280px;
 }
 
 .c-tetra-bute-item:hover {
@@ -53,15 +53,6 @@
 
 .c-tetra-bute-left {
   padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-right: 1px solid #f0f0f0;
-}
-
-.c-tetra-bute-right {
-  padding: 30px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,6 +100,7 @@
   margin: 0 auto;
   display: block;
   width: fit-content;
+  font-size: 14px;
 }
 
 .c-tetra-bute-link:hover {
@@ -119,77 +111,7 @@
   text-decoration: none;
 }
 
-/* Staff Section Styles */
-.c-tetra-bute-staff-section h4 {
-  font-size: 1.125rem;
-  margin-bottom: 20px;
-  color: #333;
-  text-align: center;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-}
-
-.c-tetra-bute-staff-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.c-tetra-bute-staff-member {
-  transition: all 0.3s ease;
-}
-
-.c-tetra-bute-staff-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  background: rgba(255,255,255,0.7);
-  border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
-}
-
-.c-tetra-bute-staff-link:hover {
-  background: rgba(255,255,255,0.95);
-  transform: translateX(4px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  text-decoration: none;
-  color: inherit;
-}
-
-.c-tetra-bute-staff-photo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  border: 2px solid rgba(255,255,255,0.8);
-}
-
-.c-tetra-bute-staff-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.c-tetra-bute-staff-info {
-  flex: 1;
-}
-
-.c-tetra-bute-staff-info h5 {
-  margin: 0 0 2px 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #333;
-}
-
-.c-tetra-bute-staff-position {
-  font-size: 0.8rem;
-  color: #666;
-  font-weight: 300;
-}
+/* Removed staff section styles - no longer needed */
 
 /* Custom brand color support */
 .c-tetra-bute-item[data-brand-color] .c-tetra-bute-link {
@@ -197,33 +119,14 @@
 }
 
 /* Responsive Design */
-@media (max-width: 968px) {
-  .c-tetra-bute-item {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-  
-  .c-tetra-bute-left {
-    border-right: none;
-    border-bottom: 1px solid #f0f0f0;
-    padding: 30px 25px;
-  }
-  
-  .c-tetra-bute-right {
-    padding: 30px 25px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f4 100%);
-  }
-}
-
 @media (max-width: 768px) {
   .c-tetra-bute-grid {
-    gap: 30px;
-    padding: 0 20px;
+    padding: 0 15px;
   }
   
   .c-tetra-bute-intro {
     margin-bottom: 40px;
-    padding: 0 20px;
+    padding: 0 15px;
   }
   
   .c-tetra-bute-intro h2 {
@@ -233,9 +136,15 @@
   .c-tetra-bute-left {
     padding: 25px 20px;
   }
+}
+
+@media (max-width: 480px) {
+  .c-tetra-bute-grid {
+    padding: 0 10px;
+  }
   
-  .c-tetra-bute-right {
-    padding: 25px 20px;
+  .c-tetra-bute-left {
+    padding: 20px 15px;
   }
 }
 
@@ -254,6 +163,4 @@
   color: #495057;
 }
 
-.is-admin .c-tetra-bute-item:hover .c-tetra-bute-staff-overlay {
-  opacity: 0.7;
-}
+/* End of Tetra-Bute styles */

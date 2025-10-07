@@ -196,7 +196,21 @@ $api_key = get_option('tetra_google_maps_api_key');
                             <p class="c-property-card-address"><?php echo $address; ?></p>
                             
                             <div class="c-property-card-details">
-                                <?php if ($size) : ?>
+                                <?php 
+                                $land_size = get_field('land_size');
+                                $premises_size = get_field('premises_size');
+                                
+                                if ($land_size) : ?>
+                                    <span class="c-property-detail"><i class="fas fa-mountain"></i> Land: <?php echo $land_size; ?></span>
+                                <?php endif; ?>
+                                
+                                <?php if ($premises_size) : ?>
+                                    <span class="c-property-detail"><i class="fas fa-building"></i> Premises: <?php echo $premises_size; ?></span>
+                                <?php endif; ?>
+                                
+                                <?php 
+                                // Fallback to the old size field if neither new field is set
+                                if (!$land_size && !$premises_size && $size) : ?>
                                     <span class="c-property-detail"><i class="fas fa-vector-square"></i> <?php echo $size; ?></span>
                                 <?php endif; ?>
                                 

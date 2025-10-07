@@ -79,39 +79,6 @@ if( $is_preview ) {
       echo '</div>';
       echo '</div>';
       
-      // Right side - Staff members
-      if ($linked_staff) {
-        echo '<div class="c-tetra-bute-right">';
-        echo '<div class="c-tetra-bute-staff-section">';
-        echo '<h4>Champion' . (count($linked_staff) > 1 ? 's' : '') . ' of Change</h4>';
-        echo '<div class="c-tetra-bute-staff-list">';
-        
-        foreach ($linked_staff as $staff_member) {
-          $staff_photo = get_the_post_thumbnail_url($staff_member->ID, 'medium');
-          $staff_position = get_field('position', $staff_member->ID);
-          
-          echo '<div class="c-tetra-bute-staff-member">';
-          echo '<a href="' . esc_url(get_permalink($staff_member->ID)) . '" class="c-tetra-bute-staff-link">';
-          if ($staff_photo) {
-            echo '<div class="c-tetra-bute-staff-photo">';
-            echo '<img src="' . esc_url($staff_photo) . '" alt="' . esc_attr($staff_member->post_title) . '" />';
-            echo '</div>';
-          }
-          echo '<div class="c-tetra-bute-staff-info">';
-          echo '<h5>' . esc_html($staff_member->post_title) . '</h5>';
-          if ($staff_position) {
-            echo '<span class="c-tetra-bute-staff-position">' . esc_html($staff_position) . '</span>';
-          }
-          echo '</div>';
-          echo '</a>';
-          echo '</div>';
-        }
-        
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-      }
-      
       echo '</div>';
     }
     
