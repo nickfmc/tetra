@@ -87,8 +87,8 @@ if( $is_preview ) {
   } else {
     if ($is_preview) {
       echo '<div class="c-tetra-bute-placeholder">';
-      echo '<h3>Tetra-Bute Block</h3>';
-      echo '<p>No Tetra-Butes found. Create some Tetra-Bute posts to display them here.</p>';
+      echo '<h3>Tetra-bute Block</h3>';
+      echo '<p>No Tetra-butes found. Create some Tetra-bute posts to display them here.</p>';
       echo '</div>';
     }
   }

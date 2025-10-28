@@ -59,4 +59,47 @@ function tetra_acf_init() {
 }
 add_action('acf/init', 'tetra_acf_init');
 
+/**
+ * Remove title attributes from all images to prevent hover tooltips
+ */
+function remove_image_title_attributes($content) {
+    // Remove title attributes from img tags in content
+    $content = preg_replace('/<img([^>]*)\s+title="[^"]*"([^>]*)>/i', '<img$1$2>', $content);
+    return $content;
+}
+add_filter('the_content', 'remove_image_title_attributes');
+
+/**
+ * Remove title attribute from image attachments when they are inserted
+ */
+function remove_title_from_attachment_link($link, $id, $size, $permalink, $icon, $text) {
+    // Remove title attribute from the image link
+    $link = preg_replace('/title="[^"]*"/', '', $link);
+    return $link;
+}
+add_filter('wp_get_attachment_link', 'remove_title_from_attachment_link', 10, 6);
+
+/**
+ * Remove title attribute from images in wp_get_attachment_image
+ */
+function remove_title_from_attachment_image($html, $attachment_id, $size, $icon, $attr) {
+    // Remove title attribute from the image HTML
+    $html = preg_replace('/title="[^"]*"/', '', $html);
+    return $html;
+}
+add_filter('wp_get_attachment_image', 'remove_title_from_attachment_image', 10, 5);
+
+/**
+ * Remove title attribute from image tag attributes before rendering
+ */
+function remove_image_title_attribute($attr, $attachment, $size) {
+    if (isset($attr['title'])) {
+        unset($attr['title']);
+    }
+    return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'remove_image_title_attribute', 10, 3);
+
+
+
 ?>

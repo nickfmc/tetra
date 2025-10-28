@@ -20,7 +20,8 @@ require_once('inc/custom-post-type.php');  // you can disable this line if not u
 require_once('inc/custom-taxonomy.php');  // you can disable this line if not using Custom Taxonomy
 
 // ACF FIELD GROUPS
-require_once('inc/acf-property-fields.php');  // ACF fields for Properties
+require_once('inc/acf-property-fields.php');  // ACF fields for Properties 
+require_once('inc/acf-hot-property-fields.php');  // ACF fields for Hot Properties
 require_once('inc/property-settings.php');    // Properties settings page
 require_once('inc/property-dashboard.php');   // Properties dashboard widget
 

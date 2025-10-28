@@ -19,7 +19,7 @@
             "default_value": "",
             "maxlength": "",
             "rows": 4,
-            "placeholder": "Enter a brief description of this Tetra-Bute initiative..."
+            "placeholder": "Enter a brief description of this Tetra-bute initiative..."
         },
         {
             "key": "field_tetra_bute_logo",
@@ -68,7 +68,7 @@
             "name": "linked_staff",
             "aria-label": "",
             "type": "relationship",
-            "instructions": "Select one or more staff members who are champions of this Tetra-Bute",
+            "instructions": "Select one or more staff members who are champions of this Tetra-bute",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -96,7 +96,7 @@
             "name": "brand_color",
             "aria-label": "",
             "type": "color_picker",
-            "instructions": "Primary brand color for this Tetra-Bute (used for styling)",
+            "instructions": "Primary brand color for this Tetra-bute (used for styling)",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -125,7 +125,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Custom fields for Tetra-Bute posts including brief info, logo, linked staff members, and brand color.",
+    "description": "Custom fields for Tetra-bute posts including brief info, logo, linked staff members, and brand color.",
     "show_in_rest": 0,
     "modified": 1726331400
 }

@@ -73,7 +73,7 @@ if( $is_preview ) {
         $possessive_name = $staff_first_name . "'s";
         
         echo '<div class="c-staff-modal-tetra-butes">';
-        echo '<h5>' . $possessive_name . ' Tetra-Bute Contributions</h5>';
+        echo '<h5>' . $possessive_name . ' Tetra-bute Contributions</h5>';
         echo '<div class="c-staff-modal-tetra-bute-logos">';
         
         while ($tetra_bute_query->have_posts()) {
@@ -91,7 +91,7 @@ if( $is_preview ) {
         }
         
         echo '</div>';
-        echo '<a href="/tetra-bute/" class="c-tetra-bute-learn-more">Learn about Tetra-Bute</a>';
+        echo '<a href="/tetra-bute/" class="c-tetra-bute-learn-more">Learn about Tetra-bute</a>';
         echo '</div>'; // Close tetra-butes section
         wp_reset_postdata();
       }

@@ -30,7 +30,7 @@
             
             if ($tetra_bute_query->have_posts()) : ?>
               <div class="c-staff-tetra-butes">
-                <h3 class="u-light-blue">Tetra-Bute Contributions</h3>
+                <h3 class="u-light-blue">Tetra-bute Contributions</h3>
                 <p>Discover the charitable initiatives and community programs that <?php echo get_the_title(); ?> champions:</p>
                 <div class="c-staff-tetra-butes-grid">
                   <?php while ($tetra_bute_query->have_posts()) : $tetra_bute_query->the_post();
