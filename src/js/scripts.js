@@ -773,8 +773,30 @@ function initMasonryLayout() {
   }
   
   function layoutMasonry() {
-    const items = Array.from(grid.children);
-    if (items.length === 0) return;
+    const allItems = Array.from(grid.children);
+    
+    if (allItems.length === 0) {
+      return;
+    }
+    
+    // Filter out items that are marked as filtered-out
+    const items = allItems.filter(item => !item.classList.contains('filtered-out'));
+    
+    // Reset all items first, then hide filtered out items
+    allItems.forEach((item, index) => {
+      if (item.classList.contains('filtered-out')) {
+        item.style.position = 'absolute';
+        item.style.transform = 'translate3d(-9999px, -9999px, 0)';
+        item.style.visibility = 'hidden';
+      } else {
+        // Reset visible items completely
+        item.style.position = 'static';
+        item.style.transform = 'none';
+        item.style.width = 'auto';
+        item.style.visibility = 'visible';
+        item.style.marginBottom = '0';
+      }
+    });
     
     columnCount = getColumnCount();
     
@@ -782,11 +804,12 @@ function initMasonryLayout() {
     grid.style.position = 'relative';
     
     if (columnCount === 1) {
-      // Single column - reset to normal flow with spacing
+      // Single column - reset to normal flow with spacing (only visible items)
       items.forEach((item, index) => {
         item.style.position = 'static';
         item.style.transform = 'none';
         item.style.width = 'auto';
+        item.style.visibility = 'visible';
         item.style.marginBottom = (index === items.length - 1) ? '0' : '30px';
       });
       grid.style.height = 'auto';
@@ -803,11 +826,12 @@ function initMasonryLayout() {
     
     // Ensure columns fit within container
     if (columnWidth < 300 && columnCount > 1) {
-      // Force single column if calculated width is too small
+      // Force single column if calculated width is too small (only visible items)
       items.forEach((item, index) => {
         item.style.position = 'static';
         item.style.transform = 'none';
         item.style.width = 'auto';
+        item.style.visibility = 'visible';
         item.style.marginBottom = (index === items.length - 1) ? '0' : '30px';
       });
       grid.style.height = 'auto';
@@ -817,15 +841,19 @@ function initMasonryLayout() {
     // Initialize column heights
     const columnHeights = new Array(columnCount).fill(0);
     
-    // First pass: set widths and positions to static to measure heights
-    items.forEach(item => {
+    // First pass: set widths and positions to static to measure heights (only visible items)
+    items.forEach((item, index) => {
+      // Complete reset of positioning
       item.style.position = 'static';
       item.style.width = columnWidth + 'px';
       item.style.transform = 'none';
-      item.style.marginBottom = '0'; // Reset margin for masonry mode
+      item.style.visibility = 'visible';
+      item.style.marginBottom = '0';
+      item.style.left = 'auto';
+      item.style.top = 'auto';
     });
     
-    // Force reflow to get accurate measurements
+    // Force reflow to get accurate measurements after reset
     grid.offsetHeight;
     
     // Second pass: position items absolutely
@@ -844,13 +872,15 @@ function initMasonryLayout() {
       item.style.position = 'absolute';
       item.style.transition = 'transform 0.3s ease';
       item.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      item.style.visibility = 'visible';
       
       // Update column height
       columnHeights[shortestColumnIndex] += itemHeight + columnGap;
     });
     
     // Set container height
-    grid.style.height = Math.max(...columnHeights) + 'px';
+    const finalHeight = Math.max(...columnHeights);
+    grid.style.height = finalHeight + 'px';
   }
   
   // Layout on load
@@ -885,6 +915,9 @@ function initMasonryLayout() {
       }
     });
   }
+  
+  // Make layoutMasonry function accessible globally after it's defined
+  window.layoutMasonry = layoutMasonry;
 }
 
 // *********************** START CUSTOM JQUERY DOC READY SCRIPTS *******************************

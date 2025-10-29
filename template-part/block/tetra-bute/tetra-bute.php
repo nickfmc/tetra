@@ -9,8 +9,9 @@
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
 
-// Enqueue block specific CSS
+// Enqueue block specific CSS and JS
 wp_enqueue_style('tetra-bute', get_stylesheet_directory_uri() . '/template-part/block/tetra-bute/tetra-bute.css', array(), '1.0.0');
+wp_enqueue_script('tetra-bute-js', get_stylesheet_directory_uri() . '/template-part/block/tetra-bute/tetra-bute.js', array('jquery'), '1.0.0', true);
 
 // Create id attribute allowing for custom "anchor" value.
 $id = 'tetra-bute-' . $block['id'];
@@ -32,6 +33,51 @@ if( $is_preview ) {
 ?>
 
 <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
+  
+  <?php
+  // Get all provinces for filtering
+  $provinces = get_terms(array(
+    'taxonomy' => 'province',
+    'hide_empty' => true,
+    'orderby' => 'name',
+    'order' => 'ASC',
+  ));
+  
+  if (!is_wp_error($provinces) && !empty($provinces)) : ?>
+    <div class="c-tetra-bute-filters">
+      <h3 class="c-filters-title">Filter by Province</h3>
+      <div class="c-province-filters">
+        <button class="c-province-filter active" data-province="all">
+          <svg class="c-province-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="currentColor"/>
+          </svg>
+          <span class="c-province-label">All Provinces</span>
+        </button>
+        
+        <?php foreach ($provinces as $province) : 
+          $svg_media_id = get_term_meta($province->term_id, 'svg_media_id', true);
+          $province_color = get_term_meta($province->term_id, 'svg_color', true) ?: '#88aebd';
+        ?>
+          <button class="c-province-filter" data-province="<?php echo esc_attr($province->slug); ?>" style="--province-color: <?php echo esc_attr($province_color); ?>">
+            <?php 
+            // Use custom SVG from media library if available, otherwise fallback to default circle
+            $custom_svg = get_province_custom_svg($province->term_id);
+            if ($custom_svg) {
+              echo $custom_svg;
+            } else {
+              // Fallback if no custom SVG is set
+              echo '<svg class="c-province-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="50" cy="50" r="45" fill="currentColor"/>
+                    </svg>';
+            }
+            ?>
+            <span class="c-province-label"><?php echo esc_html($province->name); ?></span>
+          </button>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  <?php endif; ?>
+
   <?php
   $args = array(
     'post_type' => 'tetra_bute',
@@ -57,7 +103,17 @@ if( $is_preview ) {
       $linked_staff = get_field('linked_staff', $post->ID);
       $brand_color = get_field('brand_color', $post->ID) ?: '#88aebd';
       
-      echo '<div class="c-tetra-bute-item" data-brand-color="' . esc_attr($brand_color) . '">';
+      // Get provinces for this post
+      $post_provinces = get_the_terms($post->ID, 'province');
+      $province_slugs = array();
+      if ($post_provinces && !is_wp_error($post_provinces)) {
+        foreach ($post_provinces as $province) {
+          $province_slugs[] = $province->slug;
+        }
+      }
+      $province_classes = !empty($province_slugs) ? ' ' . implode(' ', array_map(function($slug) { return 'province-' . $slug; }, $province_slugs)) : '';
+      
+      echo '<div class="c-tetra-bute-item' . esc_attr($province_classes) . '" data-brand-color="' . esc_attr($brand_color) . '" data-provinces="' . esc_attr(implode(',', $province_slugs)) . '">';
       
       // Left side - Logo and main content
       echo '<div class="c-tetra-bute-left">';

@@ -154,5 +154,73 @@ add_action('admin_head', 'custom_acf_repeater_colors');
 // }
 // add_filter('admin_footer_text', 'gdt_custom_admin_footer');
 
+/************* MEDIA UPLOADER FOR TAXONOMY FIELDS **************/
+function enqueue_taxonomy_media_uploader() {
+    global $pagenow, $taxnow;
+    
+    // Only load on taxonomy edit pages
+    if (($pagenow == 'edit-tags.php' || $pagenow == 'term.php') && $taxnow == 'province') {
+        wp_enqueue_media();
+        wp_enqueue_script('jquery');
+    }
+}
+add_action('admin_enqueue_scripts', 'enqueue_taxonomy_media_uploader');
+
+// Add the JavaScript functionality for province taxonomy media uploader
+function province_taxonomy_admin_script() {
+    // Re-enabled after debugging
+    
+    global $pagenow, $taxnow;
+    
+    if (($pagenow == 'edit-tags.php' || $pagenow == 'term.php') && $taxnow == 'province') {
+        ?>
+        <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            var mediaUploader;
+            
+            $(document).on('click', '#upload-svg-button', function(e) {
+                e.preventDefault();
+                
+                if (mediaUploader) {
+                    mediaUploader.open();
+                    return;
+                }
+                
+                mediaUploader = wp.media({
+                    title: 'Select SVG File',
+                    button: {
+                        text: 'Use this SVG'
+                    },
+                    library: {
+                        type: 'image/svg+xml'
+                    },
+                    multiple: false
+                });
+                
+                mediaUploader.on('select', function() {
+                    var attachment = mediaUploader.state().get('selection').first().toJSON();
+                    $('#tag-svg-media-id').val(attachment.id);
+                    $('#svg-preview-img').attr('src', attachment.url);
+                    $('#svg-filename').text(attachment.filename || attachment.title);
+                    $('#svg-preview').show();
+                    $('#remove-svg-button').show();
+                });
+                
+                mediaUploader.open();
+            });
+            
+            $(document).on('click', '#remove-svg-button', function(e) {
+                e.preventDefault();
+                $('#tag-svg-media-id').val('');
+                $('#svg-preview').hide();
+                $('#remove-svg-button').hide();
+            });
+        });
+        </script>
+        <?php
+    }
+}
+add_action('admin_footer', 'province_taxonomy_admin_script');
+
 
 ?>

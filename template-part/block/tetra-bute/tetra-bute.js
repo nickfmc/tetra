@@ -7,29 +7,145 @@ document.addEventListener('DOMContentLoaded', function() {
     const tetraButeBlocks = document.querySelectorAll('.c-tetra-bute-block');
     
     tetraButeBlocks.forEach(function(block) {
-        const items = block.querySelectorAll('.c-tetra-bute-item');
-        
-        items.forEach(function(item) {
-            const brandColor = item.dataset.brandColor;
-            
-            // Apply custom brand color if available
-            if (brandColor) {
-                const link = item.querySelector('.c-tetra-bute-link');
-                if (link) {
-                    link.style.background = brandColor;
-                }
-                
-                const overlay = item.querySelector('.c-tetra-bute-staff-overlay');
-                if (overlay) {
-                    // Create a gradient with the brand color
-                    const gradientColor = hexToRgba(brandColor, 0.95);
-                    const defaultColor = 'rgba(155, 148, 119, 0.95)';
-                    overlay.style.background = `linear-gradient(135deg, ${gradientColor} 0%, ${defaultColor} 100%)`;
-                }
-            }
-        });
+        initializeTetraButeBlock(block);
     });
 });
+
+function initializeTetraButeBlock(block) {
+    const items = block.querySelectorAll('.c-tetra-bute-item');
+    const filters = block.querySelectorAll('.c-province-filter');
+    const grid = block.querySelector('.c-tetra-bute-grid');
+    
+    // Wait for images and content to load before initializing masonry
+    Promise.all([
+        ...Array.from(items).map(item => {
+            const img = item.querySelector('img');
+            if (img && !img.complete) {
+                return new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
+            }
+            return Promise.resolve();
+        })
+    ]).then(() => {
+        // The masonry layout is handled by scripts.js - no need to call it here
+    });
+    
+    // Initialize filtering
+    initProvinceFiltering(filters, items, grid);
+    
+    // Apply custom brand colors
+    items.forEach(function(item) {
+        const brandColor = item.dataset.brandColor;
+        
+        if (brandColor) {
+            const link = item.querySelector('.c-tetra-bute-link');
+            if (link) {
+                link.style.background = brandColor;
+            }
+        }
+    });
+    
+    // Resize handling is already managed by scripts.js
+}
+
+function initProvinceFiltering(filters, items, grid) {
+    if (!filters.length) return;
+    
+    filters.forEach(function(filter) {
+        filter.addEventListener('click', function() {
+            const selectedProvince = this.dataset.province;
+            
+            // Update active filter
+            filters.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter items
+            filterItemsByProvince(items, selectedProvince, grid);
+        });
+    });
+}
+
+function filterItemsByProvince(items, selectedProvince, grid) {
+    let visibleCount = 0;
+    
+    // Hide/show items based on province filter
+    items.forEach(function(item) {
+        const itemProvinces = item.dataset.provinces ? item.dataset.provinces.split(',') : [];
+        const shouldShow = selectedProvince === 'all' || itemProvinces.includes(selectedProvince);
+        
+        // Remove all filter classes first
+        item.classList.remove('filtered-out', 'filtered-in', 'filter-animate-in');
+        
+        if (shouldShow) {
+            item.classList.add('filtered-in');
+            visibleCount++;
+        } else {
+            item.classList.add('filtered-out');
+        }
+    });
+    
+    // Reset positioning styles before calling masonry
+    items.forEach(function(item) {
+        item.style.position = '';
+        item.style.transform = '';
+        item.style.width = '';
+        item.style.left = '';
+        item.style.top = '';
+        item.style.marginBottom = '';
+    });
+    
+    // Force reflow after clearing styles
+    grid.offsetHeight;
+    
+    // Get visible items for animation
+    const visibleItems = Array.from(items).filter(item => 
+        !item.classList.contains('filtered-out')
+    );
+    
+    // Recalculate masonry layout with filtered items
+    setTimeout(function() {
+        // Call the main masonry layout function from scripts.js
+        if (window.layoutMasonry && typeof window.layoutMasonry === 'function') {
+            window.layoutMasonry();
+        }
+        
+        // Add staggered animations after layout is set
+        setTimeout(function() {
+            visibleItems.forEach(function(item, index) {
+                if (item.classList.contains('filtered-in')) {
+                    setTimeout(function() {
+                        item.classList.add('filter-animate-in');
+                    }, index * 30);
+                }
+            });
+        }, 100);
+    }, 50);
+    
+    // Show/hide "no results" message
+    showNoResultsMessage(grid.parentElement, visibleCount === 0, selectedProvince);
+}
+
+function showNoResultsMessage(container, show, province) {
+    const existingMessage = container.querySelector('.c-no-results');
+    
+    if (show) {
+        if (!existingMessage) {
+            const message = document.createElement('div');
+            message.className = 'c-no-results';
+            message.innerHTML = `
+                <div class="c-no-results-content">
+                    <h3>No Results Found</h3>
+                    <p>No Tetra-Butes found for the selected province. Try selecting a different province or "All Provinces".</p>
+                </div>
+            `;
+            container.appendChild(message);
+        }
+    } else if (existingMessage) {
+        existingMessage.remove();
+    }
+}
 
 // Helper function to convert hex to rgba
 function hexToRgba(hex, alpha) {
@@ -37,4 +153,24 @@ function hexToRgba(hex, alpha) {
     const g = parseInt(hex.slice(3, 5), 16);
     const b = parseInt(hex.slice(5, 7), 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+// Intersection Observer for performance (optional enhancement)
+function setupIntersectionObserver() {
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+
+        document.querySelectorAll('.c-tetra-bute-item').forEach((item) => {
+            observer.observe(item);
+        });
+    }
 }

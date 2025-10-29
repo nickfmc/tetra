@@ -4,6 +4,140 @@
 
 .c-tetra-bute-block {
   padding: 60px 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   PROVINCE FILTERS
+   ========================================================================== */
+
+.c-tetra-bute-filters {
+  max-width: 1400px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+}
+
+.c-filters-title {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 300;
+}
+
+.c-province-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.c-province-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  min-width: 120px;
+  text-align: center;
+  color: var(--province-color, #88aebd);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.c-province-filter:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  border-color: var(--province-color, #88aebd);
+}
+
+.c-province-filter.active {
+  background: var(--province-color, #88aebd);
+  border-color: var(--province-color, #88aebd);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(136, 174, 189, 0.3);
+}
+
+.c-province-svg {
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.c-province-filter:hover .c-province-svg {
+  transform: scale(1.1);
+}
+
+.c-province-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Filter animation states */
+.c-tetra-bute-item {
+  opacity: 1;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.c-tetra-bute-item.filtered-out {
+  /* Items will be positioned off-screen by JavaScript */
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.c-tetra-bute-item.filtered-in {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Animation for items being shown */
+.c-tetra-bute-item.filter-animate-in {
+  animation: filterIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes filterIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* No Results Message */
+.c-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  margin: 40px 0;
+}
+
+.c-no-results-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.c-no-results h3 {
+  font-size: 1.75rem;
+  color: #666;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.c-no-results p {
+  color: #888;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .c-tetra-bute-intro {
@@ -32,10 +166,18 @@
   padding: 0 20px;
   position: relative;
   box-sizing: border-box;
+  
+  /* Masonry Layout - using absolute positioning */
+  display: block;
+  width: 100%;
 }
 
 .c-tetra-bute-item {
   box-sizing: border-box;
+  
+  /* Will be positioned by JavaScript */
+  position: relative;
+  width: 100%;
 }
 
 .c-tetra-bute-item {
@@ -124,6 +266,34 @@
     padding: 0 15px;
   }
   
+  .c-tetra-bute-filters {
+    padding: 0 15px;
+    margin-bottom: 40px;
+  }
+  
+  .c-filters-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .c-province-filters {
+    gap: 10px;
+  }
+  
+  .c-province-filter {
+    min-width: 100px;
+    padding: 15px 10px;
+  }
+  
+  .c-province-svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .c-province-label {
+    font-size: 0.75rem;
+  }
+  
   .c-tetra-bute-intro {
     margin-bottom: 40px;
     padding: 0 15px;
@@ -141,6 +311,19 @@
 @media (max-width: 480px) {
   .c-tetra-bute-grid {
     padding: 0 10px;
+  }
+  
+  .c-tetra-bute-filters {
+    padding: 0 10px;
+  }
+  
+  .c-province-filters {
+    gap: 8px;
+  }
+  
+  .c-province-filter {
+    min-width: 80px;
+    padding: 12px 8px;
   }
   
   .c-tetra-bute-left {
