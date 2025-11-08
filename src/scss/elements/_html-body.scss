@@ -17,6 +17,7 @@ body {
   font-family: $font-primary;
   line-height: $line-height-normal;
   -webkit-overflow-scrolling: touch;
+  overflow-x: clip;
   // padding-bottom: 1000px;
   // padding-top: $page-header-height // match height of header used by headroom.js (if using)
 }

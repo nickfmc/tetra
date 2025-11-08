@@ -3,9 +3,9 @@
    ========================================================================== */
 
 .c-tetra-bute-block {
-  padding: 60px 0;
+  padding: 0;
   position: relative;
-  z-index: 10;
+  z-index: 10; 
 }
 
 /* ==========================================================================
@@ -30,7 +30,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
   margin-bottom: 20px;
 }
 
@@ -39,36 +38,53 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  background: #fff;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
-  padding: 20px 15px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  min-width: 120px;
   text-align: center;
-  color: var(--province-color, #88aebd);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  color: #293e46;
+}
+
+.c-province-filter:focus, .c-province-filter:focus-visible {
+  outline: none;
+
 }
 
 .c-province-filter:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-  border-color: var(--province-color, #88aebd);
 }
 
 .c-province-filter.active {
-  background: var(--province-color, #88aebd);
-  border-color: var(--province-color, #88aebd);
-  color: white;
+
+  color: #89adbe;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(136, 174, 189, 0.3);
+
 }
 
 .c-province-svg {
-  width: 40px;
-  height: 40px;
+  width: auto;
+  height: 130px;
   transition: all 0.3s ease;
+}
+
+.c-province-filter:nth-of-type(2) .c-province-svg {
+  height: 95px;
+  position: relative;
+left: -19px;
+  top: 36px;
+}
+
+.c-province-filter:nth-of-type(3) .c-province-svg {
+  height: 99px;
+  position: relative;
+  left: -17px;
+  top: 34px;
+}
+
+.c-province-filter:nth-of-type(4) .c-province-svg {
+height: 96px;
+  position: relative;
+  left: -18px;
+  top: 35px;
 }
 
 .c-province-filter:hover .c-province-svg {
@@ -79,6 +95,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.2;
+  display: none;
 }
 
 /* Filter animation states */

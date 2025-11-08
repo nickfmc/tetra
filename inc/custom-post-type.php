@@ -83,7 +83,7 @@ function gdt_Properties_reg() {
     'menu_icon'            => 'dashicons-location-alt',
     'rewrite'              =>  array( 'slug' => 'properties', 'with_front' => false ),
     'capability_type'      => 'post',
-    'has_archive'          => true,
+    'has_archive'          => false,
     'hierarchical'         => false,
     'supports'             => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'revisions', 'custom-fields' )
   );

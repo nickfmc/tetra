@@ -45,14 +45,13 @@ if( $is_preview ) {
   
   if (!is_wp_error($provinces) && !empty($provinces)) : ?>
     <div class="c-tetra-bute-filters">
-      <h3 class="c-filters-title">Filter by Province</h3>
       <div class="c-province-filters">
-        <button class="c-province-filter active" data-province="all">
+        <!-- <button class="c-province-filter active" data-province="all">
           <svg class="c-province-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="45" fill="currentColor"/>
           </svg>
           <span class="c-province-label">All Provinces</span>
-        </button>
+        </button> -->
         
         <?php foreach ($provinces as $province) : 
           $svg_media_id = get_term_meta($province->term_id, 'svg_media_id', true);

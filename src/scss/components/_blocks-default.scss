@@ -275,7 +275,7 @@ body .u-break-early {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(222, 210, 207, 0.3); /* tetra-warm with opacity */
     border-radius: 16px;
-    padding: 3rem;
+    padding: 15px;
     text-align: left;
     max-width: 1080px;
     margin: 40px auto;
@@ -284,30 +284,11 @@ body .u-break-early {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     
-    /* Add subtle gradient overlay */
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #6C486E 0%, #345C6D 100%); /* tetra-purple-to-teal */
-      border-radius: 16px 16px 0 0;
-    }
+    @media(width >= $bp-medium) {
+    padding: 3rem;
     
-    /* Add subtle radial gradient overlay */
-    &::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(108, 72, 110, 0.03) 0%, transparent 70%); /* tetra-purple with very low opacity */
-      transform: rotate(45deg);
-      pointer-events: none;
-    }
+    } 
+
     
     p {
       font-size: 16px;
@@ -343,8 +324,8 @@ body .u-break-early {
 
   .popup-modal-dismiss {
     position: absolute;
-    right: 24px;
-    top: 24px;
+ right: 0px;
+  top: -1px;
     text-transform: uppercase;
     color: #657962; /* tetra-green */
     font-size: 14px;
@@ -377,6 +358,8 @@ body .u-break-early {
       transition: color 0.3s ease;
     }
   }
+
+
 .mfp-arrow-right::before  {
     border-left-color: #6C486E; /* tetra-purple */
   }
@@ -384,22 +367,28 @@ body .u-break-early {
   .mfp-arrow-left::before {
     border-right-color: #6C486E; /* tetra-purple */
   }
-  
-  // Enhanced modal arrow styling
-  .mfp-arrow {
-    background: rgba(246, 248, 246, 0.9); /* tetra-cool with opacity */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(222, 210, 207, 0.3); /* tetra-warm with opacity */
-    border-radius: 50%;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    &:hover {
-  
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(37, 30, 45, 0.2); /* tetra-black shadow */
+
+  .mfp-arrow-right, .mfp-arrow-left {
+    @media(width <= $bp-medium) {
+      display: none !important;
     }
   }
+  
+  // Enhanced modal arrow styling
+  // .mfp-arrow {
+  //   background: rgba(246, 248, 246, 0.9); /* tetra-cool with opacity */
+  //   backdrop-filter: blur(10px);
+  //   -webkit-backdrop-filter: blur(10px);
+  //   border: 1px solid rgba(222, 210, 207, 0.3); /* tetra-warm with opacity */
+  //   border-radius: 50%;
+  //   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+  //   &:hover {
+  
+  //     transform: scale(1.1);
+  //     box-shadow: 0 4px 12px rgba(37, 30, 45, 0.2); /* tetra-black shadow */
+  //   }
+  // }
 
   .c-staff-member-grid {
     display: flex;

@@ -170,18 +170,6 @@
   }
 }
 
-.nav-content::after {
-  content: "";
-  position: absolute;
-  bottom: 70px;
-  right: -100px;
-  width: 200%;
-  height: 1px;
-  background-color: #fff;
-  opacity: 0.3;
-  transform: rotate(-23deg);
-  z-index: 0;
-  }
 
 
 .u-angled-line-left {
