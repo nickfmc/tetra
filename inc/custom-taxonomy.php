@@ -100,11 +100,18 @@ function province_add_form_fields_callback( $taxonomy ) {
         <input name="svg_color" id="tag-svg-color" type="color" value="#3498db" />
         <p>Choose the color for the SVG shape (will be applied as fill color)</p>
     </div>';
+    
+    echo '<div class="form-field">
+        <label for="tag-tooltip-text">Tooltip Text</label>
+        <input name="tooltip_text" id="tag-tooltip-text" type="text" value="" placeholder="Enter custom tooltip text" />
+        <p>Custom text to display in tooltip on hover (leave empty to use province name)</p>
+    </div>';
 }
 
 function province_edit_form_fields_callback( $term, $taxonomy ) {
     $svg_media_id = get_term_meta( $term->term_id, 'svg_media_id', true );
     $svg_color = get_term_meta( $term->term_id, 'svg_color', true );
+    $tooltip_text = get_term_meta( $term->term_id, 'tooltip_text', true );
     
     if (empty($svg_color)) {
         $svg_color = '#3498db';
@@ -128,6 +135,15 @@ function province_edit_form_fields_callback( $term, $taxonomy ) {
             <p class="description">Choose the color for the SVG shape</p>
         </td>
     </tr>
+    <tr class="form-field">
+        <th scope="row" valign="top">
+            <label for="tag-tooltip-text">Tooltip Text</label>
+        </th>
+        <td>
+            <input name="tooltip_text" id="tag-tooltip-text" type="text" value="<?php echo esc_attr($tooltip_text); ?>" placeholder="Enter custom tooltip text" />
+            <p class="description">Custom text to display in tooltip on hover (leave empty to use province name)</p>
+        </td>
+    </tr>
     <?php
 }
 
@@ -137,6 +153,9 @@ function save_province_custom_fields( $term_id ) {
     }
     if ( isset( $_POST['svg_color'] ) ) {
         update_term_meta( $term_id, 'svg_color', sanitize_hex_color( $_POST['svg_color'] ) );
+    }
+    if ( isset( $_POST['tooltip_text'] ) ) {
+        update_term_meta( $term_id, 'tooltip_text', sanitize_text_field( $_POST['tooltip_text'] ) );
     }
 }
 

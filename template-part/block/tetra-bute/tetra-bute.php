@@ -45,6 +45,11 @@ if( $is_preview ) {
   
   if (!is_wp_error($provinces) && !empty($provinces)) : ?>
     <div class="c-tetra-bute-filters">
+      <!-- Centralized tooltip display area -->
+      <div class="c-province-tooltip-display">
+        <span class="c-province-tooltip-text"></span>
+      </div>
+      
       <div class="c-province-filters">
         <!-- <button class="c-province-filter active" data-province="all">
           <svg class="c-province-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -56,8 +61,11 @@ if( $is_preview ) {
         <?php foreach ($provinces as $province) : 
           $svg_media_id = get_term_meta($province->term_id, 'svg_media_id', true);
           $province_color = get_term_meta($province->term_id, 'svg_color', true) ?: '#88aebd';
+          $tooltip_text = get_term_meta($province->term_id, 'tooltip_text', true);
+          // Use custom tooltip text if available, otherwise fall back to province name
+          $tooltip_content = !empty($tooltip_text) ? $tooltip_text : $province->name;
         ?>
-          <button class="c-province-filter" data-province="<?php echo esc_attr($province->slug); ?>" style="--province-color: <?php echo esc_attr($province_color); ?>">
+          <button class="c-province-filter" data-province="<?php echo esc_attr($province->slug); ?>" data-tooltip="<?php echo esc_attr($tooltip_content); ?>" style="--province-color: <?php echo esc_attr($province_color); ?>">
             <?php 
             // Use custom SVG from media library if available, otherwise fallback to default circle
             $custom_svg = get_province_custom_svg($province->term_id);
@@ -73,6 +81,14 @@ if( $is_preview ) {
             <span class="c-province-label"><?php echo esc_html($province->name); ?></span>
           </button>
         <?php endforeach; ?>
+      </div>
+      
+      <!-- Clear filters link (hidden by default) -->
+      <div class="c-clear-filters-container" style="display: none;">
+        <button class="c-clear-filters" type="button">
+          <span>Clear filter</span>
+          <span class="c-clear-filters-icon">×</span>
+        </button>
       </div>
     </div>
   <?php endif; ?>

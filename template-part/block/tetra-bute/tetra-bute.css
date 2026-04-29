@@ -18,6 +18,37 @@
   padding: 0 20px;
 }
 
+/* Centralized tooltip display */
+.c-province-tooltip-display {
+  text-align: center;
+  margin-bottom: 30px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-province-tooltip-text {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(10px);
+  display: inline-block;
+  min-width: 120px;
+}
+
+.c-province-tooltip-text.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .c-filters-title {
   text-align: center;
   font-size: 1.75rem;
@@ -42,11 +73,11 @@
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   text-align: center;
   color: #293e46;
+  position: relative;
 }
 
 .c-province-filter:focus, .c-province-filter:focus-visible {
   outline: none;
-
 }
 
 .c-province-filter:hover {
@@ -97,6 +128,54 @@ height: 96px;
   line-height: 1.2;
   display: none;
 }
+
+/* Clear Filters */
+.c-clear-filters-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.c-clear-filters-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.c-clear-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: #6c757d;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.c-clear-filters:hover {
+  background: #e9ecef;
+  border-color: #dee2e6;
+  color: #495057;
+  transform: translateY(-1px);
+}
+
+.c-clear-filters-icon {
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+/* Tooltip styles for province filters */
+/* Removed individual tooltips - now using centralized display */
 
 /* Filter animation states */
 .c-tetra-bute-item {
@@ -277,76 +356,7 @@ height: 96px;
   background: var(--brand-color, linear-gradient(135deg, #88aebd 0%, #9b9477 100%));
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .c-tetra-bute-grid {
-    padding: 0 15px;
-  }
-  
-  .c-tetra-bute-filters {
-    padding: 0 15px;
-    margin-bottom: 40px;
-  }
-  
-  .c-filters-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .c-province-filters {
-    gap: 10px;
-  }
-  
-  .c-province-filter {
-    min-width: 100px;
-    padding: 15px 10px;
-  }
-  
-  .c-province-svg {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .c-province-label {
-    font-size: 0.75rem;
-  }
-  
-  .c-tetra-bute-intro {
-    margin-bottom: 40px;
-    padding: 0 15px;
-  }
-  
-  .c-tetra-bute-intro h2 {
-    font-size: 2rem;
-  }
-  
-  .c-tetra-bute-left {
-    padding: 25px 20px;
-  }
-}
 
-@media (max-width: 480px) {
-  .c-tetra-bute-grid {
-    padding: 0 10px;
-  }
-  
-  .c-tetra-bute-filters {
-    padding: 0 10px;
-  }
-  
-  .c-province-filters {
-    gap: 8px;
-  }
-  
-  .c-province-filter {
-    min-width: 80px;
-    padding: 12px 8px;
-  }
-  
-  .c-tetra-bute-left {
-    padding: 20px 15px;
-  }
-}
 
 /* Admin/Preview Styles */
 .c-tetra-bute-placeholder {
@@ -364,3 +374,8 @@ height: 96px;
 }
 
 /* End of Tetra-Bute styles */
+@media (max-width: 768px) {
+ .c-tetra-bute-grid {
+  padding: 0;
+ }
+}

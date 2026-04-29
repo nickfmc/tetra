@@ -16,6 +16,9 @@ function initializeTetraButeBlock(block) {
     const filters = block.querySelectorAll('.c-province-filter');
     const grid = block.querySelector('.c-tetra-bute-grid');
     
+    // Initialize tooltips
+    initTooltips(filters);
+    
     // Wait for images and content to load before initializing masonry
     Promise.all([
         ...Array.from(items).map(item => {
@@ -53,6 +56,9 @@ function initializeTetraButeBlock(block) {
 function initProvinceFiltering(filters, items, grid) {
     if (!filters.length) return;
     
+    const clearFiltersContainer = grid.parentElement.querySelector('.c-clear-filters-container');
+    const clearFiltersBtn = clearFiltersContainer?.querySelector('.c-clear-filters');
+    
     filters.forEach(function(filter) {
         filter.addEventListener('click', function() {
             const selectedProvince = this.dataset.province;
@@ -61,10 +67,33 @@ function initProvinceFiltering(filters, items, grid) {
             filters.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
             
+            // Show clear filters button
+            if (clearFiltersContainer) {
+                clearFiltersContainer.style.display = 'flex';
+                setTimeout(() => clearFiltersContainer.classList.add('show'), 10);
+            }
+            
             // Filter items
             filterItemsByProvince(items, selectedProvince, grid);
         });
     });
+    
+    // Handle clear filters button
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', function() {
+            // Remove active state from all filters
+            filters.forEach(f => f.classList.remove('active'));
+            
+            // Hide clear filters button
+            clearFiltersContainer.classList.remove('show');
+            setTimeout(() => {
+                clearFiltersContainer.style.display = 'none';
+            }, 300);
+            
+            // Show all items
+            filterItemsByProvince(items, 'all', grid);
+        });
+    }
 }
 
 function filterItemsByProvince(items, selectedProvince, grid) {
@@ -173,4 +202,28 @@ function setupIntersectionObserver() {
             observer.observe(item);
         });
     }
+}
+
+// Initialize tooltips with centralized display
+function initTooltips(filters) {
+    const tooltipDisplay = document.querySelector('.c-province-tooltip-text');
+    
+    if (!tooltipDisplay) return;
+    
+    filters.forEach(function(filter) {
+        const tooltipText = filter.dataset.tooltip;
+        
+        if (tooltipText) {
+            // Show tooltip on hover
+            filter.addEventListener('mouseenter', function() {
+                tooltipDisplay.textContent = tooltipText;
+                tooltipDisplay.classList.add('show');
+            });
+            
+            // Hide tooltip on mouse leave
+            filter.addEventListener('mouseleave', function() {
+                tooltipDisplay.classList.remove('show');
+            });
+        }
+    });
 }
